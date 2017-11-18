@@ -24,7 +24,7 @@ class Login extends Component {
     super(props);
     this.itemRef = firebaseApp.database().ref("Users");
     this.state = {
-      email: "admin@gmail.com",
+      email: "admin@echat.com",
       password: "admin123",
       visible: false
     };
