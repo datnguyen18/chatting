@@ -182,7 +182,7 @@ class InformationUser extends Component {
             />
             <View style={styles.containerTextImage}>
               <TouchableOpacity onPress={() => this.changeAvatar()}>
-                <Image
+                <ImageBackground
                   source={{ uri: this.state.avatar }}
                   style={styles.avatar}
                 >
@@ -190,7 +190,7 @@ class InformationUser extends Component {
                     source={require("../img/Edit.png")}
                     style={styles.editImage}
                   />
-                </Image>
+                </ImageBackground>
               </TouchableOpacity>
             </View>
           </ImageBackground>
