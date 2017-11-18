@@ -29,12 +29,12 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      email: "",
-      password: "",
-      rePassword: "",
-      phoneNumber: "",
-      date: "",
+      name: "admin",
+      email: "admin@echat.com",
+      password: "admin123",
+      rePassword: "admin123",
+      phoneNumber: "0902807067",
+      date: "30/09/1995",
       sex: "Nam",
       visible: false
     };
@@ -82,9 +82,6 @@ class Register extends Component {
           .auth()
           .signInWithEmailAndPassword(this.state.email, this.state.password);
         var user = firebaseApp.auth().currentUser;
-        user.updateProfile({
-          displayName: this.state.name
-        });
         this.itemRef
           .child(user.uid)
           .child("Information")
@@ -99,16 +96,19 @@ class Register extends Component {
               "https://firebasestorage.googleapis.com/v0/b/eiu-chatting-c99ce.appspot.com/o/Users%2FAnonymous%2FCoverPhoto.jpg?alt=media&token=7d9930c2-4809-4fe8-b4ac-28625a1c4ec8",
             Sex: this.state.sex
           });
-        this.setState({
-          visible: false
-        });
+        this.refs.toast.show("Đăng ký thành công"),
+          this.setState({
+            visible: false
+          });
         this.props.navigation.navigate("LoginScreen");
       })
       .catch(error => {
-        this.setState({
-          visible: false
-        });
-        this.refs.toast.show("Đăng ký thất bại!");
+        this.setState(
+          {
+            visible: false
+          },
+          this.refs.toast.show("Đăng ký thất bại!")
+        );
       });
     // }
   }

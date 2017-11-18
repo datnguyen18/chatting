@@ -32,7 +32,7 @@ export default class componentName extends Component {
         <Image
           source={require("../img/MenuInformation.png")}
           style={styles.logoOpenInformationFriend}
-        />
+        />                                                                                                                      
       </TouchableOpacity>
     ),
     title: "Trang cá nhân",
