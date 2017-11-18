@@ -34,7 +34,7 @@ const BackButton = props => (
   >
     <Image
       source={require("../img/BackButton.png")}
-      style={styles.logoOpenDrawer}
+      style={styles.logoBackButton}
     />
   </TouchableOpacity>
 );
@@ -122,7 +122,7 @@ class InformationUser extends Component {
     this.setState({
       visible: false
     });
-    this.refs.toast.show("Đăng nhập thất bại!");
+    this.refs.toast.show("Thay đổi thành công");
   }
 
   changePassword() {
@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  logoOpenDrawer: {
+  logoBackButton: {
     width: 17,
     height: 17,
     marginLeft: 15

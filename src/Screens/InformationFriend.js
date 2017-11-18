@@ -12,7 +12,6 @@ import {
   BackHandler
 } from "react-native";
 import { firebaseApp } from "../api/Firebase";
-import RNFetchBlob from "react-native-fetch-blob";
 import Toast, { DURATION } from "react-native-easy-toast";
 
 var styleColorBackground = require("../components/color_background");
@@ -53,13 +52,13 @@ class InformationFriend extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.changeCoverPhoto()}>
+        <TouchableOpacity>
           <Image
             source={{ uri: this.state.coverPhoto }}
             style={styles.coverPhoto}
           >
             <View style={styles.containerTextImage}>
-              <TouchableOpacity onPress={() => this.changeAvatar()}>
+              <TouchableOpacity>
                 <Image
                   source={{ uri: this.state.avatar }}
                   style={styles.avatar}

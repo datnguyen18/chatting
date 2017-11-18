@@ -4,7 +4,7 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  ImageBackground,
+  Image,
   TouchableOpacity
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
@@ -28,10 +28,10 @@ export default class componentName extends Component {
             emailFriend: `${navigation.state.params.emailFriend}`
           })}
       >
-        <ImageBackground
+        <Image
           source={require("../img/MenuInformation.png")}
           style={styles.logoOpenInformationFriend}
-        />
+        />                                                                                                                      
       </TouchableOpacity>
     ),
     title: "Trang cá nhân",
@@ -77,15 +77,15 @@ export default class componentName extends Component {
           textContent={"Đang xử lý..."}
           textStyle={{ color: "#FFF" }}
         />
-        <ImageBackground
+        <Image
           source={{ uri: this.state.coverPhoto }}
           style={styles.coverPhoto}
         >
           <View style={styles.containerTextImage}>
-            <ImageBackground source={{ uri: this.state.avatar }} style={styles.avatar} />
+            <Image source={{ uri: this.state.avatar }} style={styles.avatar} />
             <Text style={styles.nameCss}>{this.state.name}</Text>
           </View>
-        </ImageBackground>
+        </Image>
         <View style={styles.item}>
           <TouchableOpacity
             style={[styles.buttonConfirmFriendContainer]}

@@ -7,6 +7,7 @@ import {
   TabNavigator,
   DrawerNavigator
 } from "react-navigation";
+import { Dimensions } from "react-native";
 import Login from "./Screens/Login";
 import Register from "./Screens/Register";
 import MainTab from "./MainTab";
@@ -21,6 +22,9 @@ import FriendRequests from "./Screens/FriendRequests";
 import WallFriends from "./Screens/WallFriends";
 import InformationFriend from "./Screens/InformationFriend";
 import RoomMessage from "./Screens/RoomMessage";
+import Nearby from "./Screens/Nearby";
+
+let { width, height } = Dimensions.get("window");
 
 export const LoginAndRegister = StackNavigator({
   LoginScreen: {
@@ -103,6 +107,19 @@ export const ChangeInformationUserStack = StackNavigator({
   }
 });
 
+export const NearbyStack = StackNavigator({
+  NearbyScreen: {
+    screen: Nearby,
+    navigationOptions: {
+      header: null,
+      tabBarVisible: false
+    }
+  },
+  WallFriendsScreen: {
+    screen: WallFriends
+  }
+});
+
 export const Tabbar = TabNavigator(
   {
     RecentMessageTab: {
@@ -146,16 +163,15 @@ export const Drawer = DrawerNavigator(
     LoginScreen: {
       screen: Login
     },
+    NearbyScreen: {
+      screen: NearbyStack
+    },
     MainTabScreen: {
-      screen: MainTab,
-      navigationOptions: {
-        headerLeft: null,
-        header: null
-      }
+      screen: MainTab
     }
   },
   {
-    drawerWidth: 330,
+    drawerWidth: width * 0.85,
     drawerPosition: "left",
     contentComponent: props => <MainDrawer {...props} />,
     drawerBackgroundColor: "transparent"
