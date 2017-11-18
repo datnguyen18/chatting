@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground } from "react-native";
 import { firebaseApp } from "./api/Firebase";
 
 // create a component
@@ -36,7 +36,7 @@ class MainDrawer extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Image
+        <ImageBackground
           source={{ uri: this.state.coverPhoto }}
           style={styles.coverPhoto}
         >
@@ -45,7 +45,7 @@ class MainDrawer extends Component {
             <Text style={styles.text}>{this.state.name}</Text>
             <Text style={styles.text}>{this.state.email}</Text>
           </View>
-        </Image>
+        </ImageBackground>
         <Text style={styles.title}>Tiện ích</Text>
         <View style={styles.containerItem}>
           <TouchableOpacity>
