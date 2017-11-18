@@ -5,7 +5,8 @@ import {
   StyleSheet,
   ScrollView,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  ImageBackground
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { firebaseApp } from "../api/Firebase";
@@ -77,7 +78,7 @@ export default class componentName extends Component {
           textContent={"Đang xử lý..."}
           textStyle={{ color: "#FFF" }}
         />
-        <Image
+        <ImageBackground
           source={{ uri: this.state.coverPhoto }}
           style={styles.coverPhoto}
         >
@@ -85,7 +86,7 @@ export default class componentName extends Component {
             <Image source={{ uri: this.state.avatar }} style={styles.avatar} />
             <Text style={styles.nameCss}>{this.state.name}</Text>
           </View>
-        </Image>
+        </ImageBackground>
         <View style={styles.item}>
           <TouchableOpacity
             style={[styles.buttonConfirmFriendContainer]}
