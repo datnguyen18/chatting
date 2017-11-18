@@ -9,7 +9,8 @@ import {
   BackAndroid,
   TextInput,
   KeyboardAvoidingView,
-  BackHandler
+  BackHandler,
+  ImageBackground
 } from "react-native";
 import { firebaseApp } from "../api/Firebase";
 import RNFetchBlob from "react-native-fetch-blob";
@@ -170,7 +171,7 @@ class InformationUser extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={() => this.changeCoverPhoto()}>
-          <Image
+          <ImageBackground
             source={{ uri: this.state.coverPhoto }}
             style={styles.coverPhoto}
           >
@@ -192,7 +193,7 @@ class InformationUser extends Component {
                 </Image>
               </TouchableOpacity>
             </View>
-          </Image>
+          </ImageBackground>
         </TouchableOpacity>
         <View style={styles.containerBelow}>
           <View style={styles.containerText}>
