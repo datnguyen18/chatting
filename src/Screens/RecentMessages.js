@@ -40,7 +40,7 @@ class RecentMessages extends Component {
       color: "#FFFFFF"
     },
     headerStyle: {
-      backgroundColor: "#009688"
+      backgroundColor: "#F74F4F"
     },
     tabBarIcon: ({ tintColor }) => (
       <Image
@@ -140,14 +140,22 @@ class RecentMessages extends Component {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor:'#ffffff'
   },
   item: {
+    marginLeft:"2.5%",
+    marginRight:"2.5%",
+    marginTop:8,
     flexDirection: "row",
     alignItems: "center",
     borderColor: "#2a4944",
     borderWidth: 1,
-    backgroundColor: "#d2f7f1"
+    backgroundColor: "transparent",
+    borderRadius:5,
+    borderColor:"#979797",
+    borderWidth: 0.3
+    
   },
   text: {
     margin: "5%"

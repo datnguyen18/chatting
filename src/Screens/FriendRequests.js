@@ -181,7 +181,7 @@ export class FriendRequests extends Component {
                 onSubmitEditing={() => this.searchUser()}
                 onChangeText={searchInput => this.setState({ searchInput })}
               >
-                {this.state.searchInput}
+                 
               </TextInput>
             </View>
             <TouchableOpacity
