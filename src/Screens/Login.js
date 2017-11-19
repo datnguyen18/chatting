@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     marginRight: 33
   },
   input: {
-    height: 60,
+    height: 50,
     backgroundColor: 'rgba(255, 255, 255, 0.65)',
     marginBottom: 15,
     paddingHorizontal: 10,
