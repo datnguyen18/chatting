@@ -130,18 +130,12 @@ class InformationUser extends Component {
       visible: !this.state.visible
     });
     if (this.state.oldPasswordInput != this.state.oldPassword) {
-      this.refs.toast.show("Sai mật khẩu cũ!");
-      this.setState({
-        visible: false
-      });
+      console.log("Sai mật khẩu cũ!");
     } else if (this.state.newPassword != this.state.reNewPassword) {
-      this.refs.toast.show("Mật khẩu mới không khớp!");
-      this.setState({
-        visible: false
-      });
+      console.log("Mật khẩu mới không khớp!");
     } else {
       this.itemRef
-        .child(this.state.id)
+        .child(this.state.userId)
         .child("Information")
         .set({
           Avatar: this.state.avatar,
@@ -153,10 +147,6 @@ class InformationUser extends Component {
           Sex: this.state.sex,
           Password: this.state.newPassword
         });
-      user
-        .updatePassword(this.state.reNewPassword)
-        .then(function() {}, function(error) {});
-      this.refs.toast.show("Đổi mật khẩu thành công!");
       this.setState({
         visible: false
       });
@@ -181,8 +171,6 @@ class InformationUser extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 onChangeText={name => this.setState({ name })}
-                returnKeyType="next"
-                onSubmitEditing={() => this.emailInput.focus()}
               >
                 {this.state.name}
               </TextInput>
@@ -202,9 +190,6 @@ class InformationUser extends Component {
                 autoCorrect={false}
                 keyboardType="email-address"
                 onChangeText={email => this.setState({ email })}
-                returnKeyType="next"
-                onSubmitEditing={() => this.phoneNumber.focus()}
-                ref={input => (this.emailInput = input)}
               >
                 {this.state.email}
               </TextInput>
@@ -224,7 +209,6 @@ class InformationUser extends Component {
                 autoCorrect={false}
                 keyboardType="numeric"
                 onChangeText={phoneNumber => this.setState({ phoneNumber })}
-                ref={input => (this.phoneNumber = input)}
               >
                 {this.state.phoneNumber}
               </TextInput>
@@ -298,10 +282,6 @@ class InformationUser extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 secureTextEntry
-                onChangeText={oldPasswordInput =>
-                  this.setState({ oldPasswordInput })}
-                returnKeyType="next"
-                onSubmitEditing={() => this.newPassword.focus()}
               >
                 {this.state.oldPasswordInput}
               </TextInput>
@@ -321,10 +301,6 @@ class InformationUser extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 secureTextEntry
-                onChangeText={newPassword => this.setState({ newPassword })}
-                ref={input => (this.newPassword = input)}
-                returnKeyType="next"
-                onSubmitEditing={() => this.newRePassword.focus()}
               >
                 {this.state.newPassword}
               </TextInput>
@@ -344,9 +320,6 @@ class InformationUser extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 secureTextEntry
-                onChangeText={reNewPassword => this.setState({ reNewPassword })}
-                ref={input => (this.newRePassword = input)}
-                returnKeyType="next"
                 onSubmitEditing={() => this.changePassword()}
               >
                 {this.state.reNewPassword}
