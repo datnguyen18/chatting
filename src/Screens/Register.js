@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  ImageBackground
 } from "react-native";
 import { firebaseApp } from "../api/Firebase";
 import DatePicker from "react-native-datepicker";
@@ -116,122 +117,124 @@ class Register extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <KeyboardAwareScrollView style={styleColorBackground.container}>
-        <Spinner
-          visible={this.state.visible}
-          textContent={"Đang xử lý..."}
-          textStyle={{ color: "#FFF" }}
-        />
-        <View style={styles.layout}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Họ và tên"
-            placeholderTextColor="rgba(255,255,255,255)"
-            onChangeText={name => this.setState({ name })}
-            value={this.state.name}
-            returnKeyType="next"
-            onSubmitEditing={() => this.emailInput.focus()}
-            ref="nameRef"
+      <View style={styles.container}>
+        <ImageBackground source={ require('../img/backgroundLogin.png') } style={styles.backgroundImage}>
+          <Spinner
+            visible={this.state.visible}
+            textContent={"Đang xử lý..."}
+            textStyle={{ color: "#FFF" }}
           />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Email"
-            placeholderTextColor="rgba(255,255,255,255)"
-            keyboardType="email-address"
-            autoCorrect={false}
-            onChangeText={email => this.setState({ email })}
-            value={this.state.email}
-            ref={input => (this.emailInput = input)}
-            returnKeyType="next"
-            onSubmitEditing={() => this.passwordInput.focus()}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Mật khẩu"
-            placeholderTextColor="rgba(255,255,255,255)"
-            secureTextEntry
-            autoCorrect={false}
-            onChangeText={password => this.setState({ password })}
-            value={this.state.password}
-            ref={input => (this.passwordInput = input)}
-            returnKeyType="next"
-            onSubmitEditing={() => this.rePasswordInput.focus()}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Nhập lại mật khẩu"
-            placeholderTextColor="rgba(255,255,255,255)"
-            secureTextEntry
-            autoCorrect={false}
-            onChangeText={rePassword => this.setState({ rePassword })}
-            value={this.state.rePassword}
-            ref={input => (this.rePasswordInput = input)}
-            returnKeyType="next"
-            onSubmitEditing={() => this.phoneNumberInput.focus()}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Số điện thoại"
-            placeholderTextColor="rgba(255,255,255,255)"
-            keyboardType="numeric"
-            autoCorrect={false}
-            onChangeText={phoneNumber => this.setState({ phoneNumber })}
-            value={this.state.phoneNumber}
-            ref={input => (this.phoneNumberInput = input)}
-          />
-          <DatePicker
-            style={styles.date}
-            date={this.state.date}
-            mode="date"
-            placeholder="Ngày sinh"
-            format="DD-MM-YYYY"
-            minDate="01-01-1000"
-            maxDate="01-01-2017"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            customStyles={{
-              dateIcon: {
-                position: "absolute",
-                left: 0,
-                top: 4,
-                marginLeft: 0
-              },
-              dateInput: {
-                marginLeft: 36
-              }
-            }}
-            onDateChange={date => {
-              this.setState({ date: date });
-            }}
-          />
-          <View
-            style={{
-              marginLeft: "27%",
-              marginRight: "27%",
-              marginBottom: "6%",
-              marginTop: "3%"
-            }}
-          >
-            <RadioForm
-              radio_props={radio_props}
-              initial={0}
-              formHorizontal={true}
-              buttonColor={"#00796B"}
-              labelStyle={{ marginLeft: "5%" }}
-              onPress={value => {
-                this.setState({ sex: value });
+          <View style={styles.layout}>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Họ và tên"
+              placeholderTextColor="rgba(255,255,255,255)"
+              onChangeText={name => this.setState({ name })}
+              value={this.state.name}
+              returnKeyType="next"
+              onSubmitEditing={() => this.emailInput.focus()}
+              ref="nameRef"
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Email"
+              placeholderTextColor="rgba(255,255,255,255)"
+              keyboardType="email-address"
+              autoCorrect={false}
+              onChangeText={email => this.setState({ email })}
+              value={this.state.email}
+              ref={input => (this.emailInput = input)}
+              returnKeyType="next"
+              onSubmitEditing={() => this.passwordInput.focus()}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Mật khẩu"
+              placeholderTextColor="rgba(255,255,255,255)"
+              secureTextEntry
+              autoCorrect={false}
+              onChangeText={password => this.setState({ password })}
+              value={this.state.password}
+              ref={input => (this.passwordInput = input)}
+              returnKeyType="next"
+              onSubmitEditing={() => this.rePasswordInput.focus()}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Nhập lại mật khẩu"
+              placeholderTextColor="rgba(255,255,255,255)"
+              secureTextEntry
+              autoCorrect={false}
+              onChangeText={rePassword => this.setState({ rePassword })}
+              value={this.state.rePassword}
+              ref={input => (this.rePasswordInput = input)}
+              returnKeyType="next"
+              onSubmitEditing={() => this.phoneNumberInput.focus()}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Số điện thoại"
+              placeholderTextColor="rgba(255,255,255,255)"
+              keyboardType="numeric"
+              autoCorrect={false}
+              onChangeText={phoneNumber => this.setState({ phoneNumber })}
+              value={this.state.phoneNumber}
+              ref={input => (this.phoneNumberInput = input)}
+            />
+            <DatePicker
+              style={styles.date}
+              date={this.state.date}
+              mode="date"
+              placeholder="Ngày sinh"
+              format="DD-MM-YYYY"
+              minDate="01-01-1000"
+              maxDate="01-01-2017"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              customStyles={{
+                dateIcon: {
+                  position: "absolute",
+                  left: 0,
+                  top: 4,
+                  marginLeft: 0
+                },
+                dateInput: {
+                  marginLeft: 36
+                }
+              }}
+              onDateChange={date => {
+                this.setState({ date: date });
               }}
             />
+            <View
+              style={{
+                marginLeft: "27%",
+                marginRight: "27%",
+                marginBottom: "6%",
+                marginTop: "3%"
+              }}
+            >
+              <RadioForm
+                radio_props={radio_props}
+                initial={0}
+                formHorizontal={true}
+                buttonColor={"#00796B"}
+                labelStyle={{ marginLeft: "5%" }}
+                onPress={value => {
+                  this.setState({ sex: value });
+                }}
+              />
+            </View>
+            <TouchableOpacity
+              style={styles.button_register}
+              onPress={() => this.confirmRegister()}
+            >
+              <Text style={styles.textRegister}>Đăng ký</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={[styles.touchable, styleColorBackground.button_color]}
-            onPress={() => this.confirmRegister()}
-          >
-            <Text style={styles.button_register}>Đăng ký</Text>
-          </TouchableOpacity>
-        </View>
-        <Toast ref="toast" />
-      </KeyboardAwareScrollView>
+          <Toast ref="toast" />
+        </ImageBackground>
+      </View>
     );
   }
 }
@@ -246,24 +249,42 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 17,
-    backgroundColor: "rgba(255,255,255,0.5)",
+    height: 35,
+    backgroundColor: "rgba(255,255,255,0.65)",
     marginBottom: "5%",
     marginLeft: "10%",
     marginRight: "10%",
-    paddingHorizontal: "3%"
+    borderRadius: 5,
+    paddingHorizontal: "3%",
+    color: 'rgba(255, 255, 255, 0.77)',
+    
   },
   touchable: {
     padding: "3%"
   },
   button_register: {
-    textAlign: "center",
-    fontWeight: "700",
-    fontSize: 18
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(247, 79, 79, 70)',
+    height: 45,
+    borderRadius: 15,
+    marginLeft: "10%",
+    marginRight: "10%"
   },
   date: {
     marginLeft: "11%",
     marginRight: "10%",
     width: "70%"
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: null,
+    height: null
+  },
+  textRegister:{
+    fontSize: 18,
+    color:"#FFFFFF"
   }
 });
 

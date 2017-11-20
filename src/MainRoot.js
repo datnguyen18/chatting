@@ -45,7 +45,7 @@ export const LoginAndRegister = StackNavigator({
       headerTintColor: "#FFFFFF",
       title: "Đăng ký",
       headerStyle: {
-        backgroundColor: "#009688"
+        backgroundColor: "#F74F4F"
       }
     }
   },
