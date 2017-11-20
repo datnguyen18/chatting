@@ -1,6 +1,13 @@
 //import liraries
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ImageBackground
+} from "react-native";
 import { firebaseApp } from "./api/Firebase";
 
 // create a component
@@ -53,7 +60,13 @@ class MainDrawer extends Component {
               navigate("NearbyScreen");
             }}
           >
-            <Text>Tìm người dùng gần đây</Text>
+            <View style={styles.containerText}>
+              <Image
+                source={require("./img/DrawerMaps.png")}
+                style={styles.logoDrawer}
+              />
+              <Text style={styles.textHeader}> Tìm người dùng gần đây </Text>
+            </View>
           </TouchableOpacity>
         </View>
         <Text style={styles.title}>Cài Đặt</Text>
@@ -63,10 +76,22 @@ class MainDrawer extends Component {
               navigate("InformationUserScreen");
             }}
           >
-            <Text>Thông tin người dùng</Text>
+            <View style={styles.containerText}>
+              <Image
+                source={require("./img/DrawerInformation.png")}
+                style={styles.logoDrawer}
+              />
+              <Text style={styles.textHeader}> Thông tin người dùng </Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.signOut()}>
-            <Text>Đăng xuất</Text>
+            <View style={styles.containerText}>
+              <Image
+                source={require("./img/DrawerSignOut.png")}
+                style={styles.logoDrawer}
+              />
+              <Text style={styles.textHeader}> Đăng xuất </Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -106,8 +131,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#FFFFFF"
   },
+  textHeader: {
+    marginLeft: "3%",
+    fontSize: 17,
+    fontWeight: "bold",
+    marginLeft: "3%"
+  },
   containerTextImage: {
     marginTop: "30%"
+  },
+  containerText: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  logoDrawer: {
+    width: 50,
+    height: 50
   }
 });
 
