@@ -6,7 +6,8 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Image
+  Image,
+  TextInput
 } from "react-native";
 
 const SendButton = props => (
@@ -26,15 +27,29 @@ const SendButton = props => (
 // create a component
 class NewMessage extends Component {
   static navigationOptions = ({ navigation }) => ({
-    headerRight: <SendButton navigation={navigation} />,
     title: "Tin nhắn mới",
+    tabBarVisible: false,
     headerTitleStyle: {
       textAlign: "center",
-      color: "#FFFFFF",
-      alignSelf: "center"
+      alignSelf: "center",
+      color: "#FFFFFF"
     },
-    headerTintColor: "#FFFFFF"
+    headerRight: (
+      <TouchableOpacity
+      // onPress={() => navigation.navigate("FriendRequestsScreen")}
+      >
+        <Image
+          source={require("../img/SendMessage.png")}
+          style={styles.logoSendMessage}
+        />
+      </TouchableOpacity>
+    ),
+    headerTintColor: "#FFFFFF",
+    headerStyle: {
+      backgroundColor: "#009688"
+    }
   });
+
   constructor(props) {
     super(props);
     this.state = {
@@ -74,12 +89,12 @@ class NewMessage extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <ScrollView horizontal>
+        <ScrollView horizontal={true} style={styles.scrollViewH} >
           {this.state.listChat.map((item, index) => (
             <TouchableOpacity
               onPress={() => this.state.removeFromListChat(index)}
             >
-              <View key={item.id} style={styles.item}>
+              <View key={item.id} style={styles.itemH}>
                 <Image source={{ uri: item.avatar }} style={styles.avatar} />
               </View>
             </TouchableOpacity>
@@ -101,12 +116,7 @@ class NewMessage extends Component {
           {this.state.friends.map((item, index) => (
             <TouchableOpacity
               onPress={() =>
-                this.state.addToListChat(
-                  item.avatar,
-                  item.id,
-                  item.name,
-                  index
-                )}
+                this.addToListChat(item.avatar, item.id, item.name, index)}
             >
               <View key={item.id} style={styles.item}>
                 <Image source={{ uri: item.avatar }} style={styles.avatar} />
@@ -133,6 +143,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: "#d2f7f1"
   },
+  itemH: {
+    borderColor: "#2a4944",
+    borderWidth: 1,
+    borderRadius: 30,
+    width: 60,
+    height: 60,
+    margin: 10
+  },
+  scrollViewH: {
+    backgroundColor: "#d2f7f1",
+    flexGrow: 1
+  },
   avatar: {
     marginLeft: "3%",
     width: 60,
@@ -152,6 +174,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingHorizontal: 10,
     fontSize: 17
+  },
+  logoSendMessage: {
+    width: 35,
+    height: 35,
+    marginRight: 15
   }
 });
 
