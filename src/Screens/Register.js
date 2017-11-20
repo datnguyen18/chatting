@@ -218,8 +218,8 @@ class Register extends Component {
                 radio_props={radio_props}
                 initial={0}
                 formHorizontal={true}
-                buttonColor={"#00796B"}
-                labelStyle={{ marginLeft: "5%" }}
+                buttonColor={"#FFFFFF"}
+                labelStyle={{ marginLeft: "5%" , backgroundColor:'transparent'}}
                 onPress={value => {
                   this.setState({ sex: value });
                 }}
