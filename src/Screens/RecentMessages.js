@@ -24,7 +24,7 @@ class RecentMessages extends Component {
     ),
     headerRight: (
       <TouchableOpacity
-        onPress={() => navigation.navigate("FriendRequestsScreen")}
+        onPress={() => navigation.navigate("NewMessageScreen")}
       >
         <Image
           source={require("../img/NewMessage.png")}

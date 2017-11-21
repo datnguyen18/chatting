@@ -98,7 +98,7 @@ class ListFriends extends Component {
     this.setState({
       friends: arrayNameFriends
     });
-    global.listFriends = this.state.arrayNameFriends
+    global.listFriends = this.state.friends
   }
 
   bodauTiengViet(str) {

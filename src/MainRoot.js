@@ -23,6 +23,7 @@ import WallFriends from "./Screens/WallFriends";
 import InformationFriend from "./Screens/InformationFriend";
 import RoomMessage from "./Screens/RoomMessage";
 import Nearby from "./Screens/Nearby";
+import NewMessage from "./Screens/NewMessage";
 
 let { width, height } = Dimensions.get("window");
 
@@ -65,6 +66,9 @@ export const RecentMessagesStack = StackNavigator({
   },
   MessageScreen: {
     screen: Message
+  },
+  NewMessageScreen: {
+    screen: NewMessage
   }
 });
 
