@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     height: 260
   },
   text: {
+    backgroundColor: 'transparent',
     marginLeft: "3%",
     fontSize: 19,
     fontWeight: "bold",
@@ -145,8 +146,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   logoDrawer: {
-    width: 50,
-    height: 50
+    width: 20,
+    height: 20
   }
 });
 

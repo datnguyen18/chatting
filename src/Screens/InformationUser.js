@@ -138,6 +138,7 @@ class InformationUser extends Component {
     ImagePicker.showImagePicker(options, response => {
       let source = { uri: response.uri };
       let path = response.path;
+      console.log(source + "" + path)
       Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
         .then(blob =>
           firebaseApp
