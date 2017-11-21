@@ -45,7 +45,10 @@ class RoomChat extends Component {
     var sectionData = [
       {
         title: "Kỹ thuật",
-        data: [{ value: "Toàn khoa", major: "Engineer", child: "All" }],
+        data: [
+          { value: "Toàn khoa", major: "Engineer", child: "All" },
+          { value: "K1", major: "Engineer", child: "K1" }
+        ],
         key: "1"
       },
       {
