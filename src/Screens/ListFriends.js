@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Platform,
   Image
 } from "react-native";
 import { firebaseApp } from "../api/Firebase";
@@ -39,7 +40,7 @@ class ListFriends extends Component {
     },
     headerTintColor: "#FFFFFF",
     headerStyle: {
-      backgroundColor: "#009688"
+      backgroundColor: "#F74F4F"
     },
     tabBarIcon: ({ tintColor }) => (
       <Image
@@ -129,7 +130,9 @@ class ListFriends extends Component {
             >
               <View key={item.id} style={styles.item}>
                 <Image source={{ uri: item.avatar }} style={styles.avatar} />
-                <Text style={styles.name}>{item.name}</Text>
+                <View style={styles.textName}>
+                  <Text style={styles.name}>{item.name}</Text>
+                </View>
               </View>
             </TouchableOpacity>
           ))}
@@ -142,24 +145,33 @@ class ListFriends extends Component {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor:'#ffffff'
   },
   item: {
     flexDirection: "row",
     alignItems: "center",
     padding: "1%",
     borderColor: "#2a4944",
-    borderWidth: 1,
-    backgroundColor: "#d2f7f1"
+    
   },
   avatar: {
+    flex:1,
     marginLeft: "3%",
     width: 60,
     height: 60,
-    borderRadius: 50
+    ...Platform.select({
+      ios: {
+        borderRadius: 25
+      },
+      android: {
+        borderRadius: 50
+      }})
   },
   name: {
-    margin: "6%"
+    margin: "6%",
+    fontSize: 18,
+    color: (Platform.android)? "#000000" : "#000000"
   },
   logoOpenDrawer: {
     width: 30,
@@ -172,8 +184,13 @@ const styles = StyleSheet.create({
     marginRight: 15
   },
   logoFriends: {
-    width: 24,
-    height: 24
+    width: 20,
+    height: 20
+  },
+  textName: { 
+    flex:6,
+    borderBottomWidth:1,
+    borderColor: "#F74F4F"
   }
 });
 

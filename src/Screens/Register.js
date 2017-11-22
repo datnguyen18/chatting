@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 17,
-    height: 35,
+    height: 40,
     backgroundColor: "rgba(255,255,255,0.65)",
     marginBottom: "5%",
     marginLeft: "10%",
