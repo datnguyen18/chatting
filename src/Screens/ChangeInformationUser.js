@@ -153,10 +153,11 @@ class InformationUser extends Component {
           Sex: this.state.sex,
           Password: this.state.newPassword
         });
-      user
+        user
         .updatePassword(this.state.reNewPassword)
         .then(function() {}, function(error) {});
       this.refs.toast.show("Đổi mật khẩu thành công!");
+
       this.setState({
         visible: false
       });
@@ -181,12 +182,9 @@ class InformationUser extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 onChangeText={name => this.setState({ name })}
-<<<<<<< HEAD
                 value={this.state.name}
-=======
                 returnKeyType="next"
                 onSubmitEditing={() => this.emailInput.focus()}
->>>>>>> b7ebd7d9a406266c5be53cb621c3166e10175da2
               >
                 
               </TextInput>
@@ -206,13 +204,9 @@ class InformationUser extends Component {
                 autoCorrect={false}
                 keyboardType="email-address"
                 onChangeText={email => this.setState({ email })}
-<<<<<<< HEAD
                 value={this.state.email}
-=======
                 returnKeyType="next"
-                onSubmitEditing={() => this.phoneNumber.focus()}
-                ref={input => (this.emailInput = input)}
->>>>>>> b7ebd7d9a406266c5be53cb621c3166e10175da2
+                onSubmitEditing={() => this.emailInput.focus()}
               >
                 
               </TextInput>
@@ -232,11 +226,8 @@ class InformationUser extends Component {
                 autoCorrect={false}
                 keyboardType="numeric"
                 onChangeText={phoneNumber => this.setState({ phoneNumber })}
-<<<<<<< HEAD
                 value={this.state.phoneNumber}
-=======
                 ref={input => (this.phoneNumber = input)}
->>>>>>> b7ebd7d9a406266c5be53cb621c3166e10175da2
               >
                 
               </TextInput>
@@ -356,7 +347,6 @@ class InformationUser extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 secureTextEntry
-                onSubmitEditing={() => this.changePassword()}
                 onChangeText={reNewPassword => this.setState({ reNewPassword })}
                 ref={input => (this.newRePassword = input)}
                 returnKeyType="next"

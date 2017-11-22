@@ -7,7 +7,8 @@ import {
   BackAndroid,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
+  Platform
 } from "react-native";
 import { firebaseApp } from "../api/Firebase";
 
@@ -164,7 +165,15 @@ const styles = StyleSheet.create({
     marginLeft: "3%",
     width: 60,
     height: 60,
-    borderRadius: 50
+    
+    ...Platform.select({
+      ios: {
+        borderRadius: 30
+      },
+      android: {
+        borderRadius: 50
+      }
+    })
   },
   logoOpenDrawer: {
     width: 30,
