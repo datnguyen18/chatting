@@ -26,8 +26,27 @@ class Message extends Component {
     },
     headerTintColor: "#FFFFFF",
     headerStyle: {
-      backgroundColor: "#009688"
-    }
+      backgroundColor: "#F74F4F"
+    },
+    headerRight: (
+      <TouchableOpacity
+        onPress={() => navigation.navigate("SettingConversationScreen", {
+          idFriend: `${navigation.state.params.idFriend}`,
+          avatarFriend: `${navigation.state.params.avatarFriend}`,
+          coverPhotoFriend: `${navigation.state.params.coverPhotoFriend}`,
+          nameFriend: `${navigation.state.params.nameFriend}`,
+          phoneNumberFriend: `${navigation.state.params.phoneNumberFriend}`,
+          sexFriend: `${navigation.state.params.sexFriend}`,
+          birthDateFriend: `${navigation.state.params.birthDateFriend}`,
+          emailFriend: `${navigation.state.params.emailFriend}`
+        })}
+      >
+        <Image
+          source={require("../img/Options.png")}
+          style={styles.logoOpenOptions}
+        />
+      </TouchableOpacity>
+    )
   });
 
   constructor(props) {
@@ -144,7 +163,12 @@ class Message extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  }
+  },
+  logoOpenOptions: {
+    width: 35,
+    height: 35,
+    marginRight: 15
+  },
 });
 
 //make this component available to the app

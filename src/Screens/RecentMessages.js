@@ -86,6 +86,11 @@ class RecentMessages extends Component {
               arrayRecentMessage.push({
                 name: snapshot1.val().Name,
                 avatar: snapshot1.val().Avatar,
+                birthdate: snapshot1.val().BirthDate,
+                coverPhoto: snapshot1.val().CoverPhoto,
+                email: snapshot1.val().Email,
+                phoneNumber: snapshot1.val().PhoneNumber,
+                sex: snapshot1.val().Sex,
                 id: element.val().Sender,
                 message: element.val().Message,
                 date: element.val().Time
@@ -99,7 +104,7 @@ class RecentMessages extends Component {
   }
 
   sortDate(arrayRecentMessage) {
-    arrayRecentMessage.sort(function(a, b) {
+    arrayRecentMessage.sort(function (a, b) {
       return new Date(b.date) - new Date(a.date);
     });
   }
@@ -120,7 +125,12 @@ class RecentMessages extends Component {
                 this.props.navigation.navigate("MessageScreen", {
                   idFriend: item.id,
                   nameFriend: item.name,
-                  avatarFriend: item.avatar
+                  avatarFriend: item.avatar,
+                  coverPhotoFriend: item.coverPhoto,
+                  emailFriend: item.email,
+                  phoneNumberFriend: item.phoneNumber,
+                  birthDateFriend: item.birthdate,
+                  sexFriend: item.sex
                 })}
             >
               <View key={item.id} style={styles.item}>
@@ -142,21 +152,21 @@ class RecentMessages extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#ffffff'
+    backgroundColor: '#ffffff'
   },
   item: {
-    marginLeft:"2.5%",
-    marginRight:"2.5%",
-    marginTop:8,
+    marginLeft: "2.5%",
+    marginRight: "2.5%",
+    marginTop: 8,
     flexDirection: "row",
     alignItems: "center",
     borderColor: "#2a4944",
     borderWidth: 1,
     backgroundColor: "transparent",
-    borderRadius:5,
-    borderColor:"#979797",
+    borderRadius: 5,
+    borderColor: "#979797",
     borderWidth: 0.3
-    
+
   },
   text: {
     margin: "5%"
@@ -165,7 +175,7 @@ const styles = StyleSheet.create({
     marginLeft: "3%",
     width: 60,
     height: 60,
-    
+
     ...Platform.select({
       ios: {
         borderRadius: 30
@@ -185,7 +195,7 @@ const styles = StyleSheet.create({
     height: 35,
     marginRight: 15
   },
-  logoMessage:{
+  logoMessage: {
     width: 24,
     height: 24,
   },
@@ -193,22 +203,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     ...Platform.select({
       ios: {
-        
+
       },
       android: {
-        color:"#000000"
+        color: "#000000"
       }
-    })  
+    })
   },
-  message : {
+  message: {
     ...Platform.select({
       ios: {
-        color:"#797979"
+        color: "#797979"
       },
       android: {
-       
+
       }
-    })  
+    })
   }
 });
 

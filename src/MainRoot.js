@@ -24,6 +24,7 @@ import InformationFriend from "./Screens/InformationFriend";
 import RoomMessage from "./Screens/RoomMessage";
 import Nearby from "./Screens/Nearby";
 import NewMessage from "./Screens/NewMessage";
+import SettingConversation from "./Screens/SettingConversation";
 
 let { width, height } = Dimensions.get("window");
 
@@ -69,6 +70,9 @@ export const RecentMessagesStack = StackNavigator({
   },
   NewMessageScreen: {
     screen: NewMessage
+  },
+  SettingConversationScreen: {
+    screen: SettingConversation
   }
 });
 

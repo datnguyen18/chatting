@@ -146,17 +146,16 @@ class ListFriends extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#ffffff'
+    backgroundColor: '#ffffff'
   },
   item: {
     flexDirection: "row",
     alignItems: "center",
     padding: "1%",
     borderColor: "#2a4944",
-    
   },
   avatar: {
-    flex:1,
+    flex: 1,
     marginLeft: "3%",
     width: 60,
     height: 60,
@@ -166,12 +165,13 @@ const styles = StyleSheet.create({
       },
       android: {
         borderRadius: 50
-      }})
+      }
+    })
   },
   name: {
     margin: "6%",
     fontSize: 18,
-    color: (Platform.android)? "#000000" : "#000000"
+    color: (Platform.android) ? "#000000" : "#000000"
   },
   logoOpenDrawer: {
     width: 30,
@@ -187,9 +187,9 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20
   },
-  textName: { 
-    flex:6,
-    borderBottomWidth:1,
+  textName: {
+    flex: 6,
+    borderBottomWidth: 1,
     borderColor: "#F74F4F"
   }
 });
