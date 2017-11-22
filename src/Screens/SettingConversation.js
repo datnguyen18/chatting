@@ -118,7 +118,7 @@ class SettingConversation extends Component {
             <View style={styles.container}>
                 <TouchableOpacity style={styles.containerRow}
                     onPress={() =>
-                        navigate("InformationFriendScreen", {
+                        navigate("WallFriendsScreen", {
                             idFriend: this.state.id,
                             avatarFriend: this.state.avatar,
                             coverPhotoFriend: this.state.coverPhoto,

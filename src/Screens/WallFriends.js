@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   },
   containerTextImage: {
     marginTop: "43%",
-    marginLeft: "3%",
+    marginLeft: "9%",
     height: 60,
     width: "30%",
     flexDirection: "row",
