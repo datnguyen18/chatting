@@ -130,12 +130,18 @@ class InformationUser extends Component {
       visible: !this.state.visible
     });
     if (this.state.oldPasswordInput != this.state.oldPassword) {
-      console.log("Sai mật khẩu cũ!");
+      this.refs.toast.show("Sai mật khẩu cũ!");
+      this.setState({
+        visible: false
+      });
     } else if (this.state.newPassword != this.state.reNewPassword) {
-      console.log("Mật khẩu mới không khớp!");
+      this.refs.toast.show("Mật khẩu mới không khớp!");
+      this.setState({
+        visible: false
+      });
     } else {
       this.itemRef
-        .child(this.state.userId)
+        .child(this.state.id)
         .child("Information")
         .set({
           Avatar: this.state.avatar,
@@ -147,6 +153,10 @@ class InformationUser extends Component {
           Sex: this.state.sex,
           Password: this.state.newPassword
         });
+      user
+        .updatePassword(this.state.reNewPassword)
+        .then(function() {}, function(error) {});
+      this.refs.toast.show("Đổi mật khẩu thành công!");
       this.setState({
         visible: false
       });
@@ -171,7 +181,12 @@ class InformationUser extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 onChangeText={name => this.setState({ name })}
+<<<<<<< HEAD
                 value={this.state.name}
+=======
+                returnKeyType="next"
+                onSubmitEditing={() => this.emailInput.focus()}
+>>>>>>> b7ebd7d9a406266c5be53cb621c3166e10175da2
               >
                 
               </TextInput>
@@ -191,7 +206,13 @@ class InformationUser extends Component {
                 autoCorrect={false}
                 keyboardType="email-address"
                 onChangeText={email => this.setState({ email })}
+<<<<<<< HEAD
                 value={this.state.email}
+=======
+                returnKeyType="next"
+                onSubmitEditing={() => this.phoneNumber.focus()}
+                ref={input => (this.emailInput = input)}
+>>>>>>> b7ebd7d9a406266c5be53cb621c3166e10175da2
               >
                 
               </TextInput>
@@ -211,7 +232,11 @@ class InformationUser extends Component {
                 autoCorrect={false}
                 keyboardType="numeric"
                 onChangeText={phoneNumber => this.setState({ phoneNumber })}
+<<<<<<< HEAD
                 value={this.state.phoneNumber}
+=======
+                ref={input => (this.phoneNumber = input)}
+>>>>>>> b7ebd7d9a406266c5be53cb621c3166e10175da2
               >
                 
               </TextInput>
@@ -285,6 +310,10 @@ class InformationUser extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 secureTextEntry
+                onChangeText={oldPasswordInput =>
+                  this.setState({ oldPasswordInput })}
+                returnKeyType="next"
+                onSubmitEditing={() => this.newPassword.focus()}
               >
                 
               </TextInput>
@@ -304,6 +333,10 @@ class InformationUser extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 secureTextEntry
+                onChangeText={newPassword => this.setState({ newPassword })}
+                ref={input => (this.newPassword = input)}
+                returnKeyType="next"
+                onSubmitEditing={() => this.newRePassword.focus()}
               >
                
               </TextInput>
@@ -323,6 +356,10 @@ class InformationUser extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 secureTextEntry
+                onSubmitEditing={() => this.changePassword()}
+                onChangeText={reNewPassword => this.setState({ reNewPassword })}
+                ref={input => (this.newRePassword = input)}
+                returnKeyType="next"
                 onSubmitEditing={() => this.changePassword()}
               >
                 
