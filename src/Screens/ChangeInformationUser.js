@@ -171,8 +171,9 @@ class InformationUser extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 onChangeText={name => this.setState({ name })}
+                value={this.state.name}
               >
-                {this.state.name}
+                
               </TextInput>
               <Image
                 source={require("../img/Edit.png")}
@@ -190,8 +191,9 @@ class InformationUser extends Component {
                 autoCorrect={false}
                 keyboardType="email-address"
                 onChangeText={email => this.setState({ email })}
+                value={this.state.email}
               >
-                {this.state.email}
+                
               </TextInput>
               <Image
                 source={require("../img/Edit.png")}
@@ -209,8 +211,9 @@ class InformationUser extends Component {
                 autoCorrect={false}
                 keyboardType="numeric"
                 onChangeText={phoneNumber => this.setState({ phoneNumber })}
+                value={this.state.phoneNumber}
               >
-                {this.state.phoneNumber}
+                
               </TextInput>
               <Image
                 source={require("../img/Edit.png")}
@@ -283,7 +286,7 @@ class InformationUser extends Component {
                 autoCorrect={false}
                 secureTextEntry
               >
-                {this.state.oldPasswordInput}
+                
               </TextInput>
               <Image
                 source={require("../img/Edit.png")}
@@ -302,7 +305,7 @@ class InformationUser extends Component {
                 autoCorrect={false}
                 secureTextEntry
               >
-                {this.state.newPassword}
+               
               </TextInput>
               <Image
                 source={require("../img/Edit.png")}
@@ -322,7 +325,7 @@ class InformationUser extends Component {
                 secureTextEntry
                 onSubmitEditing={() => this.changePassword()}
               >
-                {this.state.reNewPassword}
+                
               </TextInput>
               <Image
                 source={require("../img/Edit.png")}
