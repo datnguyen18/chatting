@@ -162,17 +162,17 @@ class Message extends Component {
     );
   }
 
-  renderFooter(props) {
-    // if (this.state.typingText) {
-    return (
-      <View style={styles.footerContainer}>
-        <Text style={styles.footerText}>
-        </Text>
-      </View>
-    );
-    // }
-    return null;
-  }
+  // renderFooter(props) {
+  //   // if (this.state.typingText) {
+  //   return (
+  //     <View style={styles.footerContainer}>
+  //       <Text style={styles.footerText}>
+  //       </Text>
+  //     </View>
+  //   );
+  //   // }
+  //   return null;
+  // }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -188,7 +188,7 @@ class Message extends Component {
             user={{
               _id: 1
             }}
-            renderFooter={this.renderFooter}
+            // renderFooter={this.renderFooter}
             renderMessageImage={this.renderCustomView}
           />
         </ImageBackground>
