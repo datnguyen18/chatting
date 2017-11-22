@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
     alignItems: "center",
-    padding: "1%",
+    padding: "2%",
     borderColor: "#2a4944",
   },
   avatar: {
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     height: 60,
     ...Platform.select({
       ios: {
-        borderRadius: 25
+        borderRadius: 28
       },
       android: {
         borderRadius: 50
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     height: 20
   },
   textName: {
-    flex: 6,
+    flex: 5,
     borderBottomWidth: 1,
     borderColor: "#F74F4F"
   }
