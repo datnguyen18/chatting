@@ -178,7 +178,7 @@ class Message extends Component {
     const { navigate } = this.props.navigation;
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <Image
+        <ImageBackground
           source={{ uri: this.state.background }}
           style={{ flex: 1 }}
         >
@@ -191,7 +191,7 @@ class Message extends Component {
             renderFooter={this.renderFooter}
             renderMessageImage={this.renderCustomView}
           />
-        </Image>
+        </ImageBackground>
       </TouchableWithoutFeedback >
     );
   }
