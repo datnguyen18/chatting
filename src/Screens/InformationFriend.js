@@ -9,7 +9,8 @@ import {
   BackAndroid,
   TextInput,
   KeyboardAvoidingView,
-  BackHandler
+  BackHandler,
+  ImageBackground
 } from "react-native";
 import { firebaseApp } from "../api/Firebase";
 import Toast, { DURATION } from "react-native-easy-toast";
@@ -53,7 +54,7 @@ class InformationFriend extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity>
-          <Image
+          <ImageBackground
             source={{ uri: this.state.coverPhoto }}
             style={styles.coverPhoto}
           >
@@ -65,7 +66,7 @@ class InformationFriend extends Component {
                 />
               </TouchableOpacity>
             </View>
-          </Image>
+          </ImageBackground>
         </TouchableOpacity>
         <View style={styles.containerBelow}>
           <View style={styles.containerText}>
