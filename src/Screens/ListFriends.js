@@ -151,9 +151,9 @@ class ListFriends extends Component {
                     <Text style={styles.name}>{item.name}</Text>
 
                   </View>
-                  <Menu>
+                  <Menu style={styles.menu}>
                       <MenuTrigger>
-                        <Image source={require("../img/optionLogo.png")} style={styles.option}/>
+                        <Image source={require("../img/Edit.png")} style={styles.option}/>
                       </MenuTrigger>
                       <MenuOptions>
                         <MenuOption text="Trang cá nhận" onSelect={() => {this.props.navigation.navigate("InformationFriendScreen",{
@@ -200,10 +200,10 @@ const styles = StyleSheet.create({
     height: 60,
     ...Platform.select({
       ios: {
-        borderRadius: 28
+        borderRadius: 30
       },
       android: {
-        borderRadius: 50
+        borderRadius: 55
       }
     })
   },
@@ -233,9 +233,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   option: {
-    width: 10,
-    height: 10,
+    width: 20,
+    height: 20,
     marginRight: 15
+  },
+  menu: {
+    flex: 0.5
   }
 });
 
