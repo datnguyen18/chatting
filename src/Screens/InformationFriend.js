@@ -29,7 +29,7 @@ class InformationFriend extends Component {
     },
     headerTintColor: "#FFFFFF",
     headerStyle: {
-      backgroundColor: "#009688"
+      backgroundColor: "#F74F4F"
     }
   });
 

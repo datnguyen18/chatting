@@ -32,7 +32,7 @@ export default class componentName extends Component {
         <Image
           source={require("../img/MenuInformation.png")}
           style={styles.logoOpenInformationFriend}
-        />                                                                                                                      
+        />
       </TouchableOpacity>
     ),
     title: "Trang cá nhân",
@@ -40,7 +40,7 @@ export default class componentName extends Component {
     headerTintColor: "#FFFFFF",
     headerTitleStyle: { textAlign: "center", alignSelf: "center" },
     headerStyle: {
-      backgroundColor: "#009688"
+      backgroundColor: "#F74F4F"
     }
   });
 

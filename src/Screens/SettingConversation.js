@@ -34,15 +34,32 @@ class SettingConversation extends Component {
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.containerAvatarFriend}>
+                <TouchableOpacity style={styles.containerAvatarFriend}
+                    onPress={() =>
+                        navigate("InformationFriendScreen", {
+                            idFriend: this.state.id,
+                            avatarFriend: this.state.avatar,
+                            coverPhotoFriend: this.state.coverPhoto,
+                            nameFriend: this.state.name,
+                            phoneNumberFriend: this.state.phoneNumber,
+                            sexFriend: this.state.sex,
+                            birthDateFriend: this.state.birthDate,
+                            emailFriend: this.state.email
+                        })}>
                     <Image
                         source={{ uri: this.state.avatar }}
                         style={styles.avatar}
                     />
-                    <Text>{this.state.name}</Text>
+                    <View>
+                        <Text>{this.state.name}</Text>
+                        <Text>Trang cá nhân</Text>
+                    </View>
                 </TouchableOpacity>
+
+                <Text> Thay đổi ảnh nền</Text>
             </View>
         );
     }

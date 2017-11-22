@@ -73,6 +73,9 @@ export const RecentMessagesStack = StackNavigator({
   },
   SettingConversationScreen: {
     screen: SettingConversation
+  }, 
+  InformationFriendScreen: {
+    screen: InformationFriend
   }
 });
 

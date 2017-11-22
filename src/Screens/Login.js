@@ -70,7 +70,6 @@ class Login extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView behavior="padding" style={styles.container}>  
         <ImageBackground source={ require('../img/backgroundLogin.png') } style={styles.backgroundImage}>
