@@ -126,8 +126,8 @@ class RecentMessages extends Component {
               <View key={item.id} style={styles.item}>
                 <Image source={{ uri: item.avatar }} style={styles.avatar} />
                 <View style={styles.text}>
-                  <Text>{item.name}</Text>
-                  <Text>{item.message}</Text>
+                  <Text style={styles.nameUser}>{item.name}</Text>
+                  <Text style={styles.message}>{item.message}</Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -188,6 +188,27 @@ const styles = StyleSheet.create({
   logoMessage:{
     width: 24,
     height: 24,
+  },
+  nameUser: {
+    fontSize: 18,
+    ...Platform.select({
+      ios: {
+        
+      },
+      android: {
+        color:"#000000"
+      }
+    })  
+  },
+  message : {
+    ...Platform.select({
+      ios: {
+        color:"#797979"
+      },
+      android: {
+       
+      }
+    })  
   }
 });
 
