@@ -9,6 +9,13 @@ import {
   Platform,
   Image
 } from "react-native";
+import {
+  Menu,
+  MenuContext,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger
+} from 'react-native-popup-menu';
 import { firebaseApp } from "../api/Firebase";
 
 // create a component
@@ -71,7 +78,13 @@ class ListFriends extends Component {
             arrayNameFriends.push({
               name: snapshot1.val().Name,
               id: snapshot.val().UID,
-              avatar: snapshot1.val().Avatar
+              avatar: snapshot1.val().Avatar,
+              email: snapshot1.val().Email,
+              phoneNumber: snapshot1.val().PhoneNumber,
+              birthdate: snapshot1.val().BirthDate,
+              sex: snapshot1.val().Sex,
+              coverPhoto: snapshot1.val().CoverPhoto
+            
             });
             this.sortFriends(arrayNameFriends);
             this.loadIdFriends(arrayNameFriends);
@@ -116,28 +129,54 @@ class ListFriends extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    console.log(this.state.friends)
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          {this.state.friends.map((item, index) => (
-            <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate("MessageScreen", {
-                  idFriend: item.id,
-                  nameFriend: item.name,
-                  avatarFriend: item.avatar
-                })} 
-            >
-              <View key={item.id} style={styles.item}>
-                <Image source={{ uri: item.avatar }} style={styles.avatar} />
-                <View style={styles.textName}>
-                  <Text style={styles.name}>{item.name}</Text>
+      <MenuContext>
+        <View style={styles.container}>
+          <ScrollView>
+            {this.state.friends.map((item, index) => (
+              <TouchableOpacity
+                onPress={() =>{
+                  this.props.navigation.navigate("MessageScreen", {
+                    idFriend: item.id,
+                    nameFriend: item.name,
+                    avatarFriend: item.avatar
+                  })
+                
+                }} 
+              >
+                <View key={item.id} style={styles.item}>
+                  <Image source={{ uri: item.avatar }} style={styles.avatar} />
+                  <View style={styles.textName}>
+                    <Text style={styles.name}>{item.name}</Text>
+
+                  </View>
+                  <Menu>
+                      <MenuTrigger>
+                        <Image source={require("../img/optionLogo.png")} style={styles.option}/>
+                      </MenuTrigger>
+                      <MenuOptions>
+                        <MenuOption text="Trang cá nhận" onSelect={() => {this.props.navigation.navigate("InformationFriendScreen",{
+                          coverPhotoFriend: item.coverPhoto,
+                          avatarFriend: item.avatar,
+                          nameFriend: item.name,
+                          emailFriend: item.email,
+                          idFriend: item.id,
+                          phoneNumberFriend: item.phoneNumber,
+                          birthDateFriend: item.birthdate,
+                          sexFriend: item.sex
+                        })
+                        console.log(item.avatar)
+                        }}/>
+                        <MenuOption text='Xoá bạn' />
+                      </MenuOptions>
+                  </Menu>
                 </View>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+      </MenuContext>
     );
   }
 }
@@ -188,9 +227,15 @@ const styles = StyleSheet.create({
     height: 20
   },
   textName: {
-    flex: 5,
+    flex: 4,
     borderBottomWidth: 1,
-    borderColor: "#F74F4F"
+    borderColor: "#F74F4F",
+    flexDirection: 'row'
+  },
+  option: {
+    width: 10,
+    height: 10,
+    marginRight: 15
   }
 });
 
