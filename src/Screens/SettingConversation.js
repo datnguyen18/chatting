@@ -76,6 +76,29 @@ class SettingConversation extends Component {
                     )
                     .then(snapshot => {
                         this.itemRef
+                            .child(this.state.id)
+                            .child("Messages")
+                            .child(global.path)
+                            .child("Background")
+                            .set({
+                                URL: snapshot.downloadURL
+                            });
+                        this.refs.toast.show("Thay đổi ảnh bìa thành công!");
+                    });
+
+                    Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
+                    .then(blob =>
+                        firebaseApp
+                            .storage()
+                            .ref("Users")
+                            .child(this.state.id)
+                            .child("Messages")
+                            .child(global.path)
+                            .child("Background")
+                            .put(blob, { contentType: "image/png" })
+                    )
+                    .then(snapshot => {
+                        this.itemRef
                             .child(global.userId)
                             .child("Messages")
                             .child(global.path)
