@@ -4,7 +4,7 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
+  ImageBackground,
   TouchableOpacity,
   BackHandler,
   TouchableWithoutFeedback,
@@ -41,7 +41,7 @@ class Message extends Component {
           emailFriend: `${navigation.state.params.emailFriend}`
         })}
       >
-        <Image
+        <ImageBackground
           source={require("../img/Options.png")}
           style={styles.logoOpenOptions}
         />
