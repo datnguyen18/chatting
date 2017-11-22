@@ -126,7 +126,7 @@ class ListFriends extends Component {
                   idFriend: item.id,
                   nameFriend: item.name,
                   avatarFriend: item.avatar
-                })}
+                })} 
             >
               <View key={item.id} style={styles.item}>
                 <Image source={{ uri: item.avatar }} style={styles.avatar} />
