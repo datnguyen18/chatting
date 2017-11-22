@@ -93,6 +93,7 @@ class Register extends Component {
             PhoneNumber: this.state.phoneNumber,
             BirthDate: this.state.date,
             Avatar: pathAvatar,
+            ID: user.uid,
             CoverPhoto:
               "https://firebasestorage.googleapis.com/v0/b/eiu-chatting-c99ce.appspot.com/o/Users%2FAnonymous%2FCoverPhoto.jpg?alt=media&token=7d9930c2-4809-4fe8-b4ac-28625a1c4ec8",
             Sex: this.state.sex
