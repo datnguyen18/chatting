@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   BackHandler,
   TouchableWithoutFeedback,
+  ImageBackground,
   Keyboard
 } from "react-native";
 import { GiftedChat } from "react-native-gifted-chat";
