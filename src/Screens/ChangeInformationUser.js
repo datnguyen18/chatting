@@ -153,9 +153,9 @@ class InformationUser extends Component {
           Sex: this.state.sex,
           Password: this.state.newPassword
         });
-        user
+      user
         .updatePassword(this.state.reNewPassword)
-        .then(function() {}, function(error) {});
+        .then(function () { }, function (error) { });
       this.refs.toast.show("Đổi mật khẩu thành công!");
 
       this.setState({
@@ -186,7 +186,7 @@ class InformationUser extends Component {
                 returnKeyType="next"
                 onSubmitEditing={() => this.emailInput.focus()}
               >
-                
+
               </TextInput>
               <Image
                 source={require("../img/Edit.png")}
@@ -206,9 +206,10 @@ class InformationUser extends Component {
                 onChangeText={email => this.setState({ email })}
                 value={this.state.email}
                 returnKeyType="next"
-                onSubmitEditing={() => this.emailInput.focus()}
+                onSubmitEditing={() => this.phoneNumber.focus()}
+                ref={input => (this.emailInput = input)}
               >
-                
+
               </TextInput>
               <Image
                 source={require("../img/Edit.png")}
@@ -229,7 +230,7 @@ class InformationUser extends Component {
                 value={this.state.phoneNumber}
                 ref={input => (this.phoneNumber = input)}
               >
-                
+
               </TextInput>
               <Image
                 source={require("../img/Edit.png")}
@@ -306,7 +307,7 @@ class InformationUser extends Component {
                 returnKeyType="next"
                 onSubmitEditing={() => this.newPassword.focus()}
               >
-                
+
               </TextInput>
               <Image
                 source={require("../img/Edit.png")}
@@ -329,7 +330,7 @@ class InformationUser extends Component {
                 returnKeyType="next"
                 onSubmitEditing={() => this.newRePassword.focus()}
               >
-               
+
               </TextInput>
               <Image
                 source={require("../img/Edit.png")}
@@ -352,7 +353,7 @@ class InformationUser extends Component {
                 returnKeyType="next"
                 onSubmitEditing={() => this.changePassword()}
               >
-                
+
               </TextInput>
               <Image
                 source={require("../img/Edit.png")}
