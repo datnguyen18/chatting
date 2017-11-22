@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import { firebaseApp } from "../api/Firebase";
 import RNFetchBlob from "react-native-fetch-blob";
 
@@ -48,7 +48,8 @@ class SettingConversation extends Component {
             phoneNumber: this.props.navigation.state.params.phoneNumberFriend,
             birthDate: this.props.navigation.state.params.birthDateFriend,
             sex: this.props.navigation.state.params.sexFriend,
-            path: this.props.navigation.state.params.path
+            path: this.props.navigation.state.params.path,
+            imageBackgroundConversation: global.imageBackgroundConversation
         };
     }
 
@@ -86,7 +87,7 @@ class SettingConversation extends Component {
                         this.refs.toast.show("Thay đổi ảnh bìa thành công!");
                     });
 
-                    Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
+                Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
                     .then(blob =>
                         firebaseApp
                             .storage()
@@ -140,7 +141,10 @@ class SettingConversation extends Component {
                 <TouchableOpacity onPress={() => this.changeBackGround()
                 }>
                     <View style={styles.containerRow}>
-                        <Text> Thay đổi ảnh nền</Text>
+                        <Text style={{ marginLeft: "3%" }}> Thay đổi ảnh nền</Text>
+                        <ImageBackground
+                            source={{ uri: this.state.imageBackgroundConversation }}
+                            style={styles.backgroundConversation}></ImageBackground>
                     </View>
                 </TouchableOpacity>
             </View >
@@ -161,7 +165,11 @@ const styles = StyleSheet.create({
         margin: "3%",
         width: 60,
         height: 60
-    },
+    }, backgroundConversation: {
+        marginLeft: "50%",
+        width: 45,
+        height: 80
+    }
 });
 
 //make this component available to the app

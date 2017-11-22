@@ -74,8 +74,10 @@ class Message extends Component {
       .on("value", snapshot => {
         if (snapshot.hasChild("Background")) {
           this.setState({ background: snapshot.child("Background").val().URL });
+          global.imageBackgroundConversation = snapshot.child("Background").val().URL;
+        } else {
+          global.imageBackgroundConversation = "https://firebasestorage.googleapis.com/v0/b/eiu-chatting-c99ce.appspot.com/o/Users%2FDefaultBackgroundRoomChat%2FDefault.png?alt=media&token=2139129c-6579-411b-b1b9-9e8da7bebc67";
         }
-
       });
     this.itemRef
       .child(global.userId)
