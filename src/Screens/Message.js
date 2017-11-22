@@ -55,13 +55,15 @@ class Message extends Component {
     this.state = {
       messages: [],
       uId: this.props.navigation.state.params.idFriend,
-      avatar: this.props.navigation.state.params.avatarFriend
+      avatar: this.props.navigation.state.params.avatarFriend,
+      background: '#E0E0E0'
     };
     const arraySortId = [];
     arraySortId[0] = global.userId;
     arraySortId[1] = this.state.uId;
     arraySortId.sort();
     path = arraySortId[0] + " and " + arraySortId[1];
+    global.path = path;
   }
 
   componentWillMount() {
@@ -69,6 +71,17 @@ class Message extends Component {
       .child(global.userId)
       .child("Messages")
       .child(path)
+      .on("value", snapshot => {
+        if (snapshot.hasChild("Background")) {
+          this.setState({ background: snapshot.child("Background").val().URL });
+        }
+
+      });
+    this.itemRef
+      .child(global.userId)
+      .child("Messages")
+      .child(path)
+      .child("Message")
       .on("child_added", snapshot => {
         var newPostKey = firebaseApp
           .database()
@@ -102,7 +115,7 @@ class Message extends Component {
     this.itemRef
       .child(user.uid)
       .child("Messages")
-      .child(path)
+      .child(path).child("Message")
       .child(newPostKey)
       .set({
         Message: messages[0].text,
@@ -112,7 +125,7 @@ class Message extends Component {
     this.itemRef
       .child(this.state.uId)
       .child("Messages")
-      .child(path)
+      .child(path).child("Message")
       .child(newPostKey)
       .set({
         Message: messages[0].text,
@@ -143,18 +156,43 @@ class Message extends Component {
     // }));
   }
 
+  renderMessageImage(props) {
+    return (
+      <View style={{ backgroundColor: "#F74F4F" }}></View>
+    );
+  }
+
+  renderFooter(props) {
+    // if (this.state.typingText) {
+    return (
+      <View style={styles.footerContainer}>
+        <Text style={styles.footerText}>
+        </Text>
+      </View>
+    );
+    // }
+    return null;
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <GiftedChat
-          messages={this.state.messages}
-          onSend={messages => this.onSend(messages)}
-          user={{
-            _id: 1
-          }}
-        />
-      </TouchableWithoutFeedback>
+        <Image
+          source={{ uri: this.state.background }}
+          style={{ flex: 1 }}
+        >
+          <GiftedChat
+            messages={this.state.messages}
+            onSend={messages => this.onSend(messages)}
+            user={{
+              _id: 1
+            }}
+            renderFooter={this.renderFooter}
+            renderMessageImage={this.renderCustomView}
+          />
+        </Image>
+      </TouchableWithoutFeedback >
     );
   }
 }
@@ -168,6 +206,16 @@ const styles = StyleSheet.create({
     width: 35,
     height: 35,
     marginRight: 15
+  },
+  footerContainer: {
+    marginTop: 5,
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+  },
+  footerText: {
+    fontSize: 14,
+    color: '#aaa',
   },
 });
 
