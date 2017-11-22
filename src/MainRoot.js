@@ -73,10 +73,13 @@ export const RecentMessagesStack = StackNavigator({
   },
   SettingConversationScreen: {
     screen: SettingConversation
-  }, 
+  },
   WallFriendsScreen: {
     screen: WallFriends
   },
+  InformationFriendScreen: {
+    screen: InformationFriend
+  }
 });
 
 export const ListFriendsStack = StackNavigator({
