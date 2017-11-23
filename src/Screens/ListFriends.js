@@ -9,6 +9,13 @@ import {
   Platform,
   Image
 } from "react-native";
+import {
+  Menu,
+  MenuContext,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger
+} from 'react-native-popup-menu';
 import { firebaseApp } from "../api/Firebase";
 
 // create a component
@@ -71,7 +78,13 @@ class ListFriends extends Component {
             arrayNameFriends.push({
               name: snapshot1.val().Name,
               id: snapshot.val().UID,
-              avatar: snapshot1.val().Avatar
+              avatar: snapshot1.val().Avatar,
+              email: snapshot1.val().Email,
+              phoneNumber: snapshot1.val().PhoneNumber,
+              birthdate: snapshot1.val().BirthDate,
+              sex: snapshot1.val().Sex,
+              coverPhoto: snapshot1.val().CoverPhoto
+            
             });
             this.sortFriends(arrayNameFriends);
             this.loadIdFriends(arrayNameFriends);
@@ -116,7 +129,9 @@ class ListFriends extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    console.log(this.state.friends)
     return (
+<<<<<<< HEAD
       <View style={styles.container}>
         <ScrollView>
           {this.state.friends.map((item, index) => (
@@ -132,12 +147,54 @@ class ListFriends extends Component {
                 <Image source={{ uri: item.avatar }} style={styles.avatar} />
                 <View style={styles.textName}>
                   <Text style={styles.name}>{item.name}</Text>
+=======
+      <MenuContext>
+        <View style={styles.container}>
+          <ScrollView>
+            {this.state.friends.map((item, index) => (
+              <TouchableOpacity
+                onPress={() =>{
+                  this.props.navigation.navigate("MessageScreen", {
+                    idFriend: item.id,
+                    nameFriend: item.name,
+                    avatarFriend: item.avatar
+                  })
+                
+                }} 
+              >
+                <View key={item.id} style={styles.item}>
+                  <Image source={{ uri: item.avatar }} style={styles.avatar} />
+                  <View style={styles.textName}>
+                    <Text style={styles.name}>{item.name}</Text>
+
+                  </View>
+                  <Menu style={styles.menu}>
+                      <MenuTrigger>
+                        <Image source={require("../img/Edit.png")} style={styles.option}/>
+                      </MenuTrigger>
+                      <MenuOptions>
+                        <MenuOption text="Trang cá nhận" onSelect={() => {this.props.navigation.navigate("InformationFriendScreen",{
+                          coverPhotoFriend: item.coverPhoto,
+                          avatarFriend: item.avatar,
+                          nameFriend: item.name,
+                          emailFriend: item.email,
+                          idFriend: item.id,
+                          phoneNumberFriend: item.phoneNumber,
+                          birthDateFriend: item.birthdate,
+                          sexFriend: item.sex
+                        })
+                        console.log(item.avatar)
+                        }}/>
+                        <MenuOption text='Xoá bạn' />
+                      </MenuOptions>
+                  </Menu>
+>>>>>>> f4c17e15d66b9ce9cf92e38c63eaa48c8b8de914
                 </View>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+      </MenuContext>
     );
   }
 }
@@ -161,10 +218,14 @@ const styles = StyleSheet.create({
     height: 60,
     ...Platform.select({
       ios: {
+<<<<<<< HEAD
         borderRadius: 25
+=======
+        borderRadius: 30
+>>>>>>> f4c17e15d66b9ce9cf92e38c63eaa48c8b8de914
       },
       android: {
-        borderRadius: 50
+        borderRadius: 55
       }
     })
   },
@@ -188,9 +249,22 @@ const styles = StyleSheet.create({
     height: 20
   },
   textName: {
+<<<<<<< HEAD
     flex: 6,
+=======
+    flex: 4,
+>>>>>>> f4c17e15d66b9ce9cf92e38c63eaa48c8b8de914
     borderBottomWidth: 1,
-    borderColor: "#F74F4F"
+    borderColor: "#F74F4F",
+    flexDirection: 'row'
+  },
+  option: {
+    width: 20,
+    height: 20,
+    marginRight: 15
+  },
+  menu: {
+    flex: 0.5
   }
 });
 
