@@ -131,23 +131,6 @@ class ListFriends extends Component {
     const { navigate } = this.props.navigation;
     console.log(this.state.friends)
     return (
-<<<<<<< HEAD
-      <View style={styles.container}>
-        <ScrollView>
-          {this.state.friends.map((item, index) => (
-            <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate("MessageScreen", {
-                  idFriend: item.id,
-                  nameFriend: item.name,
-                  avatarFriend: item.avatar
-                })}
-            >
-              <View key={item.id} style={styles.item}>
-                <Image source={{ uri: item.avatar }} style={styles.avatar} />
-                <View style={styles.textName}>
-                  <Text style={styles.name}>{item.name}</Text>
-=======
       <MenuContext>
         <View style={styles.container}>
           <ScrollView>
@@ -188,7 +171,6 @@ class ListFriends extends Component {
                         <MenuOption text='Xoá bạn' />
                       </MenuOptions>
                   </Menu>
->>>>>>> f4c17e15d66b9ce9cf92e38c63eaa48c8b8de914
                 </View>
               </TouchableOpacity>
             ))}
@@ -218,11 +200,7 @@ const styles = StyleSheet.create({
     height: 60,
     ...Platform.select({
       ios: {
-<<<<<<< HEAD
-        borderRadius: 25
-=======
         borderRadius: 30
->>>>>>> f4c17e15d66b9ce9cf92e38c63eaa48c8b8de914
       },
       android: {
         borderRadius: 55
@@ -249,11 +227,7 @@ const styles = StyleSheet.create({
     height: 20
   },
   textName: {
-<<<<<<< HEAD
-    flex: 6,
-=======
     flex: 4,
->>>>>>> f4c17e15d66b9ce9cf92e38c63eaa48c8b8de914
     borderBottomWidth: 1,
     borderColor: "#F74F4F",
     flexDirection: 'row'
