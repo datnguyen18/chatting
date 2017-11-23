@@ -119,7 +119,7 @@ class Register extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <ImageBackground source={ require('../img/backgroundLogin.png') } style={styles.backgroundImage}>
+        <ImageBackground source={require('../img/backgroundLogin.png')} style={styles.backgroundImage}>
           <Spinner
             visible={this.state.visible}
             textContent={"Đang xử lý..."}
@@ -220,7 +220,7 @@ class Register extends Component {
                 initial={0}
                 formHorizontal={true}
                 buttonColor={"#FFFFFF"}
-                labelStyle={{ marginLeft: "5%" , backgroundColor:'transparent'}}
+                labelStyle={{ marginLeft: "5%", backgroundColor: 'transparent' }}
                 onPress={value => {
                   this.setState({ sex: value });
                 }}
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: "3%",
     color: 'rgba(255, 255, 255, 0.77)',
-    
+
   },
   touchable: {
     padding: "3%"
@@ -283,9 +283,9 @@ const styles = StyleSheet.create({
     width: null,
     height: null
   },
-  textRegister:{
+  textRegister: {
     fontSize: 18,
-    color:"#FFFFFF"
+    color: "#FFFFFF"
   }
 });
 

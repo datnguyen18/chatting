@@ -126,7 +126,7 @@ class ListFriends extends Component {
                   idFriend: item.id,
                   nameFriend: item.name,
                   avatarFriend: item.avatar
-                })} 
+                })}
             >
               <View key={item.id} style={styles.item}>
                 <Image source={{ uri: item.avatar }} style={styles.avatar} />
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
     alignItems: "center",
-    padding: "2%",
+    padding: "1%",
     borderColor: "#2a4944",
   },
   avatar: {
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     height: 60,
     ...Platform.select({
       ios: {
-        borderRadius: 28
+        borderRadius: 25
       },
       android: {
         borderRadius: 50
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     height: 20
   },
   textName: {
-    flex: 5,
+    flex: 6,
     borderBottomWidth: 1,
     borderColor: "#F74F4F"
   }
