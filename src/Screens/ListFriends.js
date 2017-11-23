@@ -168,7 +168,18 @@ class ListFriends extends Component {
                         })
                         console.log(item.avatar)
                         }}/>
-                        <MenuOption text='Xoá bạn' />
+                        <MenuOption text='Xoá bạn' onSelect={() => {
+                          
+                          this.itemRef
+                          .child(global.userId)
+                          .child("Friends")
+                          .orderByChild("UID").equalTo(item.id).on("value", snapshot => {
+                            snapshot.forEach(data=> {
+                              this.itemRef.child(global.userId).child("Friends").child(data.key).remove()
+                              this.itemRef.child(item.id).child("Friends").child(data.key).remove()
+                            })
+                          })
+                        }}/>
                       </MenuOptions>
                   </Menu>
                 </View>
