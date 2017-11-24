@@ -13,6 +13,6 @@ module.exports = StyleSheet.create({
         padding: 15
     },
     button_color: {
-        backgroundColor: '#00796B'
+        backgroundColor: '#F74F4F'
     }
 });

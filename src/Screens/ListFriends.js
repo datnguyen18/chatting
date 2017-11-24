@@ -84,7 +84,7 @@ class ListFriends extends Component {
               birthdate: snapshot1.val().BirthDate,
               sex: snapshot1.val().Sex,
               coverPhoto: snapshot1.val().CoverPhoto
-            
+
             });
             this.sortFriends(arrayNameFriends);
             this.loadIdFriends(arrayNameFriends);
@@ -127,23 +127,27 @@ class ListFriends extends Component {
     return str;
   }
 
+  deleteByValue(array, index) {
+    delete array[index];
+    return array;
+  }
+
   render() {
     const { navigate } = this.props.navigation;
-    console.log(this.state.friends)
     return (
       <MenuContext>
         <View style={styles.container}>
           <ScrollView>
             {this.state.friends.map((item, index) => (
               <TouchableOpacity
-                onPress={() =>{
+                onPress={() => {
                   this.props.navigation.navigate("MessageScreen", {
                     idFriend: item.id,
                     nameFriend: item.name,
                     avatarFriend: item.avatar
                   })
-                
-                }} 
+
+                }}
               >
                 <View key={item.id} style={styles.item}>
                   <Image source={{ uri: item.avatar }} style={styles.avatar} />
@@ -152,11 +156,12 @@ class ListFriends extends Component {
 
                   </View>
                   <Menu style={styles.menu}>
-                      <MenuTrigger>
-                        <Image source={require("../img/Edit.png")} style={styles.option}/>
-                      </MenuTrigger>
-                      <MenuOptions>
-                        <MenuOption text="Trang cá nhận" onSelect={() => {this.props.navigation.navigate("InformationFriendScreen",{
+                    <MenuTrigger>
+                      <Image source={require("../img/Edit.png")} style={styles.option} />
+                    </MenuTrigger>
+                    <MenuOptions>
+                      <MenuOption text="Trang cá nhận" onSelect={() => {
+                        this.props.navigation.navigate("InformationFriendScreen", {
                           coverPhotoFriend: item.coverPhoto,
                           avatarFriend: item.avatar,
                           nameFriend: item.name,
@@ -166,21 +171,20 @@ class ListFriends extends Component {
                           birthDateFriend: item.birthdate,
                           sexFriend: item.sex
                         })
-                        console.log(item.avatar)
-                        }}/>
-                        <MenuOption text='Xoá bạn' onSelect={() => {
-                          
-                          this.itemRef
+                      }} />
+                      <MenuOption text='Xoá bạn' onSelect={() => {
+                        this.itemRef
                           .child(global.userId)
                           .child("Friends")
                           .orderByChild("UID").equalTo(item.id).on("value", snapshot => {
-                            snapshot.forEach(data=> {
+                            snapshot.forEach(data => {
                               this.itemRef.child(global.userId).child("Friends").child(data.key).remove()
                               this.itemRef.child(item.id).child("Friends").child(data.key).remove()
+                              this.setState({ friends: this.deleteByValue(this.state.friends, index) });
                             })
                           })
-                        }}/>
-                      </MenuOptions>
+                      }} />
+                    </MenuOptions>
                   </Menu>
                 </View>
               </TouchableOpacity>

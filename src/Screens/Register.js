@@ -27,6 +27,19 @@ var radio_props = [
 var styleColorBackground = require("../components/color_background");
 // create a component
 class Register extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    headerTitleStyle: {
+      alignSelf: "center",
+      marginRight: "19%",
+      color: "#FFFFFF"
+    },
+    headerTintColor: "#FFFFFF",
+    title: "Đăng ký",
+    headerStyle: {
+      backgroundColor: "#F74F4F"
+    }
+  });
+  
   constructor(props) {
     super(props);
     this.state = {

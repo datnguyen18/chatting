@@ -37,19 +37,7 @@ export const LoginAndRegister = StackNavigator({
   },
 
   RegisterScreen: {
-    screen: Register,
-    navigationOptions: {
-      headerTitleStyle: {
-        alignSelf: "center",
-        marginRight: "19%",
-        color: "#FFFFFF"
-      },
-      headerTintColor: "#FFFFFF",
-      title: "Đăng ký",
-      headerStyle: {
-        backgroundColor: "#F74F4F"
-      }
-    }
+    screen: Register
   },
 
   MainTabScreen: {
@@ -58,6 +46,18 @@ export const LoginAndRegister = StackNavigator({
       headerLeft: null,
       header: null
     }
+  }
+});
+
+export const RegisterStack = StackNavigator({
+  LoginScreen: {
+    screen: Login,
+    navigationOptions: {
+      header: null
+    }
+  },
+  RegisterScreen: {
+    screen: Register
   }
 });
 
@@ -112,10 +112,7 @@ export const RoomChatStack = StackNavigator({
 export const InformationUserStack = StackNavigator({
   InformationUserScreen: {
     screen: InformationUser
-  }
-});
-
-export const ChangeInformationUserStack = StackNavigator({
+  },
   ChangeInformationUserScreen: {
     screen: ChangeInformationUser
   }
@@ -171,11 +168,11 @@ export const Drawer = DrawerNavigator(
     InformationUser: {
       screen: InformationUserStack
     },
-    ChangeInformationUserScreen: {
-      screen: ChangeInformationUserStack
-    },
     LoginScreen: {
       screen: Login
+    },
+    RegisterStack: {
+      screen: RegisterStack
     },
     NearbyScreen: {
       screen: NearbyStack

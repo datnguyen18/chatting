@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   },
   itemHeaderSection: {
     fontSize: 23,
-    color: "#009688"
+    color: "#F74F4F"
   }
 });
 

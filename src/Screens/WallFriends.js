@@ -164,7 +164,8 @@ const styles = StyleSheet.create({
     marginLeft: "10%",
     fontSize: 18,
     fontWeight: "bold",
-    color: "#FFFFFF"
+    color: "#FFFFFF",
+    backgroundColor: 'transparent'
   },
   logoOpenInformationFriend: {
     width: 35,

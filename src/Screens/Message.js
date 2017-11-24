@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard
 } from "react-native";
-import { GiftedChat } from "react-native-gifted-chat";
+import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import { firebaseApp } from "../api/Firebase";
 
 // create a component
@@ -176,6 +176,19 @@ class Message extends Component {
   //   return null;
   // }
 
+  renderBubble(props) {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: '#F74F4F',
+          }
+        }}
+      />
+    );
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -192,6 +205,7 @@ class Message extends Component {
             }}
             // renderFooter={this.renderFooter}
             renderMessageImage={this.renderCustomView}
+            renderBubble={this.renderBubble}
           />
         </ImageBackground>
       </TouchableWithoutFeedback >
