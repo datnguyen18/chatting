@@ -179,11 +179,11 @@ const styles = StyleSheet.create({
         width: 45,
         height: 80
     },
-    viewColor: {
-        width: 45,
-        height: 45,
-        background: this.state.viewColor
-    }
+    // viewColor: {
+    //     width: 45,
+    //     height: 45,
+    //     background: this.state.viewColor
+    // }
 });
 
 //make this component available to the app

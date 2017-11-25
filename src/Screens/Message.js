@@ -26,7 +26,7 @@ class Message extends Component {
     },
     headerTintColor: "#FFFFFF",
     headerStyle: {
-      backgroundColor: this.state.viewColor
+      backgroundColor: "#E0E0E0"
     },
     headerRight: (
       <TouchableOpacity
@@ -189,7 +189,7 @@ class Message extends Component {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: this.state.viewColor,
+            // backgroundColor: this.state.viewColor,
           }
         }}
       />

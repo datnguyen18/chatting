@@ -10,7 +10,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   BackHandler,
-  ImageBackground
+  ImageBackground,
+  Platform
 } from "react-native";
 import { firebaseApp } from "../api/Firebase";
 import RNFetchBlob from "react-native-fetch-blob";
@@ -28,6 +29,8 @@ const BackButton = props => (
 var ImagePicker = require("react-native-image-picker");
 var styleColorBackground = require("../components/color_background");
 const polyfill = RNFetchBlob.polyfill;
+const fs = RNFetchBlob.fs;
+const Blob = RNFetchBlob.polyfill.Blob
 
 window.XMLHttpRequest = polyfill.XMLHttpRequest;
 window.Blob = polyfill.Blob;
@@ -40,6 +43,8 @@ var options = {
   path: 'images'
   }
 };
+
+
 // create a component
 class InformationUser extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -93,6 +98,72 @@ class InformationUser extends Component {
     return true;
   }
 
+  uploadCover = (uri, mime = 'image/jpg') => {
+    console.log('zoooo')
+    return new Promise((resolve, reject) => {
+      const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
+        let uploadBlob = null
+        const imageRef = firebaseApp.storage()
+        .ref('Users')
+        .child(this.state.id)
+        .child("CoverPhoto")
+        .child("CoverPhoto")
+        fs.readFile(uploadUri, 'base64')
+        .then((data) => {
+          // console.log(data)
+          return Blob.build(data, { type: `${mime};BASE64` })
+        })
+        .then((blob) => {
+          uploadBlob = blob
+          console.log(blob)
+          return imageRef.put(blob, { contentType: mime })
+        })
+        .then(() => {
+          uploadBlob.close()
+          return imageRef.getDownloadURL()
+        })
+        .then((url) => {
+          resolve(url)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  }
+
+  uploadAvatar = (uri, mime = 'image/jpg') => {
+    console.log('zoooo')
+    return new Promise((resolve, reject) => {
+      const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
+        let uploadBlob = null
+        const imageRef = firebaseApp.storage()
+        .ref('Users')
+        .child(this.state.id)
+        .child("Avatar")
+        .child("Avatar")
+        fs.readFile(uploadUri, 'base64')
+        .then((data) => {
+          // console.log(data)
+          return Blob.build(data, { type: `${mime};BASE64` })
+        })
+        .then((blob) => {
+          uploadBlob = blob
+          console.log(blob)
+          return imageRef.put(blob, { contentType: mime })
+        })
+        .then(() => {
+          uploadBlob.close()
+          return imageRef.getDownloadURL()
+        })
+        .then((url) => {
+          resolve(url)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  }
+
   changeCoverPhoto() {
     ImagePicker.showImagePicker(options, response => {
       if (response.didCancel) {
@@ -102,72 +173,87 @@ class InformationUser extends Component {
       } else if (response.customButton) {
         console.log("User tapped custom button: ", response.customButton);
       } else {
-        let source = { uri: response.uri };
-        let path = response.path;
-        Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
-          .then(blob =>
-            firebaseApp
-              .storage()
-              .ref("Users")
-              .child(this.state.id)
-              .child("CoverPhoto")
-              .child("CoverPhoto")
-              .put(blob, { contentType: "image/png" })
-          )
-          .then(snapshot => {
-            this.itemRef
-              .child(user.uid)
-              .child("Information")
-              .set({
-                Avatar: this.state.avatar,
-                CoverPhoto: snapshot.downloadURL,
-                Email: this.state.email,
-                Name: this.state.name,
-                PhoneNumber: this.state.phoneNumber,
-                BirthDate: this.state.birthDate,
-                Sex: this.state.sex,
-                Password: this.state.password
-              });
-            this.refs.toast.show("Thay đổi ảnh bìa thành công!");
-          });
-      }
-    });
-  }
-
-  changeAvatar() {
-    ImagePicker.showImagePicker(options, response => {
-      let source = { uri: response.uri };
-      let path = response.path;
-      console.log(source + "" + path)
-      Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
-        .then(blob =>
-          firebaseApp
-            .storage()
-            .ref("Users")
-            .child(this.state.id)
-            .child("Avatar")
-            .child("Avatar")
-            .put(blob, { contentType: "image/png" })
-        )
-        .then(snapshot => {
+        this.uploadCover(response.uri)
+        .then(url => {
           this.itemRef
             .child(user.uid)
             .child("Information")
             .set({
-              Avatar: snapshot.downloadURL,
-              CoverPhoto: this.state.coverPhoto,
+              Avatar: this.state.avatar,
+              CoverPhoto: url,
               Email: this.state.email,
               Name: this.state.name,
               PhoneNumber: this.state.phoneNumber,
               BirthDate: this.state.birthDate,
               Sex: this.state.sex,
               Password: this.state.password
-            });
-          this.refs.toast.show("Thay đổi ảnh đại diện thành công!");
-        });
+            })
+          })
+        .then(error => console.log(error))
+        
+        // let source = { uri: response.uri };
+        // let path = response.path;
+        // Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
+        //   .then(blob =>
+        //     firebaseApp
+        //       .storage()
+        //       .ref("Users")
+              // .child(this.state.id)
+              // .child("CoverPhoto")
+              // .child("CoverPhoto")
+              // .put(blob, { contentType: "image/png" })
+        //   )
+          // .then(snapshot => {
+          //   this.itemRef
+          //     .child(user.uid)
+          //     .child("Information")
+          //     .set({
+          //       Avatar: this.state.avatar,
+          //       CoverPhoto: snapshot.downloadURL,
+          //       Email: this.state.email,
+          //       Name: this.state.name,
+          //       PhoneNumber: this.state.phoneNumber,
+          //       BirthDate: this.state.birthDate,
+          //       Sex: this.state.sex,
+          //       Password: this.state.password
+          //     });
+        //     this.refs.toast.show("Thay đổi ảnh bìa thành công!");
+        //   });
+      }
     });
   }
+  
+  
 
+  changeAvatar() {
+      ImagePicker.showImagePicker(options, response => {
+        if (response.didCancel) {
+          console.log("User cancelled image picker");
+        } else if (response.error) {
+          console.log("ImagePicker Error: ", response.error);
+        } else if (response.customButton) {
+          console.log("User tapped custom button: ", response.customButton);
+        } else {
+          this.uploadAvatar(response.uri)
+          .then(url => {
+            this.itemRef
+              .child(user.uid)
+              .child("Information")
+              .set({
+                Avatar: url,
+                CoverPhoto: this.state.coverPhoto,
+                Email: this.state.email,
+                Name: this.state.name,
+                PhoneNumber: this.state.phoneNumber,
+                BirthDate: this.state.birthDate,
+                Sex: this.state.sex,
+                Password: this.state.password
+              })
+            })
+          .then(error => console.log(error))
+    }});
+  }
+      
   render() {
     const { navigate } = this.props.navigation;
     return (
