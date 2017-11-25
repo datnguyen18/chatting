@@ -147,6 +147,12 @@ class SettingConversation extends Component {
                             style={styles.backgroundConversation}></ImageBackground>
                     </View>
                 </TouchableOpacity>
+                <TouchableOpacity>
+                    <View style={styles.containerRow}>
+                        <Text style={{ marginLeft: "3%" }}> Thay đổi ảnh nền</Text>
+                        <View style={styles.viewColor}></View>
+                    </View>
+                </TouchableOpacity>
             </View >
         );
     }
@@ -156,19 +162,27 @@ class SettingConversation extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1
-    }, containerRow: {
+    },
+    containerRow: {
         flexDirection: "row",
         alignItems: "center",
         padding: "1%",
         borderColor: "#2a4944",
-    }, avatar: {
+    },
+    avatar: {
         margin: "3%",
         width: 60,
         height: 60
-    }, backgroundConversation: {
+    },
+    backgroundConversation: {
         marginLeft: "50%",
         width: 45,
         height: 80
+    },
+    viewColor: {
+        width: 45,
+        height: 45,
+        background: this.state.viewColor
     }
 });
 

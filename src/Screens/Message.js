@@ -26,7 +26,7 @@ class Message extends Component {
     },
     headerTintColor: "#FFFFFF",
     headerStyle: {
-      backgroundColor: "#F74F4F"
+      backgroundColor: this.state.viewColor
     },
     headerRight: (
       <TouchableOpacity
@@ -56,7 +56,8 @@ class Message extends Component {
       messages: [],
       uId: this.props.navigation.state.params.idFriend,
       avatar: this.props.navigation.state.params.avatarFriend,
-      background: '#E0E0E0'
+      background: '#E0E0E0',
+      viewColor: '#E0E0E0'
     };
     const arraySortId = [];
     arraySortId[0] = global.userId;
@@ -77,6 +78,12 @@ class Message extends Component {
           global.imageBackgroundConversation = snapshot.child("Background").val().URL;
         } else {
           global.imageBackgroundConversation = "https://firebasestorage.googleapis.com/v0/b/eiu-chatting-c99ce.appspot.com/o/Users%2FDefaultBackgroundRoomChat%2FDefault.png?alt=media&token=2139129c-6579-411b-b1b9-9e8da7bebc67";
+        }
+        if (snapshot.hasChild("Color")) {
+          this.setState({ viewColor: snapshot.child("Color").val().URL });
+          global.colorConversation = snapshot.child("Color").val().URL;
+        } else {
+          global.colorConversation = '#E0E0E0';
         }
       });
     this.itemRef
@@ -182,7 +189,7 @@ class Message extends Component {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: '#F74F4F',
+            backgroundColor: this.state.viewColor,
           }
         }}
       />
