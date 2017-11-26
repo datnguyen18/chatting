@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   buttonConfirmFriendContainer: {
-    backgroundColor: "#4DB6AC",
+    backgroundColor: "#F74F4F",
     padding: "1%",
     paddingLeft: "6%",
     paddingRight: "6%",

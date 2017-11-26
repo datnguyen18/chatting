@@ -26,7 +26,7 @@ class Message extends Component {
     },
     headerTintColor: "#FFFFFF",
     headerStyle: {
-      backgroundColor: "#E0E0E0"
+      backgroundColor: "#F74F4F"
     },
     headerRight: (
       <TouchableOpacity
@@ -95,7 +95,7 @@ class Message extends Component {
         var newPostKey = firebaseApp
           .database()
           .ref()
-          .push().key;
+          .push().key;  
         var i = 0;
         if (snapshot.val().Sender == global.userId) {
           i = 1;
@@ -189,7 +189,7 @@ class Message extends Component {
         {...props}
         wrapperStyle={{
           right: {
-            // backgroundColor: this.state.viewColor,
+             backgroundColor: "#F74F4F",
           }
         }}
       />

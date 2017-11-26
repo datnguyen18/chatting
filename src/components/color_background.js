@@ -9,7 +9,7 @@ var {
 module.exports = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#009688',
+        backgroundColor: '#F74F4F',
         padding: 15
     },
     button_color: {
