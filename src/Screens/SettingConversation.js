@@ -1,11 +1,13 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ImageBackground, Platform } from 'react-native';
 import { firebaseApp } from "../api/Firebase";
 import RNFetchBlob from "react-native-fetch-blob";
 
 var ImagePicker = require("react-native-image-picker");
 const polyfill = RNFetchBlob.polyfill;
+const fs = RNFetchBlob.fs;
+const Blob = RNFetchBlob.polyfill.Blob
 
 window.XMLHttpRequest = polyfill.XMLHttpRequest;
 window.Blob = polyfill.Blob;
@@ -53,6 +55,78 @@ class SettingConversation extends Component {
         };
     }
 
+    uploadBackgroundUser = (uri, mime = 'image/jpg') => {
+        console.log('zoooo')
+        return new Promise((resolve, reject) => {
+          const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
+            let uploadBlob = null
+            
+            const imageRef = firebaseApp.storage()
+            .ref('Users')
+            .child(user.uid)
+            .child("Messages")
+            .child(global.path)
+            .child("Background")
+
+            fs.readFile(uploadUri, 'base64')
+            .then((data) => {
+              console.log(data)
+              return Blob.build(data, { type: `${mime};BASE64` })
+            })
+            .then((blob) => {
+              uploadBlob = blob
+              console.log(blob)
+              return imageRef.put(blob, { contentType: mime })
+            })
+            .then(() => {
+              uploadBlob.close()
+              return imageRef.getDownloadURL()
+            })
+            .then((url) => {
+              resolve(url)
+            })
+            .catch((error) => {
+              reject(error)
+            })
+        })
+      }
+
+      uploadBackgroundFriend = (uri, mime = 'image/jpg') => {
+        console.log('zoooo')
+        return new Promise((resolve, reject) => {
+          const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
+            let uploadBlob = null
+            
+            const imageRef = firebaseApp.storage()
+            .ref("Users")
+            .child(this.state.id)
+            .child("Messages")
+            .child(global.path)
+            .child("Background")
+
+            fs.readFile(uploadUri, 'base64')
+            .then((data) => {
+              // console.log(data)
+              return Blob.build(data, { type: `${mime};BASE64` })
+            })
+            .then((blob) => {
+              uploadBlob = blob
+              console.log(blob)
+              return imageRef.put(blob, { contentType: mime })
+            })
+            .then(() => {
+              uploadBlob.close()
+              return imageRef.getDownloadURL()
+            })
+            .then((url) => {
+              resolve(url)
+            })
+            .catch((error) => {
+              reject(error)
+            })
+        })
+      }
+
     changeBackGround() {
         ImagePicker.showImagePicker(options, response => {
             if (response.didCancel) {
@@ -62,53 +136,78 @@ class SettingConversation extends Component {
             } else if (response.customButton) {
                 console.log("User tapped custom button: ", response.customButton);
             } else {
-                let source = { uri: response.uri };
-                let path = response.path;
-                Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
-                    .then(blob =>
-                        firebaseApp
-                            .storage()
-                            .ref("Users")
-                            .child(user.uid)
-                            .child("Messages")
-                            .child(global.path)
-                            .child("Background")
-                            .put(blob, { contentType: "image/png" })
-                    )
-                    .then(snapshot => {
-                        this.itemRef
-                            .child(this.state.id)
-                            .child("Messages")
-                            .child(global.path)
-                            .child("Background")
-                            .set({
-                                URL: snapshot.downloadURL
-                            });
-                        this.refs.toast.show("Thay đổi ảnh bìa thành công!");
+                this.uploadBackgroundUser(response.uri)
+                .then(url => {
+                    console.log(url)
+                    this.itemRef
+                    .child(this.state.id)
+                    .child("Messages")
+                    .child(global.path)
+                    .child("Background")
+                    .set({
+                        URL: url
                     });
+                })
+                this.uploadBackgroundFriend(response.uri)
+                .then(url => {
+                    console.log(url)
+                    this.itemRef
+                    .child(global.userId)
+                    .child("Messages")
+                    .child(global.path)
+                    .child("Background")
+                    .set({
+                        URL: url
+                    });
+                })
 
-                Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
-                    .then(blob =>
-                        firebaseApp
-                            .storage()
-                            .ref("Users")
-                            .child(this.state.id)
-                            .child("Messages")
-                            .child(global.path)
-                            .child("Background")
-                            .put(blob, { contentType: "image/png" })
-                    )
-                    .then(snapshot => {
-                        this.itemRef
-                            .child(global.userId)
-                            .child("Messages")
-                            .child(global.path)
-                            .child("Background")
-                            .set({
-                                URL: snapshot.downloadURL
-                            });
-                        this.refs.toast.show("Thay đổi ảnh bìa thành công!");
-                    });
+                // let source = { uri: response.uri };
+                // let path = response.path;
+                // Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
+                //     .then(blob =>
+                //         firebaseApp
+                //             .storage()
+                //             .ref("Users")
+                //             .child(user.uid)
+                //             .child("Messages")
+                //             .child(global.path)
+                //             .child("Background")
+                //             .put(blob, { contentType: "image/png" })
+                //     )
+                //     .then(snapshot => {
+                        // this.itemRef
+                        //     .child(this.state.id)
+                        //     .child("Messages")
+                        //     .child(global.path)
+                        //     .child("Background")
+                        //     .set({
+                        //         URL: snapshot.downloadURL
+                        //     });
+                //         this.refs.toast.show("Thay đổi ảnh bìa thành công!");
+                //     });
+
+                // Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
+                //     .then(blob =>
+                    //     firebaseApp
+                    //         .storage()
+                    //         .ref("Users")
+                    //         .child(this.state.id)
+                    //         .child("Messages")
+                    //         .child(global.path)
+                    //         .child("Background")
+                    //         .put(blob, { contentType: "image/png" })
+                    // )
+                //     .then(snapshot => {
+                        // this.itemRef
+                        //     .child(global.userId)
+                        //     .child("Messages")
+                        //     .child(global.path)
+                        //     .child("Background")
+                        //     .set({
+                        //         URL: snapshot.downloadURL
+                        //     });
+                //         this.refs.toast.show("Thay đổi ảnh bìa thành công!");
+                //     });
             }
         });
     }
