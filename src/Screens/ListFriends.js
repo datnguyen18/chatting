@@ -17,15 +17,13 @@ import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 4
 
-const options = [ 
-  'Cancel', 
-  'Apple', 
-  <Text style={{color: 'yellow'}}>Banana</Text>,
-  'Watermelon', 
-  <Text style={{color: 'red'}}>Durian</Text>
+const options = [
+  'Cancel',
+  <Text style={{ color: 'red', fontSize: 16 }}>Xoá bạn</Text>,
+  'Xem thông tin cá nhân'
 ]
 
-const title = <Text style={{color: '#000', fontSize: 18}}>Which one do you like?</Text>
+const title = <Text style={{ color: '#000', fontSize: 18 }}>Which one do you like?</Text>
 // create a component
 class ListFriends extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -69,7 +67,8 @@ class ListFriends extends Component {
     super(props);
     this.itemRef = firebaseApp.database().ref("Users");
     this.state = {
-      friends: []
+      friends: [],
+      itemIndex: ''
     };
 
     this.handlePress = this.handlePress.bind(this)
@@ -78,10 +77,34 @@ class ListFriends extends Component {
 
   showActionSheet() {
     this.ActionSheet.show()
+
   }
 
   handlePress(i) {
-    console.log("22")
+    if (i == 2) {
+      this.props.navigation.navigate("InformationFriendScreen", {
+        coverPhotoFriend: this.state.itemIndex.coverPhoto,
+        avatarFriend: this.state.itemIndex.avatar,
+        nameFriend: this.state.itemIndex.name,
+        emailFriend: this.state.itemIndex.email,
+        idFriend: this.state.itemIndex.id,
+        phoneNumberFriend: this.state.itemIndex.phoneNumber,
+        birthDateFriend: this.state.itemIndex.birthdate,
+        sexFriend: this.state.itemIndex.sex
+      })
+    }
+    if (i == 1) {
+      this.itemRef
+        .child(global.userId)
+        .child("Friends")
+        .orderByChild("UID").equalTo(this.state.itemIndex.id).on("value", snapshot => {
+          snapshot.forEach(data => {
+            this.itemRef.child(global.userId).child("Friends").child(data.key).remove()
+            this.itemRef.child(this.state.itemIndex.id).child("Friends").child(data.key).remove()
+          })
+        })
+    }
+
   }
 
   componentWillMount() {
@@ -103,7 +126,7 @@ class ListFriends extends Component {
               birthdate: snapshot1.val().BirthDate,
               sex: snapshot1.val().Sex,
               coverPhoto: snapshot1.val().CoverPhoto
-            
+
             });
             this.sortFriends(arrayNameFriends);
             this.loadIdFriends(arrayNameFriends);
@@ -148,40 +171,44 @@ class ListFriends extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    console.log(this.state.friends)
     return (
-        <View style={styles.container}>
-          <ScrollView>
-            {this.state.friends.map((item, index) => (
-              <TouchableHighlight
-                onPress={() =>{
-                  this.props.navigation.navigate("MessageScreen", {
-                    idFriend: item.id,
-                    nameFriend: item.name,
-                    avatarFriend: item.avatar
-                  })
-                }}
-                onLongPress={this.showActionSheet}
-                underlayColor="white"
-              >
-                <View key={item.id} style={styles.item}>
-                  <Image source={{ uri: item.avatar }} style={styles.avatar} />
-                  <View style={styles.textName}>
-                    <Text style={styles.name}>{item.name}</Text>
-                  </View>
+      <View style={styles.container}>
+        <ScrollView>
+          {this.state.friends.map((item, index) => (
+            <TouchableHighlight
+              onPress={() => {
+                this.props.navigation.navigate("MessageScreen", {
+                  idFriend: item.id,
+                  nameFriend: item.name,
+                  avatarFriend: item.avatar
+                })
+              }}
+              onLongPress={() => {
+                this.showActionSheet
+                this.setState({
+                  itemIndex: item
+                })
+              }}
+              underlayColor="white"
+            >
+              <View key={item.id} style={styles.item}>
+                <Image source={{ uri: item.avatar }} style={styles.avatar} />
+                <View style={styles.textName}>
+                  <Text style={styles.name}>{item.name}</Text>
                 </View>
-              </TouchableHighlight>
-            ))}
-          </ScrollView>
-          <ActionSheet
-              ref={o => this.ActionSheet = o}
-              title={title}
-              options={options}
-              cancelButtonIndex={CANCEL_INDEX}
-              destructiveButtonIndex={DESTRUCTIVE_INDEX}
-              onPress={this.handlePress}
-              />
-        </View>
+              </View>
+            </TouchableHighlight>
+          ))}
+        </ScrollView>
+        <ActionSheet
+          ref={o => this.ActionSheet = o}
+          title={title}
+          options={options}
+          cancelButtonIndex={CANCEL_INDEX}
+          destructiveButtonIndex={DESTRUCTIVE_INDEX}
+          onPress={this.handlePress}
+        />
+      </View>
     );
   }
 }
