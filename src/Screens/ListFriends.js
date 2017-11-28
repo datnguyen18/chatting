@@ -76,8 +76,8 @@ class ListFriends extends Component {
   }
 
   showActionSheet() {
-    this.ActionSheet.show()
 
+    this.ActionSheet.show()
   }
 
   handlePress(i) {
@@ -183,12 +183,7 @@ class ListFriends extends Component {
                   avatarFriend: item.avatar
                 })
               }}
-              onLongPress={() => {
-                this.showActionSheet
-                this.setState({
-                  itemIndex: item
-                })
-              }}
+              onLongPress={this.showActionSheet}
               underlayColor="white"
             >
               <View key={item.id} style={styles.item}>
