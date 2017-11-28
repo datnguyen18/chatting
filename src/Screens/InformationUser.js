@@ -190,35 +190,6 @@ class InformationUser extends Component {
             })
           })
         .then(error => console.log(error))
-        
-        // let source = { uri: response.uri };
-        // let path = response.path;
-        // Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
-        //   .then(blob =>
-        //     firebaseApp
-        //       .storage()
-        //       .ref("Users")
-              // .child(this.state.id)
-              // .child("CoverPhoto")
-              // .child("CoverPhoto")
-              // .put(blob, { contentType: "image/png" })
-        //   )
-          // .then(snapshot => {
-          //   this.itemRef
-          //     .child(user.uid)
-          //     .child("Information")
-          //     .set({
-          //       Avatar: this.state.avatar,
-          //       CoverPhoto: snapshot.downloadURL,
-          //       Email: this.state.email,
-          //       Name: this.state.name,
-          //       PhoneNumber: this.state.phoneNumber,
-          //       BirthDate: this.state.birthDate,
-          //       Sex: this.state.sex,
-          //       Password: this.state.password
-          //     });
-        //     this.refs.toast.show("Thay đổi ảnh bìa thành công!");
-        //   });
       }
     });
   }

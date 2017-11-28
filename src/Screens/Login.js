@@ -12,6 +12,7 @@ import {
   StatusBar,
   AppRegistry,
   Image,
+  Platform,
   ImageBackground
 } from "react-native";
 import { firebaseApp } from "../api/Firebase";
@@ -25,8 +26,8 @@ class Login extends Component {
     super(props);
     this.itemRef = firebaseApp.database().ref("Users");
     this.state = {
-      email: "admin@echat.com",
-      password: "admin123",
+      email: Platform.OS === 'ios' ? "admin@echat.com" : "ntd180295@echat.com",
+      password: Platform.OS === 'ios' ? "admin123" : "123456",
       visible: false
     };
   }
