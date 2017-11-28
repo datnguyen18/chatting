@@ -170,7 +170,6 @@ export class FriendRequests extends Component {
             textStyle={{ color: "#FFF" }}
           />
           <View style={styles.containerBelow}>
-            <View style={styles.containerText}>
               <TextInput
                 style={styles.textState}
                 placeholder="Nhập email hoặc số điện thoại"
@@ -181,9 +180,8 @@ export class FriendRequests extends Component {
                 onSubmitEditing={() => this.searchUser()}
                 onChangeText={searchInput => this.setState({ searchInput })}
               >
-                 
               </TextInput>
-            </View>
+
             <TouchableOpacity
               style={[
                 styles.button_container,
@@ -237,7 +235,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: "5%",
-    backgroundColor: "#BDBDBD"
+    backgroundColor: "transparent"
   },
   item: {
     flexDirection: "row",
