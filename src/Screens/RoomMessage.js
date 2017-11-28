@@ -16,19 +16,32 @@ class RoomMessage extends Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarVisible: false,
     title:
-      `${navigation.state.params.childNameRoom}` +
-      " " +
+      // `${navigation.state.params.childNameRoom}` +
+      // " " +
       `${navigation.state.params.nameRoom}`,
     headerTitleStyle: {
       textAlign: "center",
       color: "#FFFFFF",
-      alignSelf: "center",
-      marginRight: "16%"
+      alignSelf: "center"
     },
     headerTintColor: "#FFFFFF",
     headerStyle: {
       backgroundColor: "#F74F4F"
-    }
+    },
+    headerRight: (
+      <TouchableOpacity
+        onPress={() => navigation.navigate("ListUserRoomChatScreen", {
+          childNameRoom: `${navigation.state.params.childNameRoom}`,
+          childName: `${navigation.state.params.childName}`,
+          majorRoom: `${navigation.state.params.majorRoom}`,
+        })}
+      >
+        <Image
+          source={require("../img/Options.png")}
+          style={styles.logoOpenListUser}
+        />
+      </TouchableOpacity>
+    ),
   });
 
   constructor(props) {
@@ -118,6 +131,11 @@ class RoomMessage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  logoOpenListUser: {
+    width: 35,
+    height: 35,
+    marginRight: 15
   }
 });
 
