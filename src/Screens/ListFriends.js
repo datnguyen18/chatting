@@ -7,17 +7,25 @@ import {
   ScrollView,
   TouchableOpacity,
   Platform,
+  TouchableHighlight,
   Image
 } from "react-native";
-import {
-  Menu,
-  MenuContext,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger
-} from 'react-native-popup-menu';
-import { firebaseApp } from "../api/Firebase";
 
+import { firebaseApp } from "../api/Firebase";
+import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
+
+const CANCEL_INDEX = 0
+const DESTRUCTIVE_INDEX = 4
+
+const options = [ 
+  'Cancel', 
+  'Apple', 
+  <Text style={{color: 'yellow'}}>Banana</Text>,
+  'Watermelon', 
+  <Text style={{color: 'red'}}>Durian</Text>
+]
+
+const title = <Text style={{color: '#000', fontSize: 18}}>Which one do you like?</Text>
 // create a component
 class ListFriends extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -63,6 +71,17 @@ class ListFriends extends Component {
     this.state = {
       friends: []
     };
+
+    this.handlePress = this.handlePress.bind(this)
+    this.showActionSheet = this.showActionSheet.bind(this)
+  }
+
+  showActionSheet() {
+    this.ActionSheet.show()
+  }
+
+  handlePress(i) {
+    console.log("22")
   }
 
   componentWillMount() {
@@ -131,63 +150,38 @@ class ListFriends extends Component {
     const { navigate } = this.props.navigation;
     console.log(this.state.friends)
     return (
-      <MenuContext>
         <View style={styles.container}>
           <ScrollView>
             {this.state.friends.map((item, index) => (
-              <TouchableOpacity
+              <TouchableHighlight
                 onPress={() =>{
                   this.props.navigation.navigate("MessageScreen", {
                     idFriend: item.id,
                     nameFriend: item.name,
                     avatarFriend: item.avatar
                   })
-                
-                }} 
+                }}
+                onLongPress={this.showActionSheet}
+                underlayColor="white"
               >
                 <View key={item.id} style={styles.item}>
                   <Image source={{ uri: item.avatar }} style={styles.avatar} />
                   <View style={styles.textName}>
                     <Text style={styles.name}>{item.name}</Text>
-
                   </View>
-                  <Menu style={styles.menu}>
-                      <MenuTrigger>
-                        <Image source={require("../img/Edit.png")} style={styles.option}/>
-                      </MenuTrigger>
-                      <MenuOptions>
-                        <MenuOption text="Trang cá nhận" onSelect={() => {this.props.navigation.navigate("InformationFriendScreen",{
-                          coverPhotoFriend: item.coverPhoto,
-                          avatarFriend: item.avatar,
-                          nameFriend: item.name,
-                          emailFriend: item.email,
-                          idFriend: item.id,
-                          phoneNumberFriend: item.phoneNumber,
-                          birthDateFriend: item.birthdate,
-                          sexFriend: item.sex
-                        })
-                        console.log(item.avatar)
-                        }}/>
-                        <MenuOption text='Xoá bạn' onSelect={() => {
-                          
-                          this.itemRef
-                          .child(global.userId)
-                          .child("Friends")
-                          .orderByChild("UID").equalTo(item.id).on("value", snapshot => {
-                            snapshot.forEach(data=> {
-                              this.itemRef.child(global.userId).child("Friends").child(data.key).remove()
-                              this.itemRef.child(item.id).child("Friends").child(data.key).remove()
-                            })
-                          })
-                        }}/>
-                      </MenuOptions>
-                  </Menu>
                 </View>
-              </TouchableOpacity>
+              </TouchableHighlight>
             ))}
           </ScrollView>
+          <ActionSheet
+              ref={o => this.ActionSheet = o}
+              title={title}
+              options={options}
+              cancelButtonIndex={CANCEL_INDEX}
+              destructiveButtonIndex={DESTRUCTIVE_INDEX}
+              onPress={this.handlePress}
+              />
         </View>
-      </MenuContext>
     );
   }
 }
