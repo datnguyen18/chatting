@@ -68,15 +68,18 @@ class ListFriends extends Component {
     this.itemRef = firebaseApp.database().ref("Users");
     this.state = {
       friends: [],
-      itemIndex: null
+      itemIndex: ''
     };
 
     this.handlePress = this.handlePress.bind(this)
     this.showActionSheet = this.showActionSheet.bind(this)
   }
 
-  showActionSheet() {
+  showActionSheet(item) {
     this.ActionSheet.show()
+    this.setState({
+      itemIndex: item
+    });
   }
 
   handlePress(i) {
@@ -92,18 +95,18 @@ class ListFriends extends Component {
         sexFriend: this.state.itemIndex.sex
       })
     }
-    if (i == 1) {
-      this.itemRef
-        .child(global.userId)
-        .child("Friends")
-        .orderByChild("UID").equalTo(this.state.itemIndex.id).on("value", snapshot => {
-          snapshot.forEach(data => {
-            this.itemRef.child(global.userId).child("Friends").child(data.key).remove()
-            this.itemRef.child(this.state.itemIndex.id).child("Friends").child(data.key).remove()
-          })
-        })
-    }
 
+    if (i == 1) {
+      // this.itemRef
+      //   .child(global.userId)
+      //   .child("Friends")
+      //   .orderByChild("UID").equalTo(this.state.itemIndex.id).on("value", snapshot => {
+      //     snapshot.forEach(data => {
+      //       this.itemRef.child(global.userId).child("Friends").child(data.key).remove()
+      //       this.itemRef.child(this.state.itemIndex.id).child("Friends").child(data.key).remove()
+      //     })
+      //   })
+    }
   }
 
   componentWillMount() {
@@ -181,9 +184,7 @@ class ListFriends extends Component {
                   avatarFriend: item.avatar
                 })
               }}
-              onLongPress={[this.showActionSheet, this.setState({
-                itemIndex: item
-              })]}
+              onLongPress={() => this.showActionSheet(item)}
               underlayColor="white"
             >
               <View key={item.id} style={styles.item}>
@@ -203,7 +204,7 @@ class ListFriends extends Component {
           destructiveButtonIndex={DESTRUCTIVE_INDEX}
           onPress={this.handlePress}
         />
-      </View>
+      </View >
     );
   }
 }
