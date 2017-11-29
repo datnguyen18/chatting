@@ -183,10 +183,7 @@ export class FriendRequests extends Component {
               </TextInput>
 
             <TouchableOpacity
-              style={[
-                styles.button_container,
-                styleColorBackground.button_color
-              ]}
+              style={styles.btn_search}
               onPress={() => {
                 Keyboard.dismiss, this.searchUser();
               }}
@@ -235,7 +232,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: "5%",
-    backgroundColor: "transparent"
+    backgroundColor: "#FFF"
   },
   item: {
     flexDirection: "row",
@@ -252,7 +249,16 @@ const styles = StyleSheet.create({
     borderRadius: 50
   },
   textState: {
-    backgroundColor: "rgba(255,255,255,250)"
+    height: 50,
+    backgroundColor: 'rgba(255, 255, 255, 0.65)',
+    marginBottom: 15,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    fontSize: 17,
+    color:'rgba(0, 0, 0, 0.77)',
+    borderWidth: 1,
+    borderColor: "#939393",
+ 
   },
   name: {
     margin: "6%"
@@ -263,8 +269,10 @@ const styles = StyleSheet.create({
   },
   button_search: {
     textAlign: "center",
+    justifyContent:'center',
     fontWeight: "700",
-    fontSize: 18
+    fontSize: 18,
+    color: "#fff"
   },
   containerBelow: {
     marginTop: "3%"
@@ -276,6 +284,12 @@ const styles = StyleSheet.create({
     paddingRight: "6%",
     borderRadius: 50,
     marginLeft: "30%"
+  },
+  btn_search: {
+    backgroundColor: "#F74F4F",
+    height: 50,
+    justifyContent:'center',
+    borderRadius: 15
   }
 });
 export default FriendRequests;
