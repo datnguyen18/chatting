@@ -16,38 +16,42 @@ import { firebaseApp } from "../api/Firebase";
 // create a component
 var path;
 class Message extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    tabBarVisible: false,
-    title: `${navigation.state.params.nameFriend}`,
-    headerTitleStyle: {
-      textAlign: "center",
-      color: "#FFFFFF",
-      alignSelf: "center"
-    },
-    headerTintColor: "#FFFFFF",
-    headerStyle: {
-      backgroundColor: "#F74F4F"
-    },
-    headerRight: (
-      <TouchableOpacity
-        onPress={() => navigation.navigate("SettingConversationScreen", {
-          idFriend: `${navigation.state.params.idFriend}`,
-          avatarFriend: `${navigation.state.params.avatarFriend}`,
-          coverPhotoFriend: `${navigation.state.params.coverPhotoFriend}`,
-          nameFriend: `${navigation.state.params.nameFriend}`,
-          phoneNumberFriend: `${navigation.state.params.phoneNumberFriend}`,
-          sexFriend: `${navigation.state.params.sexFriend}`,
-          birthDateFriend: `${navigation.state.params.birthDateFriend}`,
-          emailFriend: `${navigation.state.params.emailFriend}`
-        })}
-      >
-        <ImageBackground
-          source={require("../img/Options.png")}
-          style={styles.logoOpenOptions}
-        />
-      </TouchableOpacity>
-    )
-  });
+  static navigationOptions = ({ navigation }) => {
+    const { state, setParams, navigate } = navigation;
+    const params = state.params || {};
+    return {
+      tabBarVisible: false,
+      title: `${navigation.state.params.nameFriend}`,
+      headerTitleStyle: {
+        textAlign: "center",
+        color: "#FFFFFF",
+        alignSelf: "center"
+      },
+      headerTintColor: "#FFFFFF",
+      headerStyle: {
+        backgroundColor: "#F74F4F"
+      },
+      headerRight: (
+        <TouchableOpacity
+          onPress={() => navigation.navigate("SettingConversationScreen", {
+            idFriend: `${navigation.state.params.idFriend}`,
+            avatarFriend: `${navigation.state.params.avatarFriend}`,
+            coverPhotoFriend: `${navigation.state.params.coverPhotoFriend}`,
+            nameFriend: `${navigation.state.params.nameFriend}`,
+            phoneNumberFriend: `${navigation.state.params.phoneNumberFriend}`,
+            sexFriend: `${navigation.state.params.sexFriend}`,
+            birthDateFriend: `${navigation.state.params.birthDateFriend}`,
+            emailFriend: `${navigation.state.params.emailFriend}`
+          })}
+        >
+          <ImageBackground
+            source={require("../img/Options.png")}
+            style={styles.logoOpenOptions}
+          />
+        </TouchableOpacity>
+      )
+    }
+  };
 
   constructor(props) {
     super(props);
@@ -67,7 +71,16 @@ class Message extends Component {
     global.path = path;
   }
 
+  componentDidMount() {
+    this.props.navigation.setParams({
+      handleButtonNext: this.state.background,
+    });
+  }
+
   componentWillMount() {
+    this.props.navigation.setParams({
+      handleButtonNext: this.state.background,
+    });
     this.itemRef
       .child(global.userId)
       .child("Messages")
@@ -92,11 +105,11 @@ class Message extends Component {
       .child(path)
       .child("Message")
       .on("child_added", snapshot => {
-        var newPostKey = firebaseApp
+        const newPostKey = firebaseApp
           .database()
           .ref()
-          .push().key;  
-        var i = 0;
+          .push().key;
+        let i = 0;
         if (snapshot.val().Sender == global.userId) {
           i = 1;
         } else {
@@ -117,7 +130,7 @@ class Message extends Component {
   }
 
   onSend(messages = []) {
-    var newPostKey = firebaseApp
+    const newPostKey = firebaseApp
       .database()
       .ref()
       .push().key;
@@ -131,6 +144,7 @@ class Message extends Component {
         Sender: global.userId,
         Time: new Date().toUTCString()
       });
+
     this.itemRef
       .child(this.state.uId)
       .child("Messages")
@@ -189,7 +203,7 @@ class Message extends Component {
         {...props}
         wrapperStyle={{
           right: {
-             backgroundColor: "#F74F4F",
+            backgroundColor: "#F74F4F",
           }
         }}
       />

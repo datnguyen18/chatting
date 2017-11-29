@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   StyleSheet
 } from "react-native";
+import { firebaseApp } from "../api/Firebase";
 
 // create a component
 class RoomChat extends Component {
@@ -40,14 +41,38 @@ class RoomChat extends Component {
     )
   });
 
+  constructor(props) {
+    super(props);
+    this.itemRef = firebaseApp.database().ref();
+  }
+
+  openRoomChat(section) {
+    this.itemRef
+      .child("Room Chat")
+      .child("Eastern International University")
+      .child(section.data[0].major)
+      .child(section.data[0].child)
+      .child("Users")
+      .child(global.userId)
+      .set({
+        ID: global.userId
+      });
+      
+    this.props.navigation.navigate("RoomMessageScreen", {
+      nameRoom: section.title,
+      childNameRoom: section.data[0].value,
+      childName: section.data[0].child,
+      majorRoom: section.data[0].major
+    })
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     var sectionData = [
       {
         title: "Kỹ thuật",
         data: [
-          { value: "Toàn khoa", major: "Engineer", child: "All" },
-          { value: "K1", major: "Engineer", child: "K1" }
+          { value: "Toàn khoa", major: "Engineer", child: "All" }
         ],
         key: "1"
       },
@@ -67,20 +92,25 @@ class RoomChat extends Component {
         <SectionList
           sections={sectionData}
           renderItem={({ item, section }) => (
-            <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate("RoomMessageScreen", {
-                  nameRoom: section.title,
-                  childNameRoom: item.value,
-                  childName: item.child,
-                  majorRoom: item.major
-                })}
-            >
-              <Text style={styles.itemValueSection}>{item.value}</Text>
-            </TouchableOpacity>
+            // <TouchableOpacity
+            //   onPress={() =>
+            //     this.props.navigation.navigate("RoomMessageScreen", {
+            //       nameRoom: section.title,
+            //       // childNameRoom: item.value,
+            //       childName: item.child,
+            //       majorRoom: item.major
+            //     })}
+            // >
+            // <Text style={styles.itemValueSection}>{item.value}</Text>
+            <Text />
+            // {/* </TouchableOpacity> */}
           )}
           renderSectionHeader={({ section }) => (
-            <Text style={styles.itemHeaderSection}>{section.title}</Text>
+            <TouchableOpacity
+              onPress={() => this.openRoomChat(section)}
+            >
+              <Text style={styles.itemHeaderSection}>{section.title}</Text>
+            </TouchableOpacity>
           )}
         />
       </View>

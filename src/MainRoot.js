@@ -25,6 +25,7 @@ import RoomMessage from "./Screens/RoomMessage";
 import Nearby from "./Screens/Nearby";
 import NewMessage from "./Screens/NewMessage";
 import SettingConversation from "./Screens/SettingConversation";
+import ListUserRoomChat from "./Screens/ListUserRoomChat"
 
 let { width, height } = Dimensions.get("window");
 
@@ -106,6 +107,9 @@ export const RoomChatStack = StackNavigator({
   },
   RoomMessageScreen: {
     screen: RoomMessage
+  },
+  ListUserRoomChatScreen: {
+    screen: ListUserRoomChat
   }
 });
 
