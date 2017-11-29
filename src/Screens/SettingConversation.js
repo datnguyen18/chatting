@@ -56,7 +56,6 @@ class SettingConversation extends Component {
     }
 
     uploadBackgroundUser = (uri, mime = 'image/jpg') => {
-        console.log('zoooo')
         return new Promise((resolve, reject) => {
           const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
             let uploadBlob = null
@@ -92,11 +91,9 @@ class SettingConversation extends Component {
       }
 
       uploadBackgroundFriend = (uri, mime = 'image/jpg') => {
-        console.log('zoooo')
         return new Promise((resolve, reject) => {
           const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
             let uploadBlob = null
-            
             const imageRef = firebaseApp.storage()
             .ref("Users")
             .child(this.state.id)
@@ -106,7 +103,6 @@ class SettingConversation extends Component {
 
             fs.readFile(uploadUri, 'base64')
             .then((data) => {
-              // console.log(data)
               return Blob.build(data, { type: `${mime};BASE64` })
             })
             .then((blob) => {

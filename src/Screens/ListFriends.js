@@ -68,17 +68,19 @@ class ListFriends extends Component {
     this.itemRef = firebaseApp.database().ref("Users");
     this.state = {
       friends: [],
-      itemIndex: ''
+      itemIndex: '',
+      currentIndex: ''
     };
 
     this.handlePress = this.handlePress.bind(this)
     this.showActionSheet = this.showActionSheet.bind(this)
   }
 
-  showActionSheet(item) {
+  showActionSheet(item, index) {
     this.ActionSheet.show()
     this.setState({
-      itemIndex: item
+      itemIndex: item,
+      currentIndex: index
     });
   }
 
@@ -97,16 +99,24 @@ class ListFriends extends Component {
     }
 
     if (i == 1) {
-      // this.itemRef
-      //   .child(global.userId)
-      //   .child("Friends")
-      //   .orderByChild("UID").equalTo(this.state.itemIndex.id).on("value", snapshot => {
-      //     snapshot.forEach(data => {
-      //       this.itemRef.child(global.userId).child("Friends").child(data.key).remove()
-      //       this.itemRef.child(this.state.itemIndex.id).child("Friends").child(data.key).remove()
-      //     })
-      //   })
+      this.setState({
+        friends: this.deleteByValue(this.state.friends, this.state.currentIndex)
+      });
+      this.itemRef
+        .child(global.userId)
+        .child("Friends")
+        .orderByChild("UID").equalTo(this.state.itemIndex.id).on("value", snapshot => {
+          snapshot.forEach(data => {
+            this.itemRef.child(global.userId).child("Friends").child(data.key).remove()
+            this.itemRef.child(this.state.itemIndex.id).child("Friends").child(data.key).remove()
+          })
+        })
     }
+  }
+
+  deleteByValue(array, index) {
+    delete array[index];
+    return array;
   }
 
   componentWillMount() {
@@ -181,10 +191,15 @@ class ListFriends extends Component {
                 this.props.navigation.navigate("MessageScreen", {
                   idFriend: item.id,
                   nameFriend: item.name,
-                  avatarFriend: item.avatar
+                  avatarFriend: item.avatar,
+                  coverPhotoFriend: item.coverPhoto,
+                  emailFriend: item.email,
+                  phoneNumberFriend: item.phoneNumber,
+                  birthDateFriend: item.birthdate,
+                  sexFriend: item.sex
                 })
               }}
-              onLongPress={() => this.showActionSheet(item)}
+              onLongPress={() => this.showActionSheet(item, index)}
               underlayColor="white"
             >
               <View key={item.id} style={styles.item}>
