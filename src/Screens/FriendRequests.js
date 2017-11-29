@@ -8,7 +8,8 @@ import {
   Image,
   Keyboard,
   TouchableWithoutFeedback,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import Toast, { DURATION } from "react-native-easy-toast";
@@ -183,18 +184,16 @@ export class FriendRequests extends Component {
               </TextInput>
 
             <TouchableOpacity
-              style={[
-                styles.button_container,
-                styleColorBackground.button_color
-              ]}
+              style={styles.btn_search}
               onPress={() => {
                 Keyboard.dismiss, this.searchUser();
               }}
             >
               <Text style={styles.button_search}>Tìm kiếm</Text>
             </TouchableOpacity>
+            <Text style={styles.requests}>Lời mời kết bạn</Text>
           </View>
-          <View style={styles.containerBelow}>
+          <View style={[styles.containerBelow, {marginTop:"0%"}]}>
             <ScrollView>
               {this.state.friends.map((item, index) => (
                 <TouchableOpacity
@@ -206,18 +205,19 @@ export class FriendRequests extends Component {
                       coverPhotoFriend: item.coverPhoto
                     })}
                 >
-                  <View key={item.id} style={styles.item}>
-                    <Image
-                      source={{ uri: item.avatar }}
-                      style={styles.avatar}
-                    />
-                    <Text style={styles.name}>{item.name}</Text>
+                  <View key={item.id} style={[styles.item, {justifyContent:'space-between'}]}>
+                    <View style={{flexDirection:'row', alignItems: 'center'}}>
+                      <Image
+                        source={{ uri: item.avatar }}
+                        style={styles.avatar}
+                      />
+                      <Text style={styles.name}>{item.name}</Text>
+                    </View>
                     <TouchableOpacity
-                      style={[styles.buttonConfirmFriendContainer]}
                       onPress={() =>
                         this.confirmFriend(item.id, item.key, index)}
                     >
-                      <Text style={styles.button_search}>Đồng ý</Text>
+                      <Image source={require('../img/iconcheck.png')} style={styles.icon}/>
                     </TouchableOpacity>
                   </View>
                 </TouchableOpacity>
@@ -234,25 +234,42 @@ export class FriendRequests extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: "5%",
-    backgroundColor: "transparent"
+    padding: "3%",
+    backgroundColor: "#FFF"
   },
   item: {
     flexDirection: "row",
     alignItems: "center",
     padding: "1%",
-    borderColor: "#2a4944",
-    borderWidth: 1,
-    backgroundColor: "#d2f7f1"
+    borderColor: "#939393",
+    borderBottomWidth: 0.5,
+    backgroundColor: "#fff"
   },
   avatar: {
     marginLeft: "3%",
     width: 60,
     height: 60,
-    borderRadius: 50
+    
+    ...Platform.select({
+      ios: {
+        borderRadius: 30
+      }, 
+      android: {
+        borderRadius: 50,
+      }
+    })
   },
   textState: {
-    backgroundColor: "rgba(255,255,255,250)"
+    height: 50,
+    backgroundColor: 'rgba(255, 255, 255, 0.65)',
+    marginBottom: 15,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    fontSize: 17,
+    color:'rgba(0, 0, 0, 0.77)',
+    borderWidth: 1,
+    borderColor: "#939393",
+ 
   },
   name: {
     margin: "6%"
@@ -263,8 +280,10 @@ const styles = StyleSheet.create({
   },
   button_search: {
     textAlign: "center",
+    justifyContent:'center',
     fontWeight: "700",
-    fontSize: 18
+    fontSize: 18,
+    color: "#fff"
   },
   containerBelow: {
     marginTop: "3%"
@@ -276,6 +295,25 @@ const styles = StyleSheet.create({
     paddingRight: "6%",
     borderRadius: 50,
     marginLeft: "30%"
+  },
+  btn_search: {
+    backgroundColor: "#F74F4F",
+    height: 50,
+    justifyContent:'center',
+    borderRadius: 15
+  },
+  requests :{
+    marginTop: "2%",
+    textAlign:'left',
+    backgroundColor:"#E0E0E0",
+    paddingLeft: 2,
+    color: "#939393",
+    fontSize: 14
+  },
+  icon: {
+    width:25,
+    height:25,
+    alignItems:'flex-end'
   }
 });
 export default FriendRequests;

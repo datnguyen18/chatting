@@ -26,10 +26,15 @@ class Login extends Component {
     super(props);
     this.itemRef = firebaseApp.database().ref("Users");
     this.state = {
+<<<<<<< HEAD
       // email: Platform.OS === 'ios' ? "admin@echat.com" : "ntd180295@echat.com",
       // password: Platform.OS === 'ios' ? "admin123" : "123456",
       email: "admin@echat.com",
       password: "admin123",
+=======
+      email: Platform.OS === 'android' ? "admin@echat.com" : "ntd180295@echat.com",
+      password: Platform.OS === 'adnroid' ? "admin123" : "123456",
+>>>>>>> 1fbfd831760401be61cfc112a01095f01df218f2
       visible: false
     };
   }

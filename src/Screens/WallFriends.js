@@ -61,6 +61,7 @@ export default class componentName extends Component {
       .database()
       .ref()
       .push().key;
+      console.log(this.state.id)
     this.itemRef
       .child(this.state.id)
       .child("Friend Requests")
