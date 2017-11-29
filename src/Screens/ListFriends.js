@@ -68,7 +68,7 @@ class ListFriends extends Component {
     this.itemRef = firebaseApp.database().ref("Users");
     this.state = {
       friends: [],
-      itemIndex: ''
+      itemIndex: null
     };
 
     this.handlePress = this.handlePress.bind(this)
@@ -76,7 +76,6 @@ class ListFriends extends Component {
   }
 
   showActionSheet() {
-
     this.ActionSheet.show()
   }
 
@@ -183,7 +182,9 @@ class ListFriends extends Component {
                   avatarFriend: item.avatar
                 })
               }}
-              onLongPress={this.showActionSheet}
+              onLongPress={[this.showActionSheet, this.setState({
+                itemIndex: item
+              })]}
               underlayColor="white"
             >
               <View key={item.id} style={styles.item}>
