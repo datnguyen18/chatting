@@ -26,8 +26,10 @@ class Login extends Component {
     super(props);
     this.itemRef = firebaseApp.database().ref("Users");
     this.state = {
-      email: Platform.OS === 'ios' ? "admin@echat.com" : "ntd180295@echat.com",
-      password: Platform.OS === 'ios' ? "admin123" : "123456",
+      // email: Platform.OS === 'ios' ? "admin@echat.com" : "ntd180295@echat.com",
+      // password: Platform.OS === 'ios' ? "admin123" : "123456",
+      email: "admin@echat.com",
+      password: "admin123",
       visible: false
     };
   }
@@ -72,71 +74,71 @@ class Login extends Component {
     const { navigate } = this.props.navigation;
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView behavior="padding" style={styles.container}>  
-        <ImageBackground source={ require('../img/backgroundLogin.png') } style={styles.backgroundImage}>
-          <View style={styles.container}>
-            <View style={styles.containerLogo}>
-              <Image
-                source={require("../img/login_logo/logo.png")}
-                style={styles.logo_container}
+        <KeyboardAvoidingView behavior="padding" style={styles.container}>
+          <ImageBackground source={require('../img/backgroundLogin.png')} style={styles.backgroundImage}>
+            <View style={styles.container}>
+              <View style={styles.containerLogo}>
+                <Image
+                  source={require("../img/login_logo/logo.png")}
+                  style={styles.logo_container}
+                />
+              </View>
+              <Spinner
+                visible={this.state.visible}
+                textContent={"Đang xử lý..."}
+                textStyle={{ color: "#FFF" }}
               />
-            </View>
-            <Spinner
-              visible={this.state.visible}
-              textContent={"Đang xử lý..."}
-              textStyle={{ color: "#FFF" }}
-            />
-            <View style={styles.bottomPart}>
-              <StatusBar barStyle="light-content" />
-              <TextInput
-                style={styles.input}
-                placeholder="Email"
-                underlineColorAndroid="transparent"
-                placeholderTextColor="rgba(255,255,255,255)"
-                returnKeyType="next"
-                onSubmitEditing={() => this.passwordInput.focus()}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={email => this.setState({ email })}
-                value={this.state.email}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="***********"
-                underlineColorAndroid="transparent"
-                placeholderTextColor="rgba(255,255,255,255)"
-                returnKeyType="go"
-                ref={input => (this.passwordInput = input)}
-                autoCapitalize="none"
-                autoCorrect={false}
-                secureTextEntry
-                onChangeText={password => this.setState({ password })}
-                value={this.state.password}
-                onSubmitEditing={() => this.confirmLogin()}
-              />
-              <TouchableOpacity
-                onPress={() => this.confirmLogin()}
-              >
-                <View style={styles.buttonLogin}>
-                  <Text style={styles.button_login}>Đăng nhập</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  navigate("RegisterScreen");
-                }}
-              >
-                <Text style={styles.button_register}>Đăng ký</Text>
-              </TouchableOpacity>
-            </View>
+              <View style={styles.bottomPart}>
+                <StatusBar barStyle="light-content" />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Email"
+                  underlineColorAndroid="transparent"
+                  placeholderTextColor="rgba(255,255,255,255)"
+                  returnKeyType="next"
+                  onSubmitEditing={() => this.passwordInput.focus()}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  onChangeText={email => this.setState({ email })}
+                  value={this.state.email}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="***********"
+                  underlineColorAndroid="transparent"
+                  placeholderTextColor="rgba(255,255,255,255)"
+                  returnKeyType="go"
+                  ref={input => (this.passwordInput = input)}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  secureTextEntry
+                  onChangeText={password => this.setState({ password })}
+                  value={this.state.password}
+                  onSubmitEditing={() => this.confirmLogin()}
+                />
+                <TouchableOpacity
+                  onPress={() => this.confirmLogin()}
+                >
+                  <View style={styles.buttonLogin}>
+                    <Text style={styles.button_login}>Đăng nhập</Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigate("RegisterScreen");
+                  }}
+                >
+                  <Text style={styles.button_register}>Đăng ký</Text>
+                </TouchableOpacity>
+              </View>
 
-          <Toast ref="toast" />
-          </View>
+              <Toast ref="toast" />
+            </View>
           </ImageBackground>
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
-      
+
     );
   }
 }
@@ -147,17 +149,17 @@ const styles = StyleSheet.create({
     flex: 1
   },
   containerLogo: {
-    flex:1,
-    alignItems:'center',
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
-    
+
   },
-  logo_container:{
-    width:210,
-    height:185
+  logo_container: {
+    width: 210,
+    height: 185
   },
-  bottomPart:{
-    flex:1,
+  bottomPart: {
+    flex: 1,
     marginLeft: 33,
     marginRight: 33
   },
@@ -168,21 +170,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 5,
     fontSize: 17,
-    color:'rgba(255, 255, 255, 0.77)'
+    color: 'rgba(255, 255, 255, 0.77)'
   },
   button_container: {
     padding: 10
   },
   button_login: {
     fontSize: 18,
-    color:"#FFFFFF"
+    color: "#FFFFFF"
 
   },
   button_register: {
     marginTop: 15,
     textAlign: "center",
     justifyContent: "center",
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
     color: "rgba(255, 255, 255, 0.77)",
     position: "relative"
   },
@@ -192,7 +194,7 @@ const styles = StyleSheet.create({
     width: null,
     height: null
   },
-  buttonLogin:{
+  buttonLogin: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(247, 79, 79, 70)',

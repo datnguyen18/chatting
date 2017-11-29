@@ -23,7 +23,7 @@ const options = [
   'Xem thông tin cá nhân'
 ]
 
-const title = <Text style={{ color: '#000', fontSize: 18 }}>Which one do you like?</Text>
+// const title = <Text style={{ color: '#000', fontSize: 18 }}>Which one do you like?</Text>
 // create a component
 class ListFriends extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -126,7 +126,6 @@ class ListFriends extends Component {
               birthdate: snapshot1.val().BirthDate,
               sex: snapshot1.val().Sex,
               coverPhoto: snapshot1.val().CoverPhoto
-
             });
             this.sortFriends(arrayNameFriends);
             this.loadIdFriends(arrayNameFriends);
@@ -197,7 +196,7 @@ class ListFriends extends Component {
         </ScrollView>
         <ActionSheet
           ref={o => this.ActionSheet = o}
-          title={title}
+          // title={title}
           options={options}
           cancelButtonIndex={CANCEL_INDEX}
           destructiveButtonIndex={DESTRUCTIVE_INDEX}

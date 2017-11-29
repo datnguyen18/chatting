@@ -98,7 +98,10 @@ export const ListFriendsStack = StackNavigator({
   },
   InformationFriendScreen: {
     screen: InformationFriend
-  }
+  },
+  SettingConversationScreen: {
+    screen: SettingConversation
+  },
 });
 
 export const RoomChatStack = StackNavigator({
