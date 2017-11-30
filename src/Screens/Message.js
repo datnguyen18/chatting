@@ -134,6 +134,7 @@ class Message extends Component {
       .database()
       .ref()
       .push().key;
+      
     this.itemRef
       .child(user.uid)
       .child("Messages")
@@ -224,6 +225,7 @@ class Message extends Component {
             user={{
               _id: 1
             }}
+            placeholder="Nhập tin nhắn..." 
             // renderFooter={this.renderFooter}
             renderMessageImage={this.renderCustomView}
             renderBubble={this.renderBubble}

@@ -122,6 +122,7 @@ class RoomMessage extends Component {
         user={{
           _id: 1
         }}
+        placeholder="Nhập tin nhắn..." 
       />
     );
   }
