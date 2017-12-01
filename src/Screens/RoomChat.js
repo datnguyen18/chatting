@@ -107,18 +107,24 @@ class RoomChat extends Component {
             //     })}
             // >
             // <Text style={styles.itemValueSection}>{item.value}</Text>
-            <Text />
+            <TouchableOpacity
+            onPress={() => this.openRoomChat(section)}
+          >
+            {/* <Text style={styles.itemHeaderSection}>{section.title}</Text> */}
+            <Image source={section.source} style={{width: responsiveWidth(100),height: responsiveHeight(29)}}/>
+
+          </TouchableOpacity>
             // {/* </TouchableOpacity> */}
           )}
-          renderSectionHeader={({ section }) => (
-            <TouchableOpacity
-              onPress={() => this.openRoomChat(section)}
-            >
-              {/* <Text style={styles.itemHeaderSection}>{section.title}</Text> */}
-              <Image source={section.source} style={{width: responsiveWidth(100),height: responsiveHeight(25)}}/>
+          // renderSectionHeader={({ section }) => (
+          //   <TouchableOpacity
+          //     onPress={() => this.openRoomChat(section)}
+          //   >
+          //     {/* <Text style={styles.itemHeaderSection}>{section.title}</Text> */}
+          //     <Image source={section.source} style={{width: responsiveWidth(100),height: responsiveHeight(25)}}/>
 
-            </TouchableOpacity>
-          )}
+          //   </TouchableOpacity>
+          // )}
         />
       </View>
     );
