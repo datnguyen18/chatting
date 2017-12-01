@@ -7,9 +7,11 @@ import {
   SectionList,
   ListItem,
   TouchableOpacity,
+  Dimensions,
   StyleSheet
 } from "react-native";
 import { firebaseApp } from "../api/Firebase";
+import { responsiveHeight, responsiveWidth,responsiveFontSize } from '../components/Responsive.js';
 
 // create a component
 class RoomChat extends Component {
@@ -74,17 +76,20 @@ class RoomChat extends Component {
         data: [
           { value: "Toàn khoa", major: "Engineer", child: "All" }
         ],
-        key: "1"
+        key: "1",
+        source: require("../img/engineer.png")
       },
       {
         title: "Điều dưỡng",
         data: [{ value: "Toàn khoa", major: "Nursing", child: "All" }],
-        key: "2"
+        key: "2",
+        source: require("../img/nursing.png")
       },
       {
         title: "Quản trị",
         data: [{ value: "Toàn khoa", major: "Business", child: "All" }],
-        key: "3"
+        key: "3",
+        source: require("../img/business.png")
       }
     ];
     return (
@@ -109,7 +114,9 @@ class RoomChat extends Component {
             <TouchableOpacity
               onPress={() => this.openRoomChat(section)}
             >
-              <Text style={styles.itemHeaderSection}>{section.title}</Text>
+              {/* <Text style={styles.itemHeaderSection}>{section.title}</Text> */}
+              <Image source={section.source} style={{width: responsiveWidth(100),height: responsiveHeight(25)}}/>
+
             </TouchableOpacity>
           )}
         />
@@ -117,14 +124,11 @@ class RoomChat extends Component {
     );
   }
 }
-
+const {height, width} = Dimensions.get('window')
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
-    padding: "1%"
+    flex: 1
   },
   logoOpenDrawer: {
     width: 30,
@@ -134,15 +138,6 @@ const styles = StyleSheet.create({
   logoRoomChat: {
     width: 24,
     height: 24
-  },
-  itemValueSection: {
-    padding: "1%",
-    marginLeft: "3%",
-    fontSize: 18
-  },
-  itemHeaderSection: {
-    fontSize: 23,
-    color: "#F74F4F"
   }
 });
 
