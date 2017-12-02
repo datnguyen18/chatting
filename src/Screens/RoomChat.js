@@ -11,7 +11,7 @@ import {
   StyleSheet
 } from "react-native";
 import { firebaseApp } from "../api/Firebase";
-import { responsiveHeight, responsiveWidth,responsiveFontSize } from '../components/Responsive.js';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from '../components/Responsive.js';
 
 // create a component
 class RoomChat extends Component {
@@ -59,7 +59,7 @@ class RoomChat extends Component {
       .set({
         ID: global.userId
       });
-      
+
     this.props.navigation.navigate("RoomMessageScreen", {
       nameRoom: section.title,
       childNameRoom: section.data[0].value,
@@ -108,29 +108,28 @@ class RoomChat extends Component {
             // >
             // <Text style={styles.itemValueSection}>{item.value}</Text>
             <TouchableOpacity
-            onPress={() => this.openRoomChat(section)}
-          >
-            {/* <Text style={styles.itemHeaderSection}>{section.title}</Text> */}
-            <Image source={section.source} style={{width: responsiveWidth(100),height: responsiveHeight(29)}}/>
+              onPress={() => this.openRoomChat(section)}
+            >
+              <Image source={section.source} style={{ width: responsiveWidth(100), height: responsiveHeight(28) }} />
 
-          </TouchableOpacity>
+            </TouchableOpacity>
             // {/* </TouchableOpacity> */}
           )}
-          // renderSectionHeader={({ section }) => (
-          //   <TouchableOpacity
-          //     onPress={() => this.openRoomChat(section)}
-          //   >
-          //     {/* <Text style={styles.itemHeaderSection}>{section.title}</Text> */}
-          //     <Image source={section.source} style={{width: responsiveWidth(100),height: responsiveHeight(25)}}/>
+        // renderSectionHeader={({ section }) => (
+        //   <TouchableOpacity
+        //     onPress={() => this.openRoomChat(section)}
+        //   >
+        //     {/* <Text style={styles.itemHeaderSection}>{section.title}</Text> */}
+        //     <Image source={section.source} style={{width: responsiveWidth(100),height: responsiveHeight(25)}}/>
 
-          //   </TouchableOpacity>
-          // )}
+        //   </TouchableOpacity>
+        // )}
         />
       </View>
     );
   }
 }
-const {height, width} = Dimensions.get('window')
+const { height, width } = Dimensions.get('window')
 // define your styles
 const styles = StyleSheet.create({
   container: {

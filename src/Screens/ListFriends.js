@@ -237,13 +237,12 @@ const styles = StyleSheet.create({
     borderColor: "#2a4944",
   },
   avatar: {
-    flex: 1,
     marginLeft: "3%",
     width: 60,
     height: 60,
     ...Platform.select({
       ios: {
-        borderRadius: 30
+        borderRadius: 30.5
       },
       android: {
         borderRadius: 55
