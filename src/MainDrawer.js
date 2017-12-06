@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Platform,
   ImageBackground
 } from "react-native";
 import { firebaseApp } from "./api/Firebase";
@@ -119,7 +120,15 @@ const styles = StyleSheet.create({
   avatar: {
     margin: "3%",
     width: 60,
-    height: 60
+    height: 60,
+    ...Platform.select({
+      ios: {
+        borderRadius: 30.5
+      },
+      android: {
+        borderRadius: 55
+      }
+    })
   },
   coverPhoto: {
     width: "100%",
