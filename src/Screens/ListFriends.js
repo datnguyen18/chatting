@@ -8,11 +8,13 @@ import {
   TouchableOpacity,
   Platform,
   TouchableHighlight,
-  Image
+  Image,
+  Alert
 } from "react-native";
 
 import { firebaseApp } from "../api/Firebase";
-import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
+import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet';
+import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 4
@@ -99,18 +101,29 @@ class ListFriends extends Component {
     }
 
     if (i == 1) {
-      this.setState({
-        friends: this.deleteByValue(this.state.friends, this.state.currentIndex)
-      });
-      this.itemRef
-        .child(global.userId)
-        .child("Friends")
-        .orderByChild("UID").equalTo(this.state.itemIndex.id).on("value", snapshot => {
-          snapshot.forEach(data => {
-            this.itemRef.child(global.userId).child("Friends").child(data.key).remove()
-            this.itemRef.child(this.state.itemIndex.id).child("Friends").child(data.key).remove()
-          })
-        })
+      Alert.alert(
+        'Xoá bạn',
+        'Bạn có chắc muốn xoá người bạn này?',
+        [
+          {text: 'Thoát', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: 'Xoá', onPress: () => {
+            this.setState({
+              friends: this.deleteByValue(this.state.friends, this.state.currentIndex)
+            });
+            this.itemRef
+              .child(global.userId)
+              .child("Friends")
+              .orderByChild("UID").equalTo(this.state.itemIndex.id).on("value", snapshot => {
+                snapshot.forEach(data => {
+                  this.itemRef.child(global.userId).child("Friends").child(data.key).remove()
+                  this.itemRef.child(this.state.itemIndex.id).child("Friends").child(data.key).remove()
+                })
+              })
+          }},
+        ],
+        { cancelable: false }
+      )
+      
     }
   }
 
@@ -186,7 +199,15 @@ class ListFriends extends Component {
       <View style={styles.container}>
         <ScrollView>
           {this.state.friends.map((item, index) => (
-            <TouchableHighlight
+            <SwipeRow
+						leftOpenValue={75}
+						rightOpenValue={-75}
+					>
+          <View style={styles.standaloneRowBack}>
+							<Text style={styles.backTextWhite}>Left</Text>
+							<Text style={styles.backTextWhite}>Right</Text>
+						</View>
+          <TouchableHighlight
               onPress={() => {
                 this.props.navigation.navigate("MessageScreen", {
                   idFriend: item.id,
@@ -209,6 +230,9 @@ class ListFriends extends Component {
                 </View>
               </View>
             </TouchableHighlight>
+						
+					</SwipeRow>
+            
           ))}
         </ScrollView>
         <ActionSheet
@@ -281,7 +305,13 @@ const styles = StyleSheet.create({
   },
   menu: {
     flex: 0.5
-  }
+  },
+  standaloneRowFront: {
+		alignItems: 'center',
+		backgroundColor: '#CCC',
+		justifyContent: 'center',
+		height: 50,
+	},
 });
 
 //make this component available to the app
