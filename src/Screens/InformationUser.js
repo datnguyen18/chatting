@@ -39,8 +39,8 @@ var options = {
   title: "Chọn ảnh từ:",
   quality: 0.6,
   storageOptions: {
-  skipBackup: true,
-  path: 'images'
+    skipBackup: true,
+    path: 'images'
   }
 };
 
@@ -102,13 +102,13 @@ class InformationUser extends Component {
     console.log('zoooo')
     return new Promise((resolve, reject) => {
       const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
-        let uploadBlob = null
-        const imageRef = firebaseApp.storage()
+      let uploadBlob = null
+      const imageRef = firebaseApp.storage()
         .ref('Users')
         .child(this.state.id)
         .child("CoverPhoto")
         .child("CoverPhoto")
-        fs.readFile(uploadUri, 'base64')
+      fs.readFile(uploadUri, 'base64')
         .then((data) => {
           // console.log(data)
           return Blob.build(data, { type: `${mime};BASE64` })
@@ -135,13 +135,13 @@ class InformationUser extends Component {
     console.log('zoooo')
     return new Promise((resolve, reject) => {
       const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
-        let uploadBlob = null
-        const imageRef = firebaseApp.storage()
+      let uploadBlob = null
+      const imageRef = firebaseApp.storage()
         .ref('Users')
         .child(this.state.id)
         .child("Avatar")
         .child("Avatar")
-        fs.readFile(uploadUri, 'base64')
+      fs.readFile(uploadUri, 'base64')
         .then((data) => {
           // console.log(data)
           return Blob.build(data, { type: `${mime};BASE64` })
@@ -174,6 +174,7 @@ class InformationUser extends Component {
         console.log("User tapped custom button: ", response.customButton);
       } else {
         this.uploadCover(response.uri)
+<<<<<<< HEAD
         .then(url => {
           this.itemRef
             .child(user.uid)
@@ -189,24 +190,40 @@ class InformationUser extends Component {
               Sex: this.state.sex,
               Password: this.state.password
             })
+=======
+          .then(url => {
+            this.itemRef
+              .child(user.uid)
+              .child("Information")
+              .set({
+                Avatar: this.state.avatar,
+                CoverPhoto: url,
+                Email: this.state.email,
+                Name: this.state.name,
+                PhoneNumber: this.state.phoneNumber,
+                BirthDate: this.state.birthDate,
+                Sex: this.state.sex,
+                Password: this.state.password
+              })
+>>>>>>> 91557ecca2ffa3adddd6bcbe745299d3277f31ad
           })
-        .then(error => console.log(error))
+          .then(error => console.log(error))
       }
     });
   }
-  
-  
+
+
 
   changeAvatar() {
-      ImagePicker.showImagePicker(options, response => {
-        if (response.didCancel) {
-          console.log("User cancelled image picker");
-        } else if (response.error) {
-          console.log("ImagePicker Error: ", response.error);
-        } else if (response.customButton) {
-          console.log("User tapped custom button: ", response.customButton);
-        } else {
-          this.uploadAvatar(response.uri)
+    ImagePicker.showImagePicker(options, response => {
+      if (response.didCancel) {
+        console.log("User cancelled image picker");
+      } else if (response.error) {
+        console.log("ImagePicker Error: ", response.error);
+      } else if (response.customButton) {
+        console.log("User tapped custom button: ", response.customButton);
+      } else {
+        this.uploadAvatar(response.uri)
           .then(url => {
             this.itemRef
               .child(user.uid)
@@ -222,11 +239,12 @@ class InformationUser extends Component {
                 Sex: this.state.sex,
                 Password: this.state.password
               })
-            })
+          })
           .then(error => console.log(error))
-    }});
+      }
+    });
   }
-      
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -243,15 +261,11 @@ class InformationUser extends Component {
             />
             <View style={styles.containerTextImage}>
               <TouchableOpacity onPress={() => this.changeAvatar()}>
-                <ImageBackground
+                <Image
                   source={{ uri: this.state.avatar }}
                   style={styles.avatar}
                 >
-                  <Image
-                    source={require("../img/Edit.png")}
-                    style={styles.editImage}
-                  />
-                </ImageBackground>
+                </Image>
               </TouchableOpacity>
             </View>
           </ImageBackground>
@@ -315,9 +329,16 @@ const styles = StyleSheet.create({
     marginLeft: 15
   },
   avatar: {
-    margin: "3%",
     width: 60,
-    height: 60
+    height: 60,
+    ...Platform.select({
+      ios: {
+        borderRadius: 30.5
+      },
+      android: {
+        borderRadius: 55
+      }
+    })
   },
   coverPhoto: {
     width: "100%",
@@ -330,8 +351,8 @@ const styles = StyleSheet.create({
     height: 60
   },
   editImage: {
-    width: 15,
-    height: 15,
+    width: 5,
+    height: 5,
     position: "absolute",
     right: 0,
     bottom: 0,
@@ -345,7 +366,8 @@ const styles = StyleSheet.create({
     marginBottom: "3%",
     fontSize: 18,
     fontWeight: "bold",
-    color: "#FFFFFF"
+    color: "#FFFFFF",
+    backgroundColor: 'transparent',
   },
   containerBelow: {
     marginTop: "1.6%",
@@ -363,7 +385,8 @@ const styles = StyleSheet.create({
   },
   touchable: {
     marginTop: "6%",
-    padding: "3%"
+    padding: "3%",
+    borderRadius: 15,
   },
   button: {
     textAlign: "center",

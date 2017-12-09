@@ -50,9 +50,12 @@ class RoomChat extends Component {
     this.state = ({
       numberPeople: []
     })
-    this.getNumOfPeople();
+    
   }
 
+  componentWillMount() {
+    this.getNumOfPeople();
+  }
   openRoomChat(section) {
     this.itemRef
       .child("Room Chat")
@@ -120,10 +123,10 @@ class RoomChat extends Component {
               <TouchableOpacity onPress={() => this.openRoomChat(item)}>
                 <View style={styles.roomItems}>
                   <Image source={item.source} style={{ width: responsiveWidth(22), height: responsiveWidth(22) }} />
-                  <Text style={{color:'#000000'}}>
+                  <Text style={styles.title}>
                     {item.title}
                   </Text>
-                  <Text>Số người: {this.state.numberPeople[item.key]}</Text>
+                  <Text style={styles.title}>Số người: {this.state.numberPeople[item.key]}</Text>
                 </View>
               </TouchableOpacity>
             )}
@@ -159,6 +162,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 8,
     justifyContent: 'center'
+  },
+  title: {
+    color:'#ffffff'
   }
 
 });

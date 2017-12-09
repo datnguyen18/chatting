@@ -21,6 +21,7 @@
 		"react-native-maps": "^0.17.1",
 		"react-native-popup-menu": "^0.9.0",
 		"react-native-simple-radio-button": "^2.7.0",
+		"react-native-swipe-list-view": "^0.4.7",
 		"react-navigation": "^1.0.0-beta.19"
 	},
 	"devDependencies": {

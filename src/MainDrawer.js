@@ -51,7 +51,7 @@ class MainDrawer extends Component {
           <View style={styles.containerTextImage}>
             <Image source={{ uri: this.state.avatar }} style={styles.avatar} />
             <Text style={styles.text}>{this.state.name}</Text>
-            <Text style={styles.text}>{this.state.email}</Text>
+            <Text style={[styles.text, {opacity: 0.8}]}>{this.state.email}</Text>
           </View>
         </ImageBackground>
         <Text style={styles.title}>Tiện ích</Text>
@@ -145,10 +145,12 @@ const styles = StyleSheet.create({
     marginLeft: "3%",
     fontSize: 17,
     fontWeight: "bold",
-    marginLeft: "3%"
+    marginLeft: "3%",
+    backgroundColor: 'transparent',
   },
   containerTextImage: {
-    marginTop: "30%"
+    marginTop: "30%",
+    alignItems: 'center'
   },
   containerText: {
     flexDirection: "row",
