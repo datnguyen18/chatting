@@ -103,6 +103,7 @@ class InformationUser extends Component {
         Avatar: this.state.avatar,
         CoverPhoto: this.state.coverPhoto,
         Email: this.state.email,
+        ID: this.state.id,
         Name: this.state.name,
         PhoneNumber: this.state.phoneNumber,
         BirthDate: this.state.birthDate,

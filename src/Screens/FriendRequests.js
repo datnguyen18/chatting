@@ -66,7 +66,7 @@ export class FriendRequests extends Component {
   }
 
   sortDate(arrayRecentMessage) {
-    arrayRecentMessage.sort(function(a, b) {
+    arrayRecentMessage.sort(function (a, b) {
       return new Date(b.date) - new Date(a.date);
     });
   }
@@ -81,19 +81,19 @@ export class FriendRequests extends Component {
     this.setState({
       visible: !this.state.visible
     });
-    var count = 0;
-    var boolean = false;
-    this.itemRef.on("child_added", snapshot => {
+    let count = 1;
+    let boolean = false;
+    let lengthSnapshot = 0;
+    let linsteningUser = this.itemRef.on("child_added", snapshot => {
       snapshot = snapshot.child("Information");
       const snapshotEmail = snapshot.child("Email").val();
       const snapshotPhoneNumber = snapshot.child("PhoneNumber").val();
-      var lengthSnapshot;
-      if (count == 0) {
+      console.log(count);
+      if (count == 1) {
         this.itemRef.once("value", snapshot => {
           lengthSnapshot = snapshot.numChildren();
         });
       }
-      count++;
       if (
         snapshotEmail == this.state.searchInput ||
         snapshotPhoneNumber == this.state.searchInput
@@ -125,8 +125,10 @@ export class FriendRequests extends Component {
         this.setState({
           visible: false
         });
-        count = 0;
+        count = 1;
+        this.itemRef.off("child_added", linsteningUser);
       }
+      count++;
     });
   }
 
@@ -171,17 +173,17 @@ export class FriendRequests extends Component {
             textStyle={{ color: "#FFF" }}
           />
           <View style={styles.containerBelow}>
-              <TextInput
-                style={styles.textState}
-                placeholder="Nhập email hoặc số điện thoại"
-                placeholderTextColor="#616161"
-                returnKeyType="go"
-                autoCapitalize="none"
-                autoCorrect={false}
-                onSubmitEditing={() => this.searchUser()}
-                onChangeText={searchInput => this.setState({ searchInput })}
-              >
-              </TextInput>
+            <TextInput
+              style={styles.textState}
+              placeholder="Nhập email hoặc số điện thoại"
+              placeholderTextColor="#616161"
+              returnKeyType="go"
+              autoCapitalize="none"
+              autoCorrect={false}
+              onSubmitEditing={() => this.searchUser()}
+              onChangeText={searchInput => this.setState({ searchInput })}
+            >
+            </TextInput>
 
             <TouchableOpacity
               style={styles.btn_search}
@@ -193,7 +195,7 @@ export class FriendRequests extends Component {
             </TouchableOpacity>
             <Text style={styles.requests}>Lời mời kết bạn</Text>
           </View>
-          <View style={[styles.containerBelow, {marginTop:"0%"}]}>
+          <View style={[styles.containerBelow, { marginTop: "0%" }]}>
             <ScrollView>
               {this.state.friends.map((item, index) => (
                 <TouchableOpacity
@@ -205,8 +207,8 @@ export class FriendRequests extends Component {
                       coverPhotoFriend: item.coverPhoto
                     })}
                 >
-                  <View key={item.id} style={[styles.item, {justifyContent:'space-between'}]}>
-                    <View style={{flexDirection:'row', alignItems: 'center'}}>
+                  <View key={item.id} style={[styles.item, { justifyContent: 'space-between' }]}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                       <Image
                         source={{ uri: item.avatar }}
                         style={styles.avatar}
@@ -217,7 +219,7 @@ export class FriendRequests extends Component {
                       onPress={() =>
                         this.confirmFriend(item.id, item.key, index)}
                     >
-                      <Image source={require('../img/iconcheck.png')} style={styles.icon}/>
+                      <Image source={require('../img/iconcheck.png')} style={styles.icon} />
                     </TouchableOpacity>
                   </View>
                 </TouchableOpacity>
@@ -249,11 +251,11 @@ const styles = StyleSheet.create({
     marginLeft: "3%",
     width: 60,
     height: 60,
-    
+
     ...Platform.select({
       ios: {
         borderRadius: 30
-      }, 
+      },
       android: {
         borderRadius: 50,
       }
@@ -266,10 +268,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 5,
     fontSize: 17,
-    color:'rgba(0, 0, 0, 0.77)',
+    color: 'rgba(0, 0, 0, 0.77)',
     borderWidth: 1,
     borderColor: "#939393",
- 
+
   },
   name: {
     margin: "6%"
@@ -280,7 +282,7 @@ const styles = StyleSheet.create({
   },
   button_search: {
     textAlign: "center",
-    justifyContent:'center',
+    justifyContent: 'center',
     fontWeight: "700",
     fontSize: 18,
     color: "#fff"
@@ -299,21 +301,21 @@ const styles = StyleSheet.create({
   btn_search: {
     backgroundColor: "#F74F4F",
     height: 50,
-    justifyContent:'center',
+    justifyContent: 'center',
     borderRadius: 15
   },
-  requests :{
+  requests: {
     marginTop: "2%",
-    textAlign:'left',
-    backgroundColor:"#E0E0E0",
+    textAlign: 'left',
+    backgroundColor: "#E0E0E0",
     paddingLeft: 2,
     color: "#939393",
     fontSize: 14
   },
   icon: {
-    width:25,
-    height:25,
-    alignItems:'flex-end'
+    width: 25,
+    height: 25,
+    alignItems: 'flex-end'
   }
 });
 export default FriendRequests;
