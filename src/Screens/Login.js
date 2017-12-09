@@ -28,8 +28,8 @@ class Login extends Component {
     this.state = {
       // email: Platform.OS === 'android' ? "admin@echat.com" : "ntd180295@echat.com",
       // password: Platform.OS === 'adnroid' ? "admin123" : "123456",
-       email:  "admin@echat.com",
-      password: "admin123" ,
+      email: "admin@echat.com",
+      password: "admin123",
       visible: false
     };
   }
@@ -44,7 +44,7 @@ class Login extends Component {
       .then(() => {
         user = firebaseApp.auth().currentUser;
         global.userId = user.uid;
-        this.itemRef
+        let linsterLogin = this.itemRef
           .child(user.uid)
           .child("Information")
           .on("value", snapshot => {
@@ -57,6 +57,10 @@ class Login extends Component {
             global.userSex = snapshot.val().Sex;
             global.userPassword = snapshot.val().Password;
             this.props.navigation.navigate("MainTabScreen");
+            this.itemRef
+            .child(user.uid)
+            .child("Information")
+            .off("value", linsterLogin);
           });
         this.setState({
           visible: false

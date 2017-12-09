@@ -140,6 +140,9 @@ export const NearbyStack = StackNavigator({
 
 export const Tabbar = TabNavigator(
   {
+    RecentMessageTab: {
+      screen: RecentMessagesStack
+    },
     ListFriendsTab: {
       screen: ListFriendsStack
     },
