@@ -88,12 +88,12 @@ export class FriendRequests extends Component {
       snapshot = snapshot.child("Information");
       const snapshotEmail = snapshot.child("Email").val();
       const snapshotPhoneNumber = snapshot.child("PhoneNumber").val();
-      console.log(count);
       if (count == 1) {
         this.itemRef.once("value", snapshot => {
           lengthSnapshot = snapshot.numChildren();
         });
       }
+      console.log(count);
       if (
         snapshotEmail == this.state.searchInput ||
         snapshotPhoneNumber == this.state.searchInput

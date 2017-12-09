@@ -113,6 +113,7 @@ class InformationUser extends Component {
     this.setState({
       visible: false
     });
+    this.updateInformation();
     this.refs.toast.show("Thay đổi thành công");
   }
 
@@ -138,6 +139,7 @@ class InformationUser extends Component {
           Avatar: this.state.avatar,
           CoverPhoto: this.state.coverPhoto,
           Email: this.state.email,
+          ID: this.state.id,
           Name: this.state.name,
           PhoneNumber: this.state.phoneNumber,
           BirthDate: this.state.birthDate,
@@ -147,12 +149,30 @@ class InformationUser extends Component {
       user
         .updatePassword(this.state.reNewPassword)
         .then(function () { }, function (error) { });
+      global.userPassword = this.state.password;
       this.refs.toast.show("Đổi mật khẩu thành công!");
-
       this.setState({
         visible: false
       });
     }
+  }
+
+  updateInformation() {
+    global.userName = this.state.name;
+    global.userEmail = this.state.email;
+    global.userAvatar = this.state.avatar;
+    global.userPhoneNumber = this.state.phoneNumber;
+    global.userBirthDate = this.state.birthDate;
+    global.userSex = this.state.sex;
+    this.setState({
+      name: global.userName,
+      email: global.userEmail,
+      id: global.userId,
+      phoneNumber: global.userPhoneNumber,
+      birthDate: global.userBirthDate,
+      sex: global.userSex,
+      oldPassword: global.userPassword,
+    });
   }
 
   render() {

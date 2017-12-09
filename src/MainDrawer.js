@@ -16,12 +16,22 @@ class MainDrawer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      coverPhoto: '',
+      avatar: '',
+      name: '',
+      email: '',
+      id: ''
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
       coverPhoto: global.userCoverPhoto,
       avatar: global.userAvatar,
       name: global.userName,
       email: global.userEmail,
       id: global.userId
-    };
+    })
   }
 
   signOut() {
@@ -29,14 +39,14 @@ class MainDrawer extends Component {
       .auth()
       .signOut()
       .then(
-        () => {
-          user = null;
-          global.userId = null;
-          this.props.navigation.navigate("LoginScreen");
-        },
-        function(error) {
-          console.error("Sign Out Error", error);
-        }
+      () => {
+        user = null;
+        global.userId = null;
+        this.props.navigation.navigate("LoginScreen");
+      },
+      function (error) {
+        console.error("Sign Out Error", error);
+      }
       );
   }
 
@@ -51,7 +61,7 @@ class MainDrawer extends Component {
           <View style={styles.containerTextImage}>
             <Image source={{ uri: this.state.avatar }} style={styles.avatar} />
             <Text style={styles.text}>{this.state.name}</Text>
-            <Text style={[styles.text, {opacity: 0.8}]}>{this.state.email}</Text>
+            <Text style={[styles.text, { opacity: 0.8 }]}>{this.state.email}</Text>
           </View>
         </ImageBackground>
         <Text style={styles.title}>Tiện ích</Text>

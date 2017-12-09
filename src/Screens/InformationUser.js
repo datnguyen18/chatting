@@ -99,7 +99,6 @@ class InformationUser extends Component {
   }
 
   uploadCover = (uri, mime = 'image/jpg') => {
-    console.log('zoooo')
     return new Promise((resolve, reject) => {
       const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
       let uploadBlob = null
@@ -132,7 +131,6 @@ class InformationUser extends Component {
   }
 
   uploadAvatar = (uri, mime = 'image/jpg') => {
-    console.log('zoooo')
     return new Promise((resolve, reject) => {
       const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
       let uploadBlob = null
@@ -143,7 +141,6 @@ class InformationUser extends Component {
         .child("Avatar")
       fs.readFile(uploadUri, 'base64')
         .then((data) => {
-          // console.log(data)
           return Blob.build(data, { type: `${mime};BASE64` })
         })
         .then((blob) => {
@@ -174,23 +171,6 @@ class InformationUser extends Component {
         console.log("User tapped custom button: ", response.customButton);
       } else {
         this.uploadCover(response.uri)
-<<<<<<< HEAD
-        .then(url => {
-          this.itemRef
-            .child(user.uid)
-            .child("Information")
-            .set({
-              Avatar: this.state.avatar,
-              CoverPhoto: url,
-              Email: this.state.email,
-              Name: this.state.name,
-              ID: this.state.id,
-              PhoneNumber: this.state.phoneNumber,
-              BirthDate: this.state.birthDate,
-              Sex: this.state.sex,
-              Password: this.state.password
-            })
-=======
           .then(url => {
             this.itemRef
               .child(user.uid)
@@ -200,12 +180,16 @@ class InformationUser extends Component {
                 CoverPhoto: url,
                 Email: this.state.email,
                 Name: this.state.name,
+                ID: this.state.id,
                 PhoneNumber: this.state.phoneNumber,
                 BirthDate: this.state.birthDate,
                 Sex: this.state.sex,
                 Password: this.state.password
               })
->>>>>>> 91557ecca2ffa3adddd6bcbe745299d3277f31ad
+            this.setState({
+              coverPhoto: url
+            });
+            global.userCoverPhoto = this.state.coverPhoto;
           })
           .then(error => console.log(error))
       }
@@ -239,10 +223,16 @@ class InformationUser extends Component {
                 Sex: this.state.sex,
                 Password: this.state.password
               })
+            this.setState({
+              avatar: url
+            });
+            global.userAvatar = this.state.avatar;
+            
           })
           .then(error => console.log(error))
       }
     });
+    this.props.navigation.refresh()
   }
 
   render() {
