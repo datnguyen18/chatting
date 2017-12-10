@@ -18,16 +18,16 @@ import RNFetchBlob from "react-native-fetch-blob";
 import Toast, { DURATION } from "react-native-easy-toast";
 
 const BackButton = props => (
-  <TouchableOpacity onPress={() => props.navigation.navigate("Tabbar")}>
+  <TouchableOpacity onPress={() => props.navigation.navigate("MainTabScreen")}>
     <Image
       source={require("../img/BackButton.png")}
-      style={styles.logoOpenDrawer}
+      style={styles.logoBackButton}
     />
   </TouchableOpacity>
 );
 
-var ImagePicker = require("react-native-image-picker");
-var styleColorBackground = require("../components/color_background");
+const ImagePicker = require("react-native-image-picker");
+const styleColorBackground = require("../components/color_background");
 const polyfill = RNFetchBlob.polyfill;
 const fs = RNFetchBlob.fs;
 const Blob = RNFetchBlob.polyfill.Blob
@@ -35,7 +35,7 @@ const Blob = RNFetchBlob.polyfill.Blob
 window.XMLHttpRequest = polyfill.XMLHttpRequest;
 window.Blob = polyfill.Blob;
 // More info on all the options is below in the README...just some common use cases shown here
-var options = {
+const options = {
   title: "Chọn ảnh từ:",
   quality: 0.6,
   storageOptions: {
@@ -43,7 +43,6 @@ var options = {
     path: 'images'
   }
 };
-
 
 // create a component
 class InformationUser extends Component {
@@ -227,12 +226,11 @@ class InformationUser extends Component {
               avatar: url
             });
             global.userAvatar = this.state.avatar;
-            
+
           })
           .then(error => console.log(error))
       }
     });
-    this.props.navigation.refresh()
   }
 
   render() {
@@ -313,7 +311,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  logoOpenDrawer: {
+  logoBackButton: {
     width: 17,
     height: 17,
     marginLeft: 15

@@ -29,12 +29,23 @@ var radio_props = [
   { label: "Nữ", value: "Nữ" }
 ];
 
-var styleColorBackground = require("../components/color_background");
+const styleColorBackground = require("../components/color_background");
 const sexInt = 0;
+
+const BackButton = props => (
+  <TouchableOpacity onPress={() => props.navigation.navigate("InformationUserScreen")}>
+    <Image
+      source={require("../img/BackButton.png")}
+      style={styles.logoBackButton}
+    />
+  </TouchableOpacity>
+);
+
 // create a component
 class InformationUser extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Thay đổi thông tin",
+    headerLeft: <BackButton navigation={navigation} />,
     headerTitleStyle: {
       textAlign: "center",
       alignSelf: "center",
