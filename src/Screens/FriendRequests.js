@@ -15,7 +15,7 @@ import Spinner from "react-native-loading-spinner-overlay";
 import Toast, { DURATION } from "react-native-easy-toast";
 import { firebaseApp } from "../api/Firebase";
 
-var styleColorBackground = require("../components/color_background");
+const styleColorBackground = require("../components/color_background");
 
 export class FriendRequests extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -57,7 +57,11 @@ export class FriendRequests extends Component {
               id: snapshot.val().UID,
               avatar: snapshot1.val().Avatar,
               key: snapshot.val().Key,
-              coverPhoto: snapshot1.val().CoverPhoto
+              coverPhoto: snapshot1.val().CoverPhoto,
+              phoneNumber: snapshot1.val().PhoneNumber,
+              sex: snapshot1.val().Sex,
+              birthDate: snapshot1.val().BirthDate,
+              email: snapshot1.val().Email
             });
             this.sortDate(arrayNameFriends);
             this.loadIdFriends(arrayNameFriends);
@@ -136,7 +140,7 @@ export class FriendRequests extends Component {
     this.setState({
       friends: this.deleteByValue(this.state.friends, index)
     });
-    var newPostKey = firebaseApp
+    const newPostKey = firebaseApp
       .database()
       .ref()
       .push().key;
@@ -204,7 +208,11 @@ export class FriendRequests extends Component {
                       idFriend: item.id,
                       nameFriend: item.name,
                       avatarFriend: item.avatar,
-                      coverPhotoFriend: item.coverPhoto
+                      coverPhotoFriend: item.coverPhoto,
+                      phoneNumberFriend: item.phoneNumber,
+                      sexFriend: item.sex,
+                      birthDateFriend: item.birthDate,
+                      emailFriend: item.email
                     })}
                 >
                   <View key={item.id} style={[styles.item, { justifyContent: 'space-between' }]}>
@@ -251,7 +259,6 @@ const styles = StyleSheet.create({
     marginLeft: "3%",
     width: 60,
     height: 60,
-
     ...Platform.select({
       ios: {
         borderRadius: 30

@@ -77,7 +77,7 @@ class RecentMessages extends Component {
         const arrayRecentMessage = [];
         snapshot = snapshot.child("RecentMessages");
         const snapshotKey = Object.keys(snapshot.val());
-        for (var key in snapshotKey) {
+        for (let key in snapshotKey) {
           const element = snapshot.child(snapshotKey[key]);
           this.itemRef
             .child(element.val().Sender)

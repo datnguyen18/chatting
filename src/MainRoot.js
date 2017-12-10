@@ -113,7 +113,13 @@ export const RoomChatStack = StackNavigator({
   },
   ListUserRoomChatScreen: {
     screen: ListUserRoomChat
-  }
+  },
+  WallFriendsScreen: {
+    screen: WallFriends
+  },
+  InformationFriendScreen: {
+    screen: InformationFriend
+  },
 });
 
 export const InformationUserStack = StackNavigator({

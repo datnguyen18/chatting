@@ -160,7 +160,6 @@ const styles = StyleSheet.create({
   },
   containerTextImage: {
     marginTop: "30%",
-    alignItems: 'center'
   },
   containerText: {
     flexDirection: "row",

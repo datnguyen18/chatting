@@ -20,11 +20,11 @@ import RadioForm, {
 } from "react-native-simple-radio-button";
 import Toast, { DURATION } from "react-native-easy-toast";
 
-var radio_props = [
+const radio_props = [
   { label: "Nam", value: "Nam" },
   { label: "Nữ", value: "Nữ" }
 ];
-var styleColorBackground = require("../components/color_background");
+const styleColorBackground = require("../components/color_background");
 // create a component
 class Register extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -39,7 +39,7 @@ class Register extends Component {
       backgroundColor: "#F74F4F"
     }
   });
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -59,7 +59,7 @@ class Register extends Component {
     this.setState({
       visible: !this.state.visible
     });
-    var pathAvatar = "";
+    let pathAvatar = "";
     if (this.state.sex == "Nam") {
       pathAvatar =
         "https://firebasestorage.googleapis.com/v0/b/eiu-chatting-c99ce.appspot.com/o/Users%2FAnonymous%2FMale.png?alt=media&token=d28967b7-690e-45e0-8dfa-3c23d2540517";
@@ -95,7 +95,7 @@ class Register extends Component {
         firebaseApp
           .auth()
           .signInWithEmailAndPassword(this.state.email, this.state.password);
-        var user = firebaseApp.auth().currentUser;
+        const user = firebaseApp.auth().currentUser;
         this.itemRef
           .child(user.uid)
           .child("Information")

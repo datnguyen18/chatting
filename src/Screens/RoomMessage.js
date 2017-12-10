@@ -4,11 +4,11 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
+  ImageBackground,
   TouchableOpacity,
   BackHandler
 } from "react-native";
-import { GiftedChat } from "react-native-gifted-chat";
+import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
 import { firebaseApp } from "../api/Firebase";
 
 // create a component
@@ -36,7 +36,7 @@ class RoomMessage extends Component {
           majorRoom: `${navigation.state.params.majorRoom}`,
         })}
       >
-        <Image
+        <ImageBackground
           source={require("../img/Options.png")}
           style={styles.logoOpenListUser}
         />
@@ -63,11 +63,11 @@ class RoomMessage extends Component {
       .child("Messages")
       .on("child_added", snapshot => {
         console.log(snapshot.val());
-        var newPostKey = firebaseApp
+        const newPostKey = firebaseApp
           .database()
           .ref()
           .push().key;
-        var i = 0;
+        let i = 0;
         if (snapshot.val().Sender == global.userId) {
           i = 1;
         } else {
@@ -94,7 +94,7 @@ class RoomMessage extends Component {
   }
 
   onSend(messages = []) {
-    var newPostKey = firebaseApp
+    const newPostKey = firebaseApp
       .database()
       .ref()
       .push().key;
@@ -113,6 +113,31 @@ class RoomMessage extends Component {
       });
   }
 
+  renderBubble(props) {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: "#F74F4F",
+          }
+        }}
+      />
+    );
+  }
+
+  renderSend(props) {
+    return (
+      <Send
+        {...props}
+      >
+        <View style={{ marginRight: 10, marginBottom: 5 }}>
+          <ImageBackground source={require('../img/SendMessage.png')} resizeMode={'center'} style={{ width: 40, height: 40 }} />
+        </View>
+      </Send>
+    );
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -122,7 +147,10 @@ class RoomMessage extends Component {
         user={{
           _id: 1
         }}
-        placeholder="Nhập tin nhắn..." 
+        placeholder="Nhập tin nhắn..."
+        renderMessageImage={this.renderCustomView}
+        renderBubble={this.renderBubble}
+        renderSend={this.renderSend}
       />
     );
   }

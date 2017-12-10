@@ -216,7 +216,7 @@ class InformationUser extends Component {
               />
             </View>
             <View
-              style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
             />
             <View style={styles.containerText}>
               <Text style={styles.textHeader}> Email: </Text>
@@ -239,7 +239,7 @@ class InformationUser extends Component {
               />
             </View>
             <View
-              style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
             />
             <View style={styles.containerText}>
               <Text style={styles.textHeader}> Số điện thoại: </Text>
@@ -260,7 +260,7 @@ class InformationUser extends Component {
               />
             </View>
             <View
-              style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
             />
             <View style={styles.containerText}>
               <DatePicker
@@ -337,7 +337,7 @@ class InformationUser extends Component {
               />
             </View>
             <View
-              style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
             />
             <View style={styles.containerText}>
               <Text style={styles.textHeader}> Mật khẩu mới: </Text>
@@ -360,7 +360,7 @@ class InformationUser extends Component {
               />
             </View>
             <View
-              style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
             />
             <View style={styles.containerText}>
               <Text style={styles.textHeader}> Nhập lại mật khẩu mới: </Text>
@@ -399,7 +399,12 @@ class InformationUser extends Component {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#FFFFFF"
+  },
+  line: {
+    borderColor: "#E0E0E0",
+    borderWidth: 1
   },
   logoBackButton: {
     width: 17,

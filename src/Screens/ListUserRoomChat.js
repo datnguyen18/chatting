@@ -73,8 +73,8 @@ class ListUserRoomChat extends Component {
     sortFriends(arrayNameFriends) {
         arrayNameFriends.sort((a, b) => {
             if (a.name != null && b.name != null) {
-                var nameA = this.bodauTiengViet(a.name.toString());
-                var nameB = this.bodauTiengViet(b.name.toString());
+                const nameA = this.bodauTiengViet(a.name.toString());
+                const nameB = this.bodauTiengViet(b.name.toString());
                 if (nameA < nameB) {
                     return -1;
                 }
@@ -118,12 +118,16 @@ class ListUserRoomChat extends Component {
                     {this.state.friends.map((item, index) => (
                         <TouchableOpacity
                             onPress={() => {
-                                this.props.navigation.navigate("MessageScreen", {
+                                this.props.navigation.navigate("WallFriendsScreen", {
                                     idFriend: item.id,
                                     nameFriend: item.name,
-                                    avatarFriend: item.avatar
+                                    avatarFriend: item.avatar,
+                                    coverPhotoFriend: item.coverPhoto,
+                                    phoneNumberFriend: item.phoneNumber,
+                                    sexFriend: item.sex,
+                                    birthDateFriend: item.birthdate,
+                                    emailFriend: item.email
                                 })
-
                             }}
                         >
                             <View key={item.id} style={styles.item}>

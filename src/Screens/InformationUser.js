@@ -264,28 +264,28 @@ class InformationUser extends Component {
             <Text style={styles.textState}>{this.state.name}</Text>
           </View>
           <View
-            style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
           />
           <View style={styles.containerText}>
             <Text style={styles.textHeader}> Email: </Text>
             <Text style={styles.textState}>{this.state.email}</Text>
           </View>
           <View
-            style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
           />
           <View style={styles.containerText}>
             <Text style={styles.textHeader}> Số điện thoại: </Text>
             <Text style={styles.textState}>{this.state.phoneNumber}</Text>
           </View>
           <View
-            style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
           />
           <View style={styles.containerText}>
             <Text style={styles.textHeader}> Ngày sinh: </Text>
             <Text style={styles.textState}>{this.state.birthDate}</Text>
           </View>
           <View
-            style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+            style={styles.line}
           />
           <View style={styles.containerText}>
             <Text style={styles.textHeader}> Giới tính: </Text>
@@ -309,7 +309,12 @@ class InformationUser extends Component {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#FFFFFF"
+  },
+  line: {
+    borderColor: "#E0E0E0",
+    borderWidth: 1
   },
   logoBackButton: {
     width: 17,
