@@ -15,7 +15,7 @@ import {
 import { firebaseApp } from "../api/Firebase";
 import Toast, { DURATION } from "react-native-easy-toast";
 
-var styleColorBackground = require("../components/color_background");
+const styleColorBackground = require("../components/color_background");
 
 // create a component
 class InformationFriend extends Component {
@@ -44,7 +44,7 @@ class InformationFriend extends Component {
       email: this.props.navigation.state.params.emailFriend,
       id: this.props.navigation.state.params.idFriend,
       phoneNumber: this.props.navigation.state.params.phoneNumberFriend,
-      birthDate:  this.props.navigation.state.params.birthDateFriend,
+      birthDate: this.props.navigation.state.params.birthDateFriend,
       sex: this.props.navigation.state.params.sexFriend,
     };
   }
@@ -74,28 +74,28 @@ class InformationFriend extends Component {
             <Text style={styles.textState}>{this.state.name}</Text>
           </View>
           <View
-            style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+            style={styles.line}
           />
           <View style={styles.containerText}>
             <Text style={styles.textHeader}> Email: </Text>
             <Text style={styles.textState}>{this.state.email}</Text>
           </View>
           <View
-            style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+            style={styles.line}
           />
           <View style={styles.containerText}>
             <Text style={styles.textHeader}> Số điện thoại: </Text>
             <Text style={styles.textState}>{this.state.phoneNumber}</Text>
           </View>
           <View
-            style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+            style={styles.line}
           />
           <View style={styles.containerText}>
             <Text style={styles.textHeader}> Ngày sinh: </Text>
             <Text style={styles.textState}>{this.state.birthDate}</Text>
           </View>
           <View
-            style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+            style={styles.line}
           />
           <View style={styles.containerText}>
             <Text style={styles.textHeader}> Giới tính: </Text>
@@ -111,7 +111,8 @@ class InformationFriend extends Component {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#FFFFFF'
   },
   logoOpenDrawer: {
     width: 17,
@@ -165,7 +166,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "700",
     fontSize: 18
-  }
+  },
+  line: {
+    borderColor: "#E0E0E0",
+    borderWidth: 1
+  },
 });
 
 //make this component available to the app

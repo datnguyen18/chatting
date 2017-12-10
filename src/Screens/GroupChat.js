@@ -12,8 +12,8 @@ import { GiftedChat } from "react-native-gifted-chat";
 import { firebaseApp } from "../api/Firebase";
 
 // create a component
-var path;
-var pathSender;
+let path;
+let pathSender;
 class GroupChat extends Component {
   static navigationOptions = ({ navigation }) => ({
     tabBarVisible: false,
@@ -60,11 +60,11 @@ class GroupChat extends Component {
       .child("Messages")
       .child(path)
       .on("child_added", snapshot => {
-        var newPostKey = firebaseApp
+        const newPostKey = firebaseApp
           .database()
           .ref()
           .push().key;
-        var i = 0;
+        let i = 0;
         if (snapshot.val().Sender == global.userId) {
           i = 1;
         } else {
@@ -85,7 +85,7 @@ class GroupChat extends Component {
   }
 
   onSend(messages = []) {
-    var newPostKey = firebaseApp
+    const newPostKey = firebaseApp
       .database()
       .ref()
       .push().key;

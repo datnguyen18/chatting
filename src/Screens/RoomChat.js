@@ -92,7 +92,7 @@ class RoomChat extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    var sectionData = [
+    const sectionData = [
       {
         title: "Khoa Kỹ thuật",
         data: [

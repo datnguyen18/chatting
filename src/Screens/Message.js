@@ -10,11 +10,11 @@ import {
   TouchableWithoutFeedback,
   Keyboard
 } from "react-native";
-import { GiftedChat, Bubble } from "react-native-gifted-chat";
+import { GiftedChat, Bubble, Send } from "react-native-gifted-chat";
 import { firebaseApp } from "../api/Firebase";
 
 // create a component
-var path;
+let path;
 class Message extends Component {
   static navigationOptions = ({ navigation }) => {
     const { state, setParams, navigate } = navigation;
@@ -134,7 +134,7 @@ class Message extends Component {
       .database()
       .ref()
       .push().key;
-      
+
     this.itemRef
       .child(user.uid)
       .child("Messages")
@@ -211,6 +211,18 @@ class Message extends Component {
     );
   }
 
+  renderSend(props) {
+    return (
+      <Send
+        {...props}
+      >
+        <View style={{ marginRight: 10, marginBottom: 5 }}>
+          <ImageBackground source={require('../img/SendMessage.png')} resizeMode={'center'} style={{ width: 40, height: 40 }} />
+        </View>
+      </Send>
+    );
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -225,10 +237,11 @@ class Message extends Component {
             user={{
               _id: 1
             }}
-            placeholder="Nhập tin nhắn..." 
+            placeholder="Nhập tin nhắn..."
             // renderFooter={this.renderFooter}
             renderMessageImage={this.renderCustomView}
             renderBubble={this.renderBubble}
+            renderSend={this.renderSend}
           />
         </ImageBackground>
       </TouchableWithoutFeedback >

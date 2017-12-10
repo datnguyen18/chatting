@@ -29,12 +29,23 @@ var radio_props = [
   { label: "Nữ", value: "Nữ" }
 ];
 
-var styleColorBackground = require("../components/color_background");
+const styleColorBackground = require("../components/color_background");
 const sexInt = 0;
+
+const BackButton = props => (
+  <TouchableOpacity onPress={() => props.navigation.navigate("InformationUserScreen")}>
+    <Image
+      source={require("../img/BackButton.png")}
+      style={styles.logoBackButton}
+    />
+  </TouchableOpacity>
+);
+
 // create a component
 class InformationUser extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: "Thay đổi thông tin",
+    headerLeft: <BackButton navigation={navigation} />,
     headerTitleStyle: {
       textAlign: "center",
       alignSelf: "center",
@@ -113,6 +124,7 @@ class InformationUser extends Component {
     this.setState({
       visible: false
     });
+    this.updateInformation();
     this.refs.toast.show("Thay đổi thành công");
   }
 
@@ -138,6 +150,7 @@ class InformationUser extends Component {
           Avatar: this.state.avatar,
           CoverPhoto: this.state.coverPhoto,
           Email: this.state.email,
+          ID: this.state.id,
           Name: this.state.name,
           PhoneNumber: this.state.phoneNumber,
           BirthDate: this.state.birthDate,
@@ -147,12 +160,30 @@ class InformationUser extends Component {
       user
         .updatePassword(this.state.reNewPassword)
         .then(function () { }, function (error) { });
+      global.userPassword = this.state.password;
       this.refs.toast.show("Đổi mật khẩu thành công!");
-
       this.setState({
         visible: false
       });
     }
+  }
+
+  updateInformation() {
+    global.userName = this.state.name;
+    global.userEmail = this.state.email;
+    global.userAvatar = this.state.avatar;
+    global.userPhoneNumber = this.state.phoneNumber;
+    global.userBirthDate = this.state.birthDate;
+    global.userSex = this.state.sex;
+    this.setState({
+      name: global.userName,
+      email: global.userEmail,
+      id: global.userId,
+      phoneNumber: global.userPhoneNumber,
+      birthDate: global.userBirthDate,
+      sex: global.userSex,
+      oldPassword: global.userPassword,
+    });
   }
 
   render() {
@@ -185,7 +216,7 @@ class InformationUser extends Component {
               />
             </View>
             <View
-              style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
             />
             <View style={styles.containerText}>
               <Text style={styles.textHeader}> Email: </Text>
@@ -208,7 +239,7 @@ class InformationUser extends Component {
               />
             </View>
             <View
-              style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
             />
             <View style={styles.containerText}>
               <Text style={styles.textHeader}> Số điện thoại: </Text>
@@ -229,7 +260,7 @@ class InformationUser extends Component {
               />
             </View>
             <View
-              style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
             />
             <View style={styles.containerText}>
               <DatePicker
@@ -306,7 +337,7 @@ class InformationUser extends Component {
               />
             </View>
             <View
-              style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
             />
             <View style={styles.containerText}>
               <Text style={styles.textHeader}> Mật khẩu mới: </Text>
@@ -329,7 +360,7 @@ class InformationUser extends Component {
               />
             </View>
             <View
-              style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
             />
             <View style={styles.containerText}>
               <Text style={styles.textHeader}> Nhập lại mật khẩu mới: </Text>
@@ -368,7 +399,12 @@ class InformationUser extends Component {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#FFFFFF"
+  },
+  line: {
+    borderColor: "#E0E0E0",
+    borderWidth: 1
   },
   logoBackButton: {
     width: 17,

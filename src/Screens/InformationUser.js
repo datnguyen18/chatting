@@ -18,16 +18,16 @@ import RNFetchBlob from "react-native-fetch-blob";
 import Toast, { DURATION } from "react-native-easy-toast";
 
 const BackButton = props => (
-  <TouchableOpacity onPress={() => props.navigation.navigate("Tabbar")}>
+  <TouchableOpacity onPress={() => props.navigation.navigate("MainTabScreen")}>
     <Image
       source={require("../img/BackButton.png")}
-      style={styles.logoOpenDrawer}
+      style={styles.logoBackButton}
     />
   </TouchableOpacity>
 );
 
-var ImagePicker = require("react-native-image-picker");
-var styleColorBackground = require("../components/color_background");
+const ImagePicker = require("react-native-image-picker");
+const styleColorBackground = require("../components/color_background");
 const polyfill = RNFetchBlob.polyfill;
 const fs = RNFetchBlob.fs;
 const Blob = RNFetchBlob.polyfill.Blob
@@ -35,7 +35,7 @@ const Blob = RNFetchBlob.polyfill.Blob
 window.XMLHttpRequest = polyfill.XMLHttpRequest;
 window.Blob = polyfill.Blob;
 // More info on all the options is below in the README...just some common use cases shown here
-var options = {
+const options = {
   title: "Chọn ảnh từ:",
   quality: 0.6,
   storageOptions: {
@@ -43,7 +43,6 @@ var options = {
     path: 'images'
   }
 };
-
 
 // create a component
 class InformationUser extends Component {
@@ -99,7 +98,6 @@ class InformationUser extends Component {
   }
 
   uploadCover = (uri, mime = 'image/jpg') => {
-    console.log('zoooo')
     return new Promise((resolve, reject) => {
       const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
       let uploadBlob = null
@@ -132,7 +130,6 @@ class InformationUser extends Component {
   }
 
   uploadAvatar = (uri, mime = 'image/jpg') => {
-    console.log('zoooo')
     return new Promise((resolve, reject) => {
       const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
       let uploadBlob = null
@@ -143,7 +140,6 @@ class InformationUser extends Component {
         .child("Avatar")
       fs.readFile(uploadUri, 'base64')
         .then((data) => {
-          // console.log(data)
           return Blob.build(data, { type: `${mime};BASE64` })
         })
         .then((blob) => {
@@ -174,6 +170,7 @@ class InformationUser extends Component {
         console.log("User tapped custom button: ", response.customButton);
       } else {
         this.uploadCover(response.uri)
+<<<<<<< HEAD
         .then(url => {
           this.itemRef
             .child(user.uid)
@@ -189,6 +186,27 @@ class InformationUser extends Component {
               Sex: this.state.sex,
               Password: this.state.password
             })
+=======
+          .then(url => {
+            this.itemRef
+              .child(user.uid)
+              .child("Information")
+              .set({
+                Avatar: this.state.avatar,
+                CoverPhoto: url,
+                Email: this.state.email,
+                Name: this.state.name,
+                ID: this.state.id,
+                PhoneNumber: this.state.phoneNumber,
+                BirthDate: this.state.birthDate,
+                Sex: this.state.sex,
+                Password: this.state.password
+              })
+            this.setState({
+              coverPhoto: url
+            });
+            global.userCoverPhoto = this.state.coverPhoto;
+>>>>>>> 3fc0c3b3f56677a68dd35350efb327a7d1a306ae
           })
           .then(error => console.log(error))
       }
@@ -222,6 +240,11 @@ class InformationUser extends Component {
                 Sex: this.state.sex,
                 Password: this.state.password
               })
+            this.setState({
+              avatar: url
+            });
+            global.userAvatar = this.state.avatar;
+
           })
           .then(error => console.log(error))
       }
@@ -259,28 +282,28 @@ class InformationUser extends Component {
             <Text style={styles.textState}>{this.state.name}</Text>
           </View>
           <View
-            style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
           />
           <View style={styles.containerText}>
             <Text style={styles.textHeader}> Email: </Text>
             <Text style={styles.textState}>{this.state.email}</Text>
           </View>
           <View
-            style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
           />
           <View style={styles.containerText}>
             <Text style={styles.textHeader}> Số điện thoại: </Text>
             <Text style={styles.textState}>{this.state.phoneNumber}</Text>
           </View>
           <View
-            style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+              style={styles.line}
           />
           <View style={styles.containerText}>
             <Text style={styles.textHeader}> Ngày sinh: </Text>
             <Text style={styles.textState}>{this.state.birthDate}</Text>
           </View>
           <View
-            style={{ borderBottomColor: "#757575", borderBottomWidth: 1 }}
+            style={styles.line}
           />
           <View style={styles.containerText}>
             <Text style={styles.textHeader}> Giới tính: </Text>
@@ -304,9 +327,14 @@ class InformationUser extends Component {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#FFFFFF"
   },
-  logoOpenDrawer: {
+  line: {
+    borderColor: "#E0E0E0",
+    borderWidth: 1
+  },
+  logoBackButton: {
     width: 17,
     height: 17,
     marginLeft: 15

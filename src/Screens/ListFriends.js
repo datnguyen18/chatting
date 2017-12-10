@@ -160,8 +160,8 @@ class ListFriends extends Component {
   sortFriends(arrayNameFriends) {
     arrayNameFriends.sort((a, b) => {
       if (a.name != null && b.name != null) {
-        var nameA = this.bodauTiengViet(a.name.toString());
-        var nameB = this.bodauTiengViet(b.name.toString());
+        const nameA = this.bodauTiengViet(a.name.toString());
+        const nameB = this.bodauTiengViet(b.name.toString());
         if (nameA < nameB) {
           return -1;
         }

@@ -19,7 +19,7 @@ import { firebaseApp } from "../api/Firebase";
 import Spinner from "react-native-loading-spinner-overlay";
 import Toast, { DURATION } from "react-native-easy-toast";
 
-var styleColorBackground = require("../components/color_background");
+const styleColorBackground = require("../components/color_background");
 // create a component
 class Login extends Component {
   constructor(props) {

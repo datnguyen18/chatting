@@ -4,7 +4,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, ImageBackground, Platf
 import { firebaseApp } from "../api/Firebase";
 import RNFetchBlob from "react-native-fetch-blob";
 
-var ImagePicker = require("react-native-image-picker");
+const ImagePicker = require("react-native-image-picker");
 const polyfill = RNFetchBlob.polyfill;
 const fs = RNFetchBlob.fs;
 const Blob = RNFetchBlob.polyfill.Blob
@@ -12,7 +12,7 @@ const Blob = RNFetchBlob.polyfill.Blob
 window.XMLHttpRequest = polyfill.XMLHttpRequest;
 window.Blob = polyfill.Blob;
 // More info on all the options is below in the README...just some common use cases shown here
-var options = {
+const options = {
     title: "Chọn ảnh từ:",
     quality: 0.3,
     storageOptions: {
@@ -57,71 +57,71 @@ class SettingConversation extends Component {
 
     uploadBackgroundUser = (uri, mime = 'image/jpg') => {
         return new Promise((resolve, reject) => {
-          const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
+            const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
             let uploadBlob = null
-            
+
             const imageRef = firebaseApp.storage()
-            .ref('Users')
-            .child(user.uid)
-            .child("Messages")
-            .child(global.path)
-            .child("Background")
+                .ref('Users')
+                .child(user.uid)
+                .child("Messages")
+                .child(global.path)
+                .child("Background")
 
             fs.readFile(uploadUri, 'base64')
-            .then((data) => {
-              console.log(data)
-              return Blob.build(data, { type: `${mime};BASE64` })
-            })
-            .then((blob) => {
-              uploadBlob = blob
-              console.log(blob)
-              return imageRef.put(blob, { contentType: mime })
-            })
-            .then(() => {
-              uploadBlob.close()
-              return imageRef.getDownloadURL()
-            })
-            .then((url) => {
-              resolve(url)
-            })
-            .catch((error) => {
-              reject(error)
-            })
+                .then((data) => {
+                    console.log(data)
+                    return Blob.build(data, { type: `${mime};BASE64` })
+                })
+                .then((blob) => {
+                    uploadBlob = blob
+                    console.log(blob)
+                    return imageRef.put(blob, { contentType: mime })
+                })
+                .then(() => {
+                    uploadBlob.close()
+                    return imageRef.getDownloadURL()
+                })
+                .then((url) => {
+                    resolve(url)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
         })
-      }
+    }
 
-      uploadBackgroundFriend = (uri, mime = 'image/jpg') => {
+    uploadBackgroundFriend = (uri, mime = 'image/jpg') => {
         return new Promise((resolve, reject) => {
-          const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
+            const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
             let uploadBlob = null
             const imageRef = firebaseApp.storage()
-            .ref("Users")
-            .child(this.state.id)
-            .child("Messages")
-            .child(global.path)
-            .child("Background")
+                .ref("Users")
+                .child(this.state.id)
+                .child("Messages")
+                .child(global.path)
+                .child("Background")
 
             fs.readFile(uploadUri, 'base64')
-            .then((data) => {
-              return Blob.build(data, { type: `${mime};BASE64` })
-            })
-            .then((blob) => {
-              uploadBlob = blob
-              console.log(blob)
-              return imageRef.put(blob, { contentType: mime })
-            })
-            .then(() => {
-              uploadBlob.close()
-              return imageRef.getDownloadURL()
-            })
-            .then((url) => {
-              resolve(url)
-            })
-            .catch((error) => {
-              reject(error)
-            })
+                .then((data) => {
+                    return Blob.build(data, { type: `${mime};BASE64` })
+                })
+                .then((blob) => {
+                    uploadBlob = blob
+                    console.log(blob)
+                    return imageRef.put(blob, { contentType: mime })
+                })
+                .then(() => {
+                    uploadBlob.close()
+                    return imageRef.getDownloadURL()
+                })
+                .then((url) => {
+                    resolve(url)
+                })
+                .catch((error) => {
+                    reject(error)
+                })
         })
-      }
+    }
 
     changeBackGround() {
         ImagePicker.showImagePicker(options, response => {
@@ -133,77 +133,29 @@ class SettingConversation extends Component {
                 console.log("User tapped custom button: ", response.customButton);
             } else {
                 this.uploadBackgroundUser(response.uri)
-                .then(url => {
-                    console.log(url)
-                    this.itemRef
-                    .child(this.state.id)
-                    .child("Messages")
-                    .child(global.path)
-                    .child("Background")
-                    .set({
-                        URL: url
-                    });
-                })
+                    .then(url => {
+                        console.log(url)
+                        this.itemRef
+                            .child(this.state.id)
+                            .child("Messages")
+                            .child(global.path)
+                            .child("Background")
+                            .set({
+                                URL: url
+                            });
+                    })
                 this.uploadBackgroundFriend(response.uri)
-                .then(url => {
-                    console.log(url)
-                    this.itemRef
-                    .child(global.userId)
-                    .child("Messages")
-                    .child(global.path)
-                    .child("Background")
-                    .set({
-                        URL: url
-                    });
-                })
-
-                // let source = { uri: response.uri };
-                // let path = response.path;
-                // Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
-                //     .then(blob =>
-                //         firebaseApp
-                //             .storage()
-                //             .ref("Users")
-                //             .child(user.uid)
-                //             .child("Messages")
-                //             .child(global.path)
-                //             .child("Background")
-                //             .put(blob, { contentType: "image/png" })
-                //     )
-                //     .then(snapshot => {
-                        // this.itemRef
-                        //     .child(this.state.id)
-                        //     .child("Messages")
-                        //     .child(global.path)
-                        //     .child("Background")
-                        //     .set({
-                        //         URL: snapshot.downloadURL
-                        //     });
-                //         this.refs.toast.show("Thay đổi ảnh bìa thành công!");
-                //     });
-
-                // Blob.build(RNFetchBlob.wrap(path), { type: "image/jpeg" })
-                //     .then(blob =>
-                    //     firebaseApp
-                    //         .storage()
-                    //         .ref("Users")
-                    //         .child(this.state.id)
-                    //         .child("Messages")
-                    //         .child(global.path)
-                    //         .child("Background")
-                    //         .put(blob, { contentType: "image/png" })
-                    // )
-                //     .then(snapshot => {
-                        // this.itemRef
-                        //     .child(global.userId)
-                        //     .child("Messages")
-                        //     .child(global.path)
-                        //     .child("Background")
-                        //     .set({
-                        //         URL: snapshot.downloadURL
-                        //     });
-                //         this.refs.toast.show("Thay đổi ảnh bìa thành công!");
-                //     });
+                    .then(url => {
+                        console.log(url)
+                        this.itemRef
+                            .child(global.userId)
+                            .child("Messages")
+                            .child(global.path)
+                            .child("Background")
+                            .set({
+                                URL: url
+                            });
+                    })
             }
         });
     }
@@ -229,25 +181,42 @@ class SettingConversation extends Component {
                         style={styles.avatar}
                     />
                     <View>
-                        <Text>{this.state.name}</Text>
+                        <Text style={styles.name}>{this.state.name}</Text>
                         <Text>Trang cá nhân</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.changeBackGround()
-                }>
+
+                <View style={styles.bigLine}></View>
+
+                <TouchableOpacity onPress={() => this.changeBackGround()}>
                     <View style={styles.containerRow}>
-                        <Text style={{ marginLeft: "3%" }}> Thay đổi ảnh nền</Text>
+                        <Text style={styles.text}> Đổi ảnh nền</Text>
                         <ImageBackground
                             source={{ uri: this.state.imageBackgroundConversation }}
                             style={styles.backgroundConversation}></ImageBackground>
                     </View>
                 </TouchableOpacity>
+                <View
+                    style={styles.line}
+                />
                 <TouchableOpacity>
                     <View style={styles.containerRow}>
-                        <Text style={{ marginLeft: "3%" }}> Thay đổi ảnh nền</Text>
-                        <View style={styles.viewColor}></View>
+                        <Text style={styles.text} > Đổi màu nền </Text>
+                        <View style={styles.colorConversation}></View>
                     </View>
                 </TouchableOpacity>
+                <View
+                    style={styles.line}
+                />
+                <TouchableOpacity>
+                    <View style={styles.containerRow}>
+                        <Text style={styles.text} > Xóa tin nhắn </Text>
+                        <View style={styles.viewOption}></View>
+                    </View>
+                </TouchableOpacity>
+                <View
+                    style={styles.line}
+                />
             </View >
         );
     }
@@ -256,29 +225,55 @@ class SettingConversation extends Component {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: "#FFFFFF"
+    },
+    line: {
+        borderColor: "#E0E0E0",
+        borderWidth: 1
+    },
+    bigLine: {
+        backgroundColor: "#E0E0E0",
+        width: "100%",
+        height: 10
     },
     containerRow: {
         flexDirection: "row",
         alignItems: "center",
         padding: "1%",
-        borderColor: "#2a4944",
+        borderColor: "#2a4944"
     },
     avatar: {
         margin: "3%",
         width: 60,
         height: 60
     },
-    backgroundConversation: {
-        marginLeft: "50%",
-        width: 45,
-        height: 80
+    name: {
+        color: "#000000",
+        fontSize: 19,
+        fontWeight: "bold",
     },
-    // viewColor: {
-    //     width: 45,
-    //     height: 45,
-    //     background: this.state.viewColor
-    // }
+    text: {
+        fontSize: 17,
+        color: "#000000",
+        marginLeft: "3%",
+        flex: 7
+    },
+    viewOption: {
+        height: 55,
+    },
+    backgroundConversation: {
+        flex: 1,
+        height: 55,
+        marginRight: '3%'
+    },
+    colorConversation: {
+        flex: 1,
+        width: 45,
+        height: 55,
+        marginRight: '3%',
+        backgroundColor: '#F74F4F'
+    }
 });
 
 //make this component available to the app

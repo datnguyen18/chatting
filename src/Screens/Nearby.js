@@ -18,7 +18,7 @@ const LONGITUDE = 0;
 const LATITUDE_DELTA = 0.03;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-var styleColorBackground = require("../components/color_background");
+const styleColorBackground = require("../components/color_background");
 export class Nearby extends Component {
   constructor(props) {
     super(props);
