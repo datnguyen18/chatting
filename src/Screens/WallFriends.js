@@ -72,21 +72,23 @@ export default class componentName extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View>
+      <View style={styles.container}>
         <Spinner
           visible={this.state.visible}
           textContent={"Đang xử lý..."}
           textStyle={{ color: "#FFF" }}
         />
-        <ImageBackground
-          source={{ uri: this.state.coverPhoto }}
-          style={styles.coverPhoto}
-        >
-          <View style={styles.containerTextImage}>
-            <Image source={{ uri: this.state.avatar }} style={styles.avatar} />
-            <Text style={styles.nameCss}>{this.state.name}</Text>
-          </View>
-        </ImageBackground>
+        <View style={styles.header}>
+          <ImageBackground
+            source={{ uri: this.state.coverPhoto }}
+            style={styles.coverPhoto}
+          >
+            <View style={styles.containerTextImage}>
+              <Image source={{ uri: this.state.avatar }} style={styles.avatar} />
+              <Text style={styles.nameCss}>{this.state.name}</Text>
+            </View>
+          </ImageBackground>
+        </View>
         <View style={styles.item}>
           <TouchableOpacity
             style={[styles.buttonConfirmFriendContainer]}
@@ -107,7 +109,7 @@ export default class componentName extends Component {
           </TouchableOpacity>
         </View>
         <Toast ref="toast" />
-      </View>
+      </View >
     );
   }
 }
@@ -115,7 +117,7 @@ export default class componentName extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10
+    backgroundColor: '#FFFFFF'
   },
   button_container: {
     padding: 10
@@ -129,13 +131,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    margin: "3%"
+    margin: "3%",
+    marginTop: "25%"
+  },
+  containerName: {
+    width: "100%",
+    justifyContent: "center",
+    marginTop: "15%",
+    marginLeft: "30%"
   },
   avatar: {
     margin: "3%",
     marginLeft: "3%",
-    width: 60,
-    height: 60
+    height: 150,
+    width: 150,
   },
   coverPhoto: {
     width: "100%",
@@ -143,10 +152,7 @@ const styles = StyleSheet.create({
   },
   containerTextImage: {
     marginTop: "43%",
-    marginLeft: "9%",
-    height: 60,
-    width: "30%",
-    flexDirection: "row",
+    width: "100%",
     justifyContent: "center",
     alignItems: "center"
   },
@@ -162,10 +168,11 @@ const styles = StyleSheet.create({
   },
   nameCss: {
     marginLeft: "10%",
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: "bold",
-    color: "#FFFFFF",
-    backgroundColor: 'transparent'
+    color: "#000000",
+    backgroundColor: 'transparent',
+    marginRight: '10%'
   },
   logoOpenInformationFriend: {
     width: 35,
