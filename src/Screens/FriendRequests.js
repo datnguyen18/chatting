@@ -167,11 +167,11 @@ export class FriendRequests extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          <Spinner
+          {/* <Spinner
             visible={this.state.visible}
             textContent={"Đang xử lý..."}
             textStyle={{ color: "#FFF" }}
-          />
+          /> */}
           <View style={styles.containerBelow}>
             <TextInput
               style={styles.textState}

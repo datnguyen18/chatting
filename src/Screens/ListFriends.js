@@ -13,8 +13,7 @@ import {
 } from "react-native";
 
 import { firebaseApp } from "../api/Firebase";
-import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet';
-import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
+import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet'
 
 const CANCEL_INDEX = 0
 const DESTRUCTIVE_INDEX = 4
@@ -199,15 +198,7 @@ class ListFriends extends Component {
       <View style={styles.container}>
         <ScrollView>
           {this.state.friends.map((item, index) => (
-            <SwipeRow
-						leftOpenValue={75}
-						rightOpenValue={-75}
-					>
-          <View style={styles.standaloneRowBack}>
-							<Text style={styles.backTextWhite}>Left</Text>
-							<Text style={styles.backTextWhite}>Right</Text>
-						</View>
-          <TouchableHighlight
+            <TouchableHighlight
               onPress={() => {
                 this.props.navigation.navigate("MessageScreen", {
                   idFriend: item.id,
@@ -230,9 +221,6 @@ class ListFriends extends Component {
                 </View>
               </View>
             </TouchableHighlight>
-						
-					</SwipeRow>
-            
           ))}
         </ScrollView>
         <ActionSheet
@@ -305,13 +293,7 @@ const styles = StyleSheet.create({
   },
   menu: {
     flex: 0.5
-  },
-  standaloneRowFront: {
-		alignItems: 'center',
-		backgroundColor: '#CCC',
-		justifyContent: 'center',
-		height: 50,
-	},
+  }
 });
 
 //make this component available to the app
