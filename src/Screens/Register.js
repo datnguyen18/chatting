@@ -43,13 +43,13 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "admin",
-      email: "admin@echat.com",
-      password: "admin123",
-      rePassword: "admin123",
-      phoneNumber: "0902807067",
-      date: "30/09/1995",
-      sex: "Nam",
+      name: "",
+      email: "",
+      password: "",
+      rePassword: "",
+      phoneNumber: "",
+      date: "",
+      sex: "",
       visible: false
     };
     this.itemRef = firebaseApp.database().ref("Users");

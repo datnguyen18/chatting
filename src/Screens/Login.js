@@ -28,8 +28,8 @@ class Login extends Component {
     this.state = {
       // email: Platform.OS === 'android' ? "admin@echat.com" : "ntd180295@echat.com",
       // password: Platform.OS === 'adnroid' ? "admin123" : "123456",
-      email: "admin@echat.com",
-      password: "admin123",
+      email: "",
+      password: "",
       visible: false
     };
   }
