@@ -37,7 +37,7 @@ window.Blob = polyfill.Blob;
 // More info on all the options is below in the README...just some common use cases shown here
 const options = {
   title: "Chọn ảnh từ:",
-  quality: 0.3,
+  quality: 0.01,
   storageOptions: {
     skipBackup: true,
     path: 'images'
