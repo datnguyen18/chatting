@@ -24,7 +24,7 @@ import RadioForm, {
 } from "react-native-simple-radio-button";
 import Toast, { DURATION } from "react-native-easy-toast";
 
-var radio_props = [
+const radio_props = [
   { label: "Nam", value: "Nam" },
   { label: "Nữ", value: "Nữ" }
 ];
