@@ -52,3 +52,6 @@ buck-out/
 */fastlane/Preview.html
 */fastlane/screenshots
 *.json
+src/Screens/InformationUser.js
+src/Screens/InformationUser.js
+src/Screens/InformationUser.js

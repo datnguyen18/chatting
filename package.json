@@ -8,6 +8,7 @@
 	},
 	"dependencies": {
 		"firebase": "^4.6.2",
+		"moment": "^2.19.3",
 		"react": "16.0.0",
 		"react-native": "0.50.3",
 		"react-native-actionsheet": "^2.3.0",

@@ -11,6 +11,7 @@ import {
   Platform
 } from "react-native";
 import { firebaseApp } from "../api/Firebase";
+import moment from 'moment'
 
 // create a component
 class RecentMessages extends Component {
@@ -113,6 +114,14 @@ class RecentMessages extends Component {
     this.setState({
       recentMessages: arrayNameFriends
     });
+    console.log(this.state.recentMessages)
+  }
+
+  getTime(date) {
+    var d = new Date(date)
+    var date = new Date()
+
+    return moment(d).format('hh:mm')
   }
 
   render() {
@@ -133,12 +142,20 @@ class RecentMessages extends Component {
                   sexFriend: item.sex
                 })}
             >
-              <View key={item.id} style={styles.item}>
-                <Image source={{ uri: item.avatar }} style={styles.avatar} />
-                <View style={styles.text}>
-                  <Text style={styles.nameUser}>{item.name}</Text>
-                  <Text style={styles.message}>{item.message}</Text>
+              <View key={item.id} style={[styles.item, { justifyContent: 'space-between' }]}>
+                <View style={{flexDirection:'row'}}> 
+                  <Image source={{ uri: item.avatar }} style={styles.avatar} />
+
+                  <View style={styles.text}>
+                    <Text style={styles.nameUser}>{item.name}</Text>
+                    <Text style={styles.message}>{item.message}</Text>
+                  </View>
                 </View>
+
+                <View >
+                  <Text>{this.getTime(item.date)}</Text>
+                </View>
+
               </View>
             </TouchableOpacity>
           ))}
@@ -165,8 +182,8 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     borderRadius: 5,
     borderColor: "#979797",
-    borderWidth: 0.3
-
+    borderWidth: 0.3,
+    padding:'2%'
   },
   text: {
     margin: "5%"

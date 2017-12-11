@@ -170,23 +170,6 @@ class InformationUser extends Component {
         console.log("User tapped custom button: ", response.customButton);
       } else {
         this.uploadCover(response.uri)
-<<<<<<< HEAD
-        .then(url => {
-          this.itemRef
-            .child(user.uid)
-            .child("Information")
-            .set({
-              Avatar: this.state.avatar,
-              CoverPhoto: url,
-              Email: this.state.email,
-              Name: this.state.name,
-              ID: this.state.id,
-              PhoneNumber: this.state.phoneNumber,
-              BirthDate: this.state.birthDate,
-              Sex: this.state.sex,
-              Password: this.state.password
-            })
-=======
           .then(url => {
             this.itemRef
               .child(user.uid)
@@ -206,7 +189,6 @@ class InformationUser extends Component {
               coverPhoto: url
             });
             global.userCoverPhoto = this.state.coverPhoto;
->>>>>>> 3fc0c3b3f56677a68dd35350efb327a7d1a306ae
           })
           .then(error => console.log(error))
       }
