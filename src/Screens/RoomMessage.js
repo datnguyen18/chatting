@@ -29,7 +29,7 @@ class RoomMessage extends Component {
       backgroundColor: "#F74F4F"
     },
     headerRight: (
-      <TouchableOpacity
+      <TouchableOpacity 
         onPress={() => navigation.navigate("ListUserRoomChatScreen", {
           childNameRoom: `${navigation.state.params.childNameRoom}`,
           childName: `${navigation.state.params.childName}`,
