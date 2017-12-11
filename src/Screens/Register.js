@@ -49,7 +49,7 @@ class Register extends Component {
       rePassword: "",
       phoneNumber: "",
       date: "",
-      sex: "",
+      sex: "1",
       visible: false
     };
     this.itemRef = firebaseApp.database().ref("Users");
