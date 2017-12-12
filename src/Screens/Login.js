@@ -109,7 +109,7 @@ class Login extends Component {
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder="***********"
+                  placeholder="Password"
                   underlineColorAndroid="transparent"
                   placeholderTextColor="rgba(255,255,255,255)"
                   returnKeyType="go"
