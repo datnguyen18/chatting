@@ -25,10 +25,18 @@ class RoomChat extends Component {
         />
       </TouchableOpacity>
     ),
+    headerRight: (
+      <TouchableOpacity
+        onPress={() => navigation.navigate("NewMessageScreen")}
+      >
+        <Image
+          style={styles.logoOpenDrawer}
+        />
+      </TouchableOpacity>
+    ),
     headerTitleStyle: {
       alignSelf: "center",
-      color: "#FFFFFF",
-      marginRight: "16%"
+      color: "#FFFFFF"
     },
     headerTintColor: "#FFFFFF",
     title: "Phòng chat",

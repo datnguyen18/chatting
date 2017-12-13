@@ -439,12 +439,14 @@ const styles = StyleSheet.create({
   touchable: {
     padding: "3%",
     marginLeft: "5%",
-    marginRight: "5%"
+    marginRight: "5%",
+    borderRadius:15
   },
   button: {
     textAlign: "center",
     fontWeight: "700",
-    fontSize: 18
+    fontSize: 18,
+    color:'#fff'
   },
   date: {
     marginTop: "6%",

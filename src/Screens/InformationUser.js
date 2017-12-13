@@ -384,7 +384,8 @@ const styles = StyleSheet.create({
   button: {
     textAlign: "center",
     fontWeight: "700",
-    fontSize: 18
+    fontSize: 18,
+    color:"#fff"
   }
 });
 

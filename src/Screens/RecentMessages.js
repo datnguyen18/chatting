@@ -84,7 +84,7 @@ class RecentMessages extends Component {
             .child(element.val().Sender)
             .child("Information")
             .on("value", snapshot1 => {
-              arrayRecentMessage.push({
+              var temp = {
                 name: snapshot1.val().Name,
                 avatar: snapshot1.val().Avatar,
                 birthdate: snapshot1.val().BirthDate,
@@ -95,7 +95,12 @@ class RecentMessages extends Component {
                 id: element.val().Sender,
                 message: element.val().Message,
                 date: element.val().Time
-              });
+              };
+              var index = arrayRecentMessage.findIndex(s => s.id == temp.id);
+              if(index >= 0){
+                arrayRecentMessage.splice(index, 1);
+              }
+              arrayRecentMessage.push(temp);
               this.sortDate(arrayRecentMessage);
               this.loadRecentMessages(arrayRecentMessage);
             });

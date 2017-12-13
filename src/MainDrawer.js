@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: "3%",
     backgroundColor: 'transparent',
+    marginBottom: 10
   },
   containerTextImage: {
     marginTop: "30%",

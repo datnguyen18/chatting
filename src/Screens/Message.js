@@ -25,7 +25,8 @@ class Message extends Component {
       headerTitleStyle: {
         textAlign: "center",
         color: "#FFFFFF",
-        alignSelf: "center"
+        alignSelf: "center",
+        marginLeft:20
       },
       headerTintColor: "#FFFFFF",
       headerStyle: {

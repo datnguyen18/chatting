@@ -62,7 +62,6 @@ class RoomMessage extends Component {
       .child(this.state.child)
       .child("Messages")
       .on("child_added", snapshot => {
-        console.log(snapshot.val());
         const newPostKey = firebaseApp
           .database()
           .ref()
@@ -152,6 +151,7 @@ class RoomMessage extends Component {
         renderBubble={this.renderBubble}
         renderSend={this.renderSend}
       />
+
     );
   }
 }

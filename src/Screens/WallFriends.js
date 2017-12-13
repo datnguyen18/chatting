@@ -52,8 +52,33 @@ export default class componentName extends Component {
       avatar: this.props.navigation.state.params.avatarFriend,
       coverPhoto: this.props.navigation.state.params.coverPhotoFriend,
       name: this.props.navigation.state.params.nameFriend,
-      visible: false
+      visible: false,
+      button:'Kết bạn'
     };
+  }
+  componentWillMount() {
+    this.itemRef
+    .child(global.userId)
+    .child("Friends")
+    .on("child_added", snapshot => {
+      if(this.state.id == snapshot.val().UID){
+        console.log(this.state.id)
+        this.setState({
+          button:'Đã kết bạn'
+        })
+      }
+    })
+
+    this.itemRef
+    .child(this.state.id)
+    .child('Friend Requests')
+    .on('child_added', snapshot => {
+      if(snapshot.val().UID == global.userId){
+        this.setState({
+          button:'Đã gửi lời mời'
+        })
+      }
+    })
   }
 
   sendFriendRequest() {
@@ -103,9 +128,16 @@ export default class componentName extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.buttonConfirmFriendContainer]}
-            onPress={() => this.sendFriendRequest()}
+            onPress={() => {
+              if(this.state.button=='Kết bạn'){
+                  this.sendFriendRequest()
+                  this.setState({
+                    button:'Đã gửi lời mời'
+                  })
+              }
+            }}
           >
-            <Text style={styles.button_search}>Kết bạn</Text>
+            <Text style={styles.button_search}>{this.state.button}</Text>
           </TouchableOpacity>
         </View>
         <Toast ref="toast" />
@@ -125,7 +157,8 @@ const styles = StyleSheet.create({
   button_search: {
     textAlign: "center",
     fontWeight: "700",
-    fontSize: 18
+    fontSize: 18,
+    color:'#fff'
   },
   item: {
     flexDirection: "row",

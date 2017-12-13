@@ -55,14 +55,13 @@ class ListUserRoomChat extends Component {
                     .on("value", snapshot1 => {
                         arrayNameFriends.push({
                             name: snapshot1.val().Name,
-                            id: snapshot.val().UID,
+                            id: snapshot.val().ID,
                             avatar: snapshot1.val().Avatar,
                             email: snapshot1.val().Email,
                             phoneNumber: snapshot1.val().PhoneNumber,
                             birthdate: snapshot1.val().BirthDate,
                             sex: snapshot1.val().Sex,
                             coverPhoto: snapshot1.val().CoverPhoto
-
                         });
                         this.sortFriends(arrayNameFriends);
                         this.loadIdFriends(arrayNameFriends);

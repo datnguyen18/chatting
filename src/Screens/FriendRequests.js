@@ -97,7 +97,6 @@ export class FriendRequests extends Component {
           lengthSnapshot = snapshot.numChildren();
         });
       }
-      console.log(count);
       if (
         snapshotEmail == this.state.searchInput ||
         snapshotPhoneNumber == this.state.searchInput
@@ -108,7 +107,6 @@ export class FriendRequests extends Component {
         const snapshotCoverPhoto = snapshot.child("CoverPhoto").val();
         const snapshotSex = snapshot.child("Sex").val();
         const snapshotBirthDate = snapshot.child("BirthDate").val();
-
         this.setState({
           visible: false
         });
@@ -130,8 +128,8 @@ export class FriendRequests extends Component {
           visible: false
         });
         count = 1;
-        this.itemRef.off("child_added", linsteningUser);
       }
+      // this.itemRef.off("child_added", linsteningUser);
       count++;
     });
   }
